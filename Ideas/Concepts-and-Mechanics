@@ -1,5 +1,6 @@
-The game will run and display in the resolution 640x360. 
-The game can be upscaled to 1280x720 or 1920x1080.
+The game will run and display in the resolution 300x270. 
+The game can be upscaled to 900x720 or 1200x1080.
+The tiles will be 20x20
 The the player will be able to move freely but only face/attack in 4 directions (Like binding of isaac/legend of zelda)
 The game will support gamepad and keyboard.
 The game will run in (30/60)? frames per second.
