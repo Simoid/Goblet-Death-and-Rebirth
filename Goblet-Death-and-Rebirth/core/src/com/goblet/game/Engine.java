@@ -20,7 +20,7 @@ public class Engine extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(Color.RED);
-		texture = new Texture(Gdx.files.internal("sprites/goblet_MC_new.png"));
+		texture = new Texture(Gdx.files.internal("assets/sprites/goblet_MC_new.png"));
 		sprite = new Sprite(texture);
 	}
 	
