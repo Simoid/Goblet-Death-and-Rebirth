@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry sourcepath="/home/johan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.9.2/b6c7422c6740f86a9a84fdcbc4c62a1f46db317d/gdx-1.9.2-sources.jar" kind="lib" path="/home/johan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.9.2/e641cb91bec06bc64d9ddf7a7d7062caceec73cd/gdx-1.9.2.jar"/>
+	<classpathentry sourcepath="/home/johan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.9.2/6e1c72c4a48cbde19f9584bfb8d2d09572067af4/gdx-box2d-1.9.2-sources.jar" kind="lib" path="/home/johan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.9.2/b78eaa90aaaf7830e6dffff587ea6e859c2787b2/gdx-box2d-1.9.2.jar"/>
+	<classpathentry sourcepath="/home/johan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.4/57a1f15112328706c648a430bd19574118e2d8f4/box2dlights-1.4-sources.jar" kind="lib" path="/home/johan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.box2dlights/box2dlights/1.4/3d77ad5b4164fb32fc67e2446e35911bb0aaf0bd/box2dlights-1.4.jar"/>
+	<classpathentry sourcepath="/home/johan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-controllers/1.9.2/e729f524826e9c852d058005f741b84fad2a2025/gdx-controllers-1.9.2-sources.jar" kind="lib" path="/home/johan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-controllers/1.9.2/d651e0d52443b1c1a943641eebc06482e29923bc/gdx-controllers-1.9.2.jar"/>
+	<classpathentry sourcepath="/home/johan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-ai/1.8.0/154b2fbb50894a944607cd74f7dba1073d31a967/gdx-ai-1.8.0-sources.jar" kind="lib" path="/home/johan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-ai/1.8.0/ec30677d8ab1a8b8aa4b853c5f4e4b1361f50bf5/gdx-ai-1.8.0.jar"/>
+	<classpathentry sourcepath="/home/johan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-bullet/1.9.2/6fbde4d232cbf1b2fdf6d79cb233201236084063/gdx-bullet-1.9.2-sources.jar" kind="lib" path="/home/johan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-bullet/1.9.2/75f6b51bec18a82a893bb5ae4359fecd9cc7d6f4/gdx-bullet-1.9.2.jar"/>
+</classpath>
