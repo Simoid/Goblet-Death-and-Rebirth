@@ -28,7 +28,6 @@ public class Engine extends ApplicationAdapter {
 	public void dispose(){
 		batch.dispose();
 		font.dispose();
-		f;
 	}
 	
 	@Override
