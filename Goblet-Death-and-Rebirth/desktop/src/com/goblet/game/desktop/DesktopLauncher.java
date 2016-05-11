@@ -10,9 +10,9 @@ public class DesktopLauncher {
 		config.title = "Goblet: Death and Rebirth";
 		config.backgroundFPS = 12;
 		config.foregroundFPS = 60;
-		config.fullscreen = true;
 		config.width = 1920;
 		config.height = 1080;
+		config.fullscreen = true;
 		new LwjglApplication(new Engine(), config);
 	}
 }
