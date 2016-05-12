@@ -10,11 +10,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Engine extends ApplicationAdapter {
+	//TEST COMMENT!
 	private SpriteBatch batch;
 	private Texture texture;
 	private Sprite sprite;
 	private BitmapFont font;
-	
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -23,24 +24,24 @@ public class Engine extends ApplicationAdapter {
 		texture = new Texture(Gdx.files.internal("assets/sprites/goblet_MC_new.png"));
 		sprite = new Sprite(texture);
 	}
-	
+
 	@Override
 	public void dispose(){
 		batch.dispose();
 		font.dispose();
 	}
-	
+
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+
 		batch.begin();
 		font.draw(batch, "Hello world!", 200, 200);
 		sprite.draw(batch);
 		batch.end();
 	}
-	
+
 	@Override
     public void pause() {
     }
