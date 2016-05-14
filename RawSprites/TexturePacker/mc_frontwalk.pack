@@ -1,0 +1,33 @@
+
+mc_frontwalk.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+spr_mc_frontwalk03
+  rotate: false
+  xy: 1, 1
+  size: 15, 27
+  orig: 15, 27
+  offset: 0, 0
+  index: -1
+spr_mc_frontwalk01
+  rotate: false
+  xy: 18, 1
+  size: 15, 27
+  orig: 15, 27
+  offset: 0, 0
+  index: -1
+spr_mc_frontwalk02
+  rotate: false
+  xy: 35, 1
+  size: 15, 27
+  orig: 15, 27
+  offset: 0, 0
+  index: -1
+spr_mc_frontwalk00
+  rotate: false
+  xy: 35, 1
+  size: 15, 27
+  orig: 15, 27
+  offset: 0, 0
+  index: -1
