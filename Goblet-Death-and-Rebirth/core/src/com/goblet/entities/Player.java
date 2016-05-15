@@ -36,20 +36,24 @@ public class Player {
 
     public Player(int xPos, int yPos){
         position = new Point2D(xPos, yPos);
+
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc_frontwalk.pack", 4, scale, 1/5f));
         animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc_frontwalk.pack", 1, scale, 1f));
         animations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc_frontwalk.pack", 1, scale, 1f));
         animations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc_frontwalk.pack", 1, scale, 1f));
         animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc_frontwalk.pack", 1, scale, 1f));
         currentAnimation = animations.get(Direction.IDLE);
+
         movementBools.put(Direction.DOWN, false);
         movementBools.put(Direction.UP, false);
         movementBools.put(Direction.LEFT, false);
         movementBools.put(Direction.RIGHT, false);
+
         xMovement.put(Direction.DOWN, 0f);
         xMovement.put(Direction.UP, 0f);
         xMovement.put(Direction.LEFT, -moveSpeed);
         xMovement.put(Direction.RIGHT, moveSpeed);
+
         yMovement.put(Direction.DOWN, -moveSpeed);
         yMovement.put(Direction.UP, moveSpeed);
         yMovement.put(Direction.LEFT, 0f);
@@ -107,10 +111,23 @@ public class Player {
             movementBools.put(dir, true);
             currentAnimation = animations.get(dir);
             timeSinceAnimationStart = 0;
-            if (currentYMovement == 0f && currentXMovement == 0f){
-                currentAnimation = animations.get(Direction.IDLE);
-            }
+            selectAnimation();
         }
+    }
+
+    private void selectAnimation(){
+        if (movementBools.get(Direction.DOWN) && ! movementBools.get(Direction.UP)){
+            currentAnimation = animations.get(Direction.DOWN);
+        } else if (movementBools.get(Direction.UP) && ! movementBools.get(Direction.DOWN)){
+            currentAnimation = animations.get(Direction.UP);
+        } else if (movementBools.get(Direction.LEFT) && ! movementBools.get(Direction.RIGHT)){
+            currentAnimation = animations.get(Direction.LEFT);
+        } else if (movementBools.get(Direction.RIGHT) && ! movementBools.get(Direction.LEFT)){
+            currentAnimation = animations.get(Direction.RIGHT);
+        } else {
+            currentAnimation = animations.get(Direction.IDLE);
+        }
+
     }
 
     public void update(float deltaTime){
@@ -128,17 +145,7 @@ public class Player {
             currentYMovement -= yMovement.get(dir);
             movementBools.put(dir, false);
             timeSinceAnimationStart = 0;
-            if (currentYMovement == 0f && currentXMovement == 0f){
-                currentAnimation = animations.get(Direction.IDLE);
-            } else if (movementBools.get(Direction.DOWN) && !movementBools.get(Direction.UP)){
-                currentAnimation = animations.get(Direction.DOWN);
-            } else if (movementBools.get(Direction.UP) && !movementBools.get(Direction.DOWN)){
-                currentAnimation = animations.get(Direction.UP);
-            } else if (movementBools.get(Direction.LEFT) && !movementBools.get(Direction.RIGHT)){
-                currentAnimation = animations.get(Direction.LEFT);
-            } else if (movementBools.get(Direction.RIGHT) && !movementBools.get(Direction.LEFT)){
-                currentAnimation = animations.get(Direction.RIGHT);
-            }
+            selectAnimation();
         }
     }
 
