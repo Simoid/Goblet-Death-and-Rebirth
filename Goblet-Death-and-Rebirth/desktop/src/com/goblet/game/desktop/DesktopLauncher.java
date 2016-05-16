@@ -1,5 +1,6 @@
 package com.goblet.game.desktop;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.goblet.gameEngine.Engine;
@@ -10,7 +11,7 @@ public class DesktopLauncher {
 		config.title = "Goblet: Death and Rebirth";
 		config.backgroundFPS = 12;
 		config.foregroundFPS = 60;
-		config.fullscreen = false;
+        config.fullscreen = true;
 		new LwjglApplication(new Engine(), config);
 	}
 }

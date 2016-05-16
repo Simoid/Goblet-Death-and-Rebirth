@@ -16,13 +16,17 @@ public class Engine implements ApplicationListener, InputProcessor {
 	private float elapsedTime = 0f;
 	private SpriteAnimation mc_walk;
 	private Player player;
+    private float xScale;
+    private float yScale;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(Color.GREEN);
-		player = new Player(50, 50);
+        xScale = Gdx.graphics.getWidth() / 640;
+        yScale = Gdx.graphics.getHeight() / 360;
+		player = new Player(50, 50, xScale, yScale);
 		Gdx.input.setInputProcessor(this);
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 	}
@@ -66,6 +70,10 @@ public class Engine implements ApplicationListener, InputProcessor {
 	public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.ESCAPE){
             quit();
+        } else if (keycode == Input.Keys.CONTROL_LEFT){
+            player.increaseScale();
+        } else if (keycode == Input.Keys.SHIFT_LEFT){
+            player.decreaseScale();
         }
 		player.keyPressed(keycode);
 		return true;

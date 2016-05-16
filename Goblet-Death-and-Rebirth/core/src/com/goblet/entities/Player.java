@@ -15,8 +15,9 @@ import java.util.HashMap;
  */
 public class Player {
 
-    private float moveSpeed = 100.0f;
-    private int scale = 5;
+    private float moveSpeed = 200.0f;
+    private float xScale;
+    private float yScale;
 
     private float timeSinceAnimationStart;
     private String spriteLocation = "assets/sprites/mc/";
@@ -33,14 +34,17 @@ public class Player {
      * @param xPos
      * @param yPos
      */
-    public Player(int xPos, int yPos){
+    public Player(int xPos, int yPos, float xScale, float yScale){
         position = new Point2D(xPos, yPos);
 
-        animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc_move_down.pack", 4, scale, 1/5f));
-        animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc_move_up.pack", 4, scale, 1/5f));
-        animations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc_move_left.pack", 4, scale, 1/5f));
-        animations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc_move_right.pack", 4, scale, 1/5f));
-        animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc_idle.pack", 2, scale, 1f));
+        this.xScale = xScale;
+        this.yScale = yScale;
+
+        animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc_move_down.pack", 4, xScale, yScale, 1/5f));
+        animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc_move_up.pack", 4, xScale, yScale, 1/5f));
+        animations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc_move_left.pack", 4, xScale, yScale, 1/5f));
+        animations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc_move_right.pack", 4, xScale, yScale, 1/5f));
+        animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc_idle.pack", 2, xScale, yScale, 1f));
         currentAnimation = animations.get(Direction.IDLE);
 
         movement = new Movement(moveSpeed);
@@ -51,26 +55,17 @@ public class Player {
      * Ökar storleken på spelarens sprite.
      */
     public void increaseScale(){
-        scale++;
-        updateScale();
+        for(SpriteAnimation animation : animations.values()){
+            animation.changeScale(1.25f);
+        }
     }
 
     /**
      * Minkskar storleken på spelarens sprite.
      */
-    public void decreaseScale(){
-        if (scale > 1) {
-            scale--;
-            updateScale();
-        }
-    }
-
-    /**
-     * Uppdaterar skalan som spelaren ritas ut i.
-     */
-    private void updateScale(){
-        for(SpriteAnimation animation : animations.values()){
-            animation.setScale(scale);
+    public void decreaseScale() {
+        for (SpriteAnimation animation : animations.values()) {
+            animation.changeScale(0.8f);
         }
     }
 

@@ -11,7 +11,8 @@ import com.badlogic.gdx.graphics.g2d.*;
  */
 public class SpriteAnimation {
     private TextureRegion[] regions;
-    private float scale;
+    private float xScale;
+    private float yScale;
     private Animation animation;
     private TextureAtlas atlas;
 
@@ -19,11 +20,13 @@ public class SpriteAnimation {
      * Konstruktur för klassen.
      * @param atlasLocation Filvägen till atlas filen (oftast "assets/sprites/***.pack")
      * @param numberOfSprites Hur många bilder som ingår i animationen.
-     * @param scale Storleken på bilden.
+     * @param xScale Skalan på bilden i x-led.
+     * @param yScale Skalan på bilden i y-led.
      * @param animationTime Tidsskillnaden mellan bildbyte.
      */
-    public SpriteAnimation(String atlasLocation, int numberOfSprites, int scale, float animationTime){
-        this.scale = (float) scale;
+    public SpriteAnimation(String atlasLocation, int numberOfSprites, float xScale, float yScale, float animationTime){
+        this.xScale = xScale;
+        this.yScale = yScale;
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
         regions = new TextureRegion[numberOfSprites];
         for (int i = 0; i < numberOfSprites; i++){
@@ -39,8 +42,9 @@ public class SpriteAnimation {
      * ut, därför får bilden endast skaleras med en int.
      * @param scale Hur mycket bilden skaleras.
      */
-    public void setScale(int scale){
-        this.scale = (float) scale;
+    public void changeScale(float scale){
+        xScale *= scale;
+        yScale *= scale;
     }
 
     /**
@@ -52,7 +56,7 @@ public class SpriteAnimation {
      */
     public void draw(Batch batch, float x, float y, float time){
         TextureRegion region = animation.getKeyFrame(time, true);
-        batch.draw(region, x, y, region.getRegionWidth()*scale, region.getRegionHeight()*scale);
+        batch.draw(region, x, y, region.getRegionWidth()*xScale, region.getRegionHeight()*yScale);
     }
 
     /**
