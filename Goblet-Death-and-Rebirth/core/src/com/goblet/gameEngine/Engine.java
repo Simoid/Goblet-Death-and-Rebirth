@@ -16,17 +16,15 @@ public class Engine implements ApplicationListener, InputProcessor {
 	private float elapsedTime = 0f;
 	private SpriteAnimation mc_walk;
 	private Player player;
-	// private float mc_x = 0f;
-	// private float mc_y = 0f;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		font.setColor(Color.RED);
-		mc_walk = new SpriteAnimation("assets/sprites/mc_frontwalk.pack", 4, 2, 1/5f);
+		font.setColor(Color.GREEN);
 		player = new Player(50, 50);
 		Gdx.input.setInputProcessor(this);
+        Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 	}
 
 	@Override
@@ -35,8 +33,9 @@ public class Engine implements ApplicationListener, InputProcessor {
 
 	@Override
 	public void dispose(){
-		batch.dispose();
 		font.dispose();
+        player.dispose();
+        batch.dispose();
 	}
 
 	public void update(float deltaTime){
@@ -45,31 +44,36 @@ public class Engine implements ApplicationListener, InputProcessor {
 
 	@Override
 	public void render () {
+        // Uppdatera om det har gått tillräckligt lång tid sen senaste uppdateringen.
 		timeCounter += Gdx.graphics.getDeltaTime();
 		if (timeCounter > timeBetweenUpdates){
 			update(timeCounter);
 			timeCounter = 0f;
 		}
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+
+		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		font.draw(batch, "Hello world!", 200, 200);
+		font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight());
 		elapsedTime += Gdx.graphics.getDeltaTime();
 		//mc_walk.draw(batch, mc_x, mc_y, elapsedTime);
 		player.draw(batch);
 		batch.end();
 	}
 
+
 	@Override
 	public boolean keyDown(int keycode) {
-		player.startMove(keycode);
-
+        if (keycode == Input.Keys.ESCAPE){
+            quit();
+        }
+		player.keyPressed(keycode);
 		return true;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
-		player.stopMove(keycode);
+		player.keyReleased(keycode);
 		return true;
 	}
 
@@ -110,4 +114,9 @@ public class Engine implements ApplicationListener, InputProcessor {
     @Override
     public void resume() {
     }
+
+    private void quit(){
+        Gdx.app.exit();
+    }
+
 }
