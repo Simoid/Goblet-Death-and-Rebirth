@@ -24,15 +24,13 @@ public class Engine implements ApplicationListener, InputProcessor {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(Color.RED);
+		mc_walk = new SpriteAnimation("assets/sprites/mc_frontwalk.pack", 4, 2, 1/5f);
 		player = new Player(50, 50);
-		//mc_walk = new SpriteAnimation("assets/sprites/mc_frontwalk.pack", 4, 3, 1/5f);
-
 		Gdx.input.setInputProcessor(this);
 	}
 
 	@Override
 	public void resize(int width, int height) {
-
 	}
 
 	@Override
