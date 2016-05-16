@@ -13,6 +13,7 @@ public class SpriteAnimation {
     private TextureRegion[] regions;
     private float scale;
     private Animation animation;
+    private TextureAtlas atlas;
 
     /**
      * Konstruktur för klassen.
@@ -23,7 +24,7 @@ public class SpriteAnimation {
      */
     public SpriteAnimation(String atlasLocation, int numberOfSprites, int scale, float animationTime){
         this.scale = (float) scale;
-        TextureAtlas atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
+        atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
         regions = new TextureRegion[numberOfSprites];
         for (int i = 0; i < numberOfSprites; i++){
             regions[i] = atlas.findRegion(String.format("%04d", i));
@@ -52,5 +53,12 @@ public class SpriteAnimation {
     public void draw(Batch batch, float x, float y, float time){
         TextureRegion region = animation.getKeyFrame(time, true);
         batch.draw(region, x, y, region.getRegionWidth()*scale, region.getRegionHeight()*scale);
+    }
+
+    /**
+     * Tar bort de objekt som javas GC inte tar hand om från minnet.
+     */
+    public void dispose(){
+        atlas.dispose();
     }
 }

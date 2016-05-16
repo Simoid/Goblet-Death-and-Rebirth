@@ -28,6 +28,11 @@ public class Player {
     private Point2D position;
 
 
+    /**
+     * Konstruktorn
+     * @param xPos
+     * @param yPos
+     */
     public Player(int xPos, int yPos){
         position = new Point2D(xPos, yPos);
 
@@ -42,24 +47,41 @@ public class Player {
         timeSinceAnimationStart = 0;
     }
 
-
+    /**
+     * Ökar storleken på spelarens sprite.
+     */
     public void increaseScale(){
         scale++;
         updateScale();
     }
 
+    /**
+     * Minkskar storleken på spelarens sprite.
+     */
     public void decreaseScale(){
-        scale--;
-        updateScale();
+        if (scale > 1) {
+            scale--;
+            updateScale();
+        }
     }
 
+    /**
+     * Uppdaterar skalan som spelaren ritas ut i.
+     */
     private void updateScale(){
         for(SpriteAnimation animation : animations.values()){
             animation.setScale(scale);
         }
     }
 
-    public void startMove(int keycode){
+    /**
+     * Metod som anropas när en tangent trycks ned.
+     * Metoden kollar i fall tangenten redan är nedtryckt (till exempel om användaren tabar ut
+     * och släpper en tangent, sedan trycker ned den igen) för att säkerställa att en tangent inte
+     * räknas två gånger.
+     * @param keycode Tangenten som trycktes ned.
+     */
+    public void keyPressed(int keycode){
         Direction dir = Direction.keyCodeTranslate(keycode);
         if (dir == Direction.IDLE){
             return;
@@ -72,6 +94,12 @@ public class Player {
         }
     }
 
+    /**
+     * Väljer den animationen som ska spelas.
+     * Denna funktion används då flera tangenter kan tryckas samtidigt, och bestämmer en prioritetsordning
+     * för de olika riktningarnas animationer:
+     * NER, UPP, VÄNSTER, HÖGER, STILLA.
+     */
     private void selectAnimation(){
         if (movement.getMoveFlag(Direction.DOWN) && ! movement.getMoveFlag(Direction.UP)){
             setAnimation(Direction.DOWN);
@@ -86,6 +114,12 @@ public class Player {
         }
     }
 
+    /**
+     * Sätter animationen för spelaren.
+     * Om animationen redan är startad ska den inte startas om, så därför kollar metoden
+     * först om animationen redan körs.
+     * @param dir Vilken animation som ska spelas.
+     */
     private void setAnimation(Direction dir){
         if (currentAnimation != animations.get(dir)) {
             currentAnimation = animations.get(dir);
@@ -93,12 +127,21 @@ public class Player {
         }
     }
 
+    /**
+     * Uppdaterar spelarens position och animation.
+     * @param deltaTime Hur lång tid som har passerat sedan senaste uppdateringen.
+     */
     public void update(float deltaTime){
         timeSinceAnimationStart += deltaTime;
         position.setLocation(position.x + deltaTime*movement.getMovementX(), position.y + deltaTime*movement.getMovementY());
     }
 
-    public void stopMove(int keycode){
+    /**
+     * Metod som anropas när en tangent släpps.
+     * Om spelaren rör sig åt det hållet som tangenten pekar åt så slutar spelaren att röra sig åt det hållet.
+     * @param keycode Tangenten som släpptes.
+     */
+    public void keyReleased(int keycode){
         Direction dir = Direction.keyCodeTranslate(keycode);
         if (dir == Direction.IDLE){
             return;
@@ -111,8 +154,21 @@ public class Player {
         }
     }
 
+    /**
+     * Ritar ut spelarens sprite.
+     * @param batch Batchen som spelaren ska ritas ut på.
+     */
     public void draw(Batch batch){
         currentAnimation.draw(batch, position.x, position.y, timeSinceAnimationStart);
+    }
+
+    /**
+     * Tar bort de objekt som javas GC inte tar hand om från minnet.
+     */
+    public void dispose(){
+        for (SpriteAnimation animation : animations.values()){
+            animation.dispose();
+        }
     }
 
 }
