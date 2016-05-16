@@ -22,7 +22,7 @@ public class Engine extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(Color.RED);
-		mc_walk = new SpriteAnimation("assets/sprites/mc_frontwalk.pack", 4, 2.5f, 1/5f);
+		mc_walk = new SpriteAnimation("assets/sprites/mc_frontwalk.pack", 4, 2, 1/5f);
 	}
 
 	@Override
