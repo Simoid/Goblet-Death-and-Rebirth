@@ -19,7 +19,7 @@ public class Player {
     private int scale = 5;
 
     private float timeSinceAnimationStart;
-    private String spriteLocation = "assets/sprites/";
+    private String spriteLocation = "assets/sprites/mc/";
 
     private Movement movement;
 
@@ -31,11 +31,11 @@ public class Player {
     public Player(int xPos, int yPos){
         position = new Point2D(xPos, yPos);
 
-        animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc_frontwalk.pack", 4, scale, 1/5f));
-        animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc_frontwalk.pack", 1, scale, 1f));
-        animations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc_frontwalk.pack", 1, scale, 1f));
-        animations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc_frontwalk.pack", 1, scale, 1f));
-        animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc_frontwalk.pack", 1, scale, 1f));
+        animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc_move_down.pack", 4, scale, 1/5f));
+        animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc_move_up.pack", 4, scale, 1/5f));
+        animations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc_move_left.pack", 4, scale, 1/5f));
+        animations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc_move_right.pack", 4, scale, 1/5f));
+        animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc_idle.pack", 2, scale, 1f));
         currentAnimation = animations.get(Direction.IDLE);
 
         movement = new Movement(moveSpeed);
@@ -68,25 +68,29 @@ public class Player {
             movement.addMovementX(dir);
             movement.addMovementY(dir);
             movement.setMoveFlag(dir, true);
-            currentAnimation = animations.get(dir);
-            timeSinceAnimationStart = 0;
             selectAnimation();
         }
     }
 
     private void selectAnimation(){
         if (movement.getMoveFlag(Direction.DOWN) && ! movement.getMoveFlag(Direction.UP)){
-            currentAnimation = animations.get(Direction.DOWN);
+            setAnimation(Direction.DOWN);
         } else if (movement.getMoveFlag(Direction.UP) && ! movement.getMoveFlag(Direction.DOWN)){
-            currentAnimation = animations.get(Direction.UP);
+            setAnimation(Direction.UP);
         } else if (movement.getMoveFlag(Direction.LEFT) && ! movement.getMoveFlag(Direction.RIGHT)){
-            currentAnimation = animations.get(Direction.LEFT);
+            setAnimation(Direction.LEFT);
         } else if (movement.getMoveFlag(Direction.RIGHT) && ! movement.getMoveFlag(Direction.LEFT)){
-            currentAnimation = animations.get(Direction.RIGHT);
+            setAnimation(Direction.RIGHT);
         } else {
-            currentAnimation = animations.get(Direction.IDLE);
+            setAnimation(Direction.IDLE);
         }
+    }
 
+    private void setAnimation(Direction dir){
+        if (currentAnimation != animations.get(dir)) {
+            currentAnimation = animations.get(dir);
+            timeSinceAnimationStart = 0;
+        }
     }
 
     public void update(float deltaTime){
@@ -103,7 +107,6 @@ public class Player {
             movement.subMovementX(dir);
             movement.subMovementY(dir);
             movement.setMoveFlag(dir, false);
-            timeSinceAnimationStart = 0;
             selectAnimation();
         }
     }
