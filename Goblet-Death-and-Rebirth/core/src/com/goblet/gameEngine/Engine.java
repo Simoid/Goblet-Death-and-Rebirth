@@ -63,21 +63,6 @@ public class Engine implements ApplicationListener, InputProcessor {
 	@Override
 	public boolean keyDown(int keycode) {
 		player.startMove(keycode);
-		/*float moveAmount = 3.0f;
-		if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-			moveAmount = 6.0f;
-		}
-
-		if (keycode == Input.Keys.LEFT)
-			mc_x -= moveAmount;
-		if (keycode == Input.Keys.RIGHT)
-			mc_x += moveAmount;
-		if (keycode == Input.Keys.UP)
-			mc_y += moveAmount;
-		if (keycode == Input.Keys.DOWN)
-			mc_y -= moveAmount;*/
-
-
 
 		return true;
 	}
