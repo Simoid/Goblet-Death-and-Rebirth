@@ -3,8 +3,9 @@ package com.goblet.entities;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.goblet.graphics.SpriteAnimation;
-import com.sun.javafx.geom.Point2D;
 
+
+import java.awt.*;
 import java.util.HashMap;
 
 /**
@@ -15,7 +16,7 @@ import java.util.HashMap;
  */
 public class Player {
 
-    private float moveSpeed = 200.0f;
+    private float moveSpeed = 100.0f;
     private float xScale;
     private float yScale;
 
@@ -26,7 +27,7 @@ public class Player {
 
     private HashMap<Direction, SpriteAnimation> animations = new HashMap<Direction, SpriteAnimation>();
     private SpriteAnimation currentAnimation;
-    private Point2D position;
+    private Point position;
 
 
     /**
@@ -35,7 +36,7 @@ public class Player {
      * @param yPos
      */
     public Player(int xPos, int yPos, float xScale, float yScale){
-        position = new Point2D(xPos, yPos);
+        position = new Point(xPos, yPos);
 
         this.xScale = xScale;
         this.yScale = yScale;
