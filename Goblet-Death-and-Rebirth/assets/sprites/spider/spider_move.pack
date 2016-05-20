@@ -1,0 +1,33 @@
+
+spider_move.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0002
+  rotate: false
+  xy: 1, 1
+  size: 25, 17
+  orig: 25, 17
+  offset: 0, 0
+  index: -1
+0001
+  rotate: false
+  xy: 28, 1
+  size: 25, 17
+  orig: 25, 17
+  offset: 0, 0
+  index: -1
+0003
+  rotate: false
+  xy: 55, 1
+  size: 25, 17
+  orig: 25, 17
+  offset: 0, 0
+  index: -1
+0000
+  rotate: false
+  xy: 82, 1
+  size: 25, 17
+  orig: 25, 17
+  offset: 0, 0
+  index: -1

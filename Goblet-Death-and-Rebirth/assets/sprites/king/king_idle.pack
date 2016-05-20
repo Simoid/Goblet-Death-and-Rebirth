@@ -1,0 +1,19 @@
+
+king_idle.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0001
+  rotate: false
+  xy: 1, 1
+  size: 154, 144
+  orig: 154, 144
+  offset: 0, 0
+  index: -1
+0000
+  rotate: false
+  xy: 157, 1
+  size: 154, 144
+  orig: 154, 144
+  offset: 0, 0
+  index: -1
