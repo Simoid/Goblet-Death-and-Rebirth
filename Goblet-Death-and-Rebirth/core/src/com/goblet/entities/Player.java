@@ -27,6 +27,8 @@ public class Player {
 
     private HashMap<Direction, SpriteAnimation> animations = new HashMap<Direction, SpriteAnimation>();
     private SpriteAnimation currentAnimation;
+    private SpriteAnimation king;
+    private SpriteAnimation datboi;
     private Point position;
 
 
@@ -41,11 +43,27 @@ public class Player {
         this.xScale = xScale;
         this.yScale = yScale;
 
+
+        animations.put(Direction.DOWN, new SpriteAnimation("assets/sprites/king/" + "king_walk.pack", 3, xScale, yScale, 1/5f));
+        animations.put(Direction.UP, new SpriteAnimation("assets/sprites/king/" + "king_walk.pack", 3, xScale, yScale, 1/5f));
+        animations.put(Direction.LEFT, new SpriteAnimation("assets/sprites/king/" + "king_walk.pack", 3, xScale, yScale, 1/5f));
+        animations.put(Direction.RIGHT, new SpriteAnimation("assets/sprites/king/" + "king_walk.pack", 3, xScale, yScale, 1/5f));
+        animations.put(Direction.IDLE, new SpriteAnimation("assets/sprites/king/" + "king_idle.pack", 2, xScale, yScale, 1f));
+
+        /*
+        animations.put(Direction.DOWN, new SpriteAnimation("assets/sprites/mc/" + "mc_move_down.pack", 4, xScale, yScale, 1/5f));
+        animations.put(Direction.UP, new SpriteAnimation("assets/sprites/mc/" + "mc_move_up.pack", 4, xScale, yScale, 1/5f));
+        animations.put(Direction.LEFT, new SpriteAnimation("assets/sprites/mc/" + "mc_move_left.pack", 4, xScale, yScale, 1/5f));
+        animations.put(Direction.RIGHT, new SpriteAnimation("assets/sprites/mc/" + "mc_move_right.pack", 4, xScale, yScale, 1/5f));
+        animations.put(Direction.IDLE, new SpriteAnimation("assets/sprites/mc/" + "mc_idle.pack", 2, xScale, yScale, 1f));
+
+
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc_move_down.pack", 4, xScale, yScale, 1/5f));
         animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc_move_up.pack", 4, xScale, yScale, 1/5f));
         animations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc_move_left.pack", 4, xScale, yScale, 1/5f));
         animations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc_move_right.pack", 4, xScale, yScale, 1/5f));
         animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc_idle.pack", 2, xScale, yScale, 1f));
+        */
         currentAnimation = animations.get(Direction.IDLE);
 
         movement = new Movement(moveSpeed);
