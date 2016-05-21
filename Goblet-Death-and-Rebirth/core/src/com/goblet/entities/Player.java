@@ -3,6 +3,7 @@ package com.goblet.entities;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.goblet.graphics.SpriteAnimation;
+import com.goblet.level.Room;
 
 
 import java.awt.*;
@@ -30,6 +31,7 @@ public class Player {
     private SpriteAnimation king;
     private SpriteAnimation datboi;
     private Point position;
+    private Room room;
 
 
     /**
@@ -169,6 +171,13 @@ public class Player {
     }
 
     /**
+     * Ändrar spelarens position.
+     */
+    private void setPosition(Point newPosition){
+        position = newPosition;
+    }
+
+    /**
      * Ritar ut spelarens sprite.
      * @param batch Batchen som spelaren ska ritas ut på.
      */
@@ -183,6 +192,11 @@ public class Player {
         for (SpriteAnimation animation : animations.values()){
             animation.dispose();
         }
+    }
+
+    public void enterRoom(Room newRoom, Direction dir){
+        this.room = newRoom;
+        position = room.getDoorPosition(dir);
     }
 
 }

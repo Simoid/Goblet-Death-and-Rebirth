@@ -15,6 +15,7 @@ public class SpriteAnimation {
     private float yScale;
     private Animation animation;
     private TextureAtlas atlas;
+    private TextureRegion currentRegion;
 
     /**
      * Konstruktur för klassen.
@@ -33,6 +34,7 @@ public class SpriteAnimation {
             regions[i] = atlas.findRegion(String.format("%04d", i));
         }
         animation = new Animation(animationTime, regions);
+        currentRegion = animation.getKeyFrame(0);
     }
 
     /**
@@ -48,6 +50,22 @@ public class SpriteAnimation {
     }
 
     /**
+     * Returnerar den nuvarande bildens höjd.
+     * @return Höjden av bilden.
+     */
+    public float getSpriteHeight(){
+        return currentRegion.getRegionHeight()*yScale;
+    }
+
+    /**
+     * Returnerar den nuvarande bildens bredd.
+     * @return Bredden av bilden.
+     */
+    public float getSpriteWidth(){
+        return currentRegion.getRegionWidth()*xScale;
+    }
+
+    /**
      * Rita ut animationen.
      * @param batch Batchen som animationen ska ritas ut på.
      * @param x X-koordinaten för animationen.
@@ -55,8 +73,8 @@ public class SpriteAnimation {
      * @param time Tiden som har passerat sen animationen började.
      */
     public void draw(Batch batch, float x, float y, float time){
-        TextureRegion region = animation.getKeyFrame(time, true);
-        batch.draw(region, x, y, region.getRegionWidth()*xScale, region.getRegionHeight()*yScale);
+        currentRegion = animation.getKeyFrame(time, true);
+        batch.draw(currentRegion, x, y, currentRegion.getRegionWidth()*xScale, currentRegion.getRegionHeight()*yScale);
     }
 
     /**
