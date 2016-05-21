@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.goblet.entities.Player;
 import com.goblet.graphics.SpriteAnimation;
+import com.goblet.gameEngine.JsonParser;
+
+import java.io.FileNotFoundException;
 
 public class Engine implements ApplicationListener, InputProcessor {
 
@@ -18,9 +21,11 @@ public class Engine implements ApplicationListener, InputProcessor {
 	private Player player;
     private float xScale;
     private float yScale;
+	private JsonParser jsonParser;
 
 	@Override
 	public void create () {
+		jsonParser = new JsonParser();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(Color.GREEN);
@@ -29,6 +34,11 @@ public class Engine implements ApplicationListener, InputProcessor {
 		player = new Player(50, 50, xScale, yScale);
 		Gdx.input.setInputProcessor(this);
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+		try {
+			System.out.println(jsonParser.getName());
+		} catch (FileNotFoundException exception){
+
+		}
 	}
 
 	@Override
