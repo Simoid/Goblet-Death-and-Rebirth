@@ -11,13 +11,34 @@ import java.io.*;
  * Created by Simoido on 2016-05-19.
  */
 public class HappyJsonParser {
-    Gson gson = new Gson();
     Reader reader;
+    JsonElement je;
 
     public String getName(String fileName) throws FileNotFoundException{
         reader = new FileReader("core/assets/jsonFiles/" + fileName);
-        JsonElement je = new JsonParser().parse(reader);
+        je = new JsonParser().parse(reader);
         String name = je.getAsJsonObject().get("name").getAsString();
         return name;
+    }
+
+    public int getHealth(String fileName) throws FileNotFoundException{
+        reader = new FileReader("core/assets/jsonFiles/" + fileName);
+        je = new JsonParser().parse(reader);
+        int health = je.getAsJsonObject().get("health").getAsInt();
+        return health;
+    }
+
+    public int getDamge(String fileName) throws FileNotFoundException{
+        reader = new FileReader("core/assets/jsonFiles/" + fileName);
+        je = new JsonParser().parse(reader);
+        int dmg = je.getAsJsonObject().get("damage").getAsInt();
+        return dmg;
+    }
+
+    public int getHitbox(String fileName) throws FileNotFoundException{
+        reader = new FileReader("core/assets/jsonFiles/" + fileName);
+        je = new JsonParser().parse(reader);
+        int hitbox = je.getAsJsonObject().get("hitbox").getAsInt();
+        return hitbox;
     }
 }

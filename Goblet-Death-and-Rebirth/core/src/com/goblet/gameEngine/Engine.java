@@ -20,11 +20,9 @@ public class Engine implements ApplicationListener, InputProcessor {
 	private Player player;
     private float xScale;
     private float yScale;
-	private HappyJsonParser happyJsonParser;
 
 	@Override
 	public void create () {
-		happyJsonParser = new HappyJsonParser();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(Color.GREEN);
@@ -33,11 +31,6 @@ public class Engine implements ApplicationListener, InputProcessor {
 		player = new Player(50, 50, xScale, yScale);
 		Gdx.input.setInputProcessor(this);
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-		try {
-			System.out.println(happyJsonParser.getName("testfile.json"));
-		} catch (FileNotFoundException exception){
-
-		}
 	}
 
 	@Override
