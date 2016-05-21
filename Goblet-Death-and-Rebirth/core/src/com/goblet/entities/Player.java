@@ -196,7 +196,7 @@ public class Player {
 
     public void enterRoom(Room newRoom, Direction dir){
         this.room = newRoom;
-        position = room.getDoorPosition(dir);
+        //position = room.getDoorPosition(dir);
     }
 
 }
