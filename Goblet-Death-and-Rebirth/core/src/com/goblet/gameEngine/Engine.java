@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.goblet.entities.Player;
 import com.goblet.graphics.SpriteAnimation;
-import com.goblet.gameEngine.JsonParser;
 
 import java.io.FileNotFoundException;
 
@@ -21,11 +20,11 @@ public class Engine implements ApplicationListener, InputProcessor {
 	private Player player;
     private float xScale;
     private float yScale;
-	private JsonParser jsonParser;
+	private HappyJasonParser happyJasonParser;
 
 	@Override
 	public void create () {
-		jsonParser = new JsonParser();
+		happyJasonParser = new HappyJasonParser();
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(Color.GREEN);
@@ -35,7 +34,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 		Gdx.input.setInputProcessor(this);
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		try {
-			System.out.println(jsonParser.getName());
+			System.out.println(happyJasonParser.getName());
 		} catch (FileNotFoundException exception){
 
 		}
