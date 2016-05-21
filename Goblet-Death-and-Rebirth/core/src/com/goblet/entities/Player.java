@@ -3,6 +3,7 @@ package com.goblet.entities;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.goblet.graphics.SpriteAnimation;
+import com.goblet.level.Position;
 import com.goblet.level.Room;
 
 
@@ -18,8 +19,6 @@ import java.util.HashMap;
 public class Player {
 
     private float moveSpeed = 100.0f;
-    private float xScale;
-    private float yScale;
 
     private float timeSinceAnimationStart;
     private String spriteLocation = "assets/sprites/mc/";
@@ -28,9 +27,7 @@ public class Player {
 
     private HashMap<Direction, SpriteAnimation> animations = new HashMap<Direction, SpriteAnimation>();
     private SpriteAnimation currentAnimation;
-    private SpriteAnimation king;
-    private SpriteAnimation datboi;
-    private Point position;
+    private Position position;
     private Room room;
 
 
@@ -40,10 +37,8 @@ public class Player {
      * @param yPos
      */
     public Player(int xPos, int yPos, float xScale, float yScale){
-        position = new Point(xPos, yPos);
+        position = new Position(xPos, yPos);
 
-        this.xScale = xScale;
-        this.yScale = yScale;
 /*
 
         animations.put(Direction.DOWN, new SpriteAnimation("assets/sprites/king/" + "king_walk.pack", 3, xScale, yScale, 1/5f));
@@ -149,7 +144,7 @@ public class Player {
      */
     public void update(float deltaTime){
         timeSinceAnimationStart += deltaTime;
-        position.setLocation(position.x + deltaTime*movement.getMovementX(), position.y + deltaTime*movement.getMovementY());
+        position.setPosition(position.getX() + deltaTime*movement.getMovementX(), position.getY() + deltaTime*movement.getMovementY());
     }
 
     /**
@@ -173,7 +168,7 @@ public class Player {
     /**
      * Ändrar spelarens position.
      */
-    private void setPosition(Point newPosition){
+    private void setPosition(Position newPosition){
         position = newPosition;
     }
 
@@ -182,7 +177,7 @@ public class Player {
      * @param batch Batchen som spelaren ska ritas ut på.
      */
     public void draw(Batch batch){
-        currentAnimation.draw(batch, position.x, position.y, timeSinceAnimationStart);
+        currentAnimation.draw(batch, position.getX(), position.getY(), timeSinceAnimationStart);
     }
 
     /**
