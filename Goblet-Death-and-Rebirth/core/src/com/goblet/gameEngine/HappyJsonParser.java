@@ -7,14 +7,15 @@ import com.google.gson.JsonParser;
 
 import java.io.*;
 /**
+ *En klass som kan läsa information från json filer och returnera dem
  * Created by Simoido on 2016-05-19.
  */
-public class HappyJasonParser {
+public class HappyJsonParser {
     Gson gson = new Gson();
     Reader reader;
 
-    public String getName() throws FileNotFoundException{
-        reader = new FileReader("core/assets/jsonFiles/testfile.json");
+    public String getName(String fileName) throws FileNotFoundException{
+        reader = new FileReader("core/assets/jsonFiles/" + fileName);
         JsonElement je = new JsonParser().parse(reader);
         String name = je.getAsJsonObject().get("name").getAsString();
         return name;
