@@ -15,7 +15,7 @@ public class Tile {
 
     public Tile(String spriteLocation, Position position){
         texture = new Texture(Gdx.files.internal(spriteLocation));
-        position = new Position(position);
+        this.position = new Position(position);
     }
 
     public void draw(Batch batch){
