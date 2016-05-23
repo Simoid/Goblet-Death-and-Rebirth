@@ -1,13 +1,15 @@
 package com.goblet.gameEngine;
 
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.goblet.entities.Player;
 import com.goblet.graphics.SpriteAnimation;
 import com.goblet.level.Room;
+import com.sun.prism.image.ViewPort;
 
 import java.io.FileNotFoundException;
 
@@ -22,7 +24,8 @@ public class Engine implements ApplicationListener, InputProcessor {
 	private Player player;
     private float xScale;
     private float yScale;
-	private OrthographicCamera camera;
+	private Camera camera;
+    private Viewport viewPort;
 	private Room startRoom;
 
 	@Override
@@ -30,7 +33,10 @@ public class Engine implements ApplicationListener, InputProcessor {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(Color.GREEN);
-		camera = new OrthographicCamera(480, 270);
+		camera = new OrthographicCamera();
+        viewPort = new FitViewport(480, 270, camera);
+        viewPort.apply();
+        camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 		batch.setProjectionMatrix(camera.combined);
 		xScale = 1.0f;
 		yScale = 1.0f;
@@ -38,11 +44,11 @@ public class Engine implements ApplicationListener, InputProcessor {
 		player = new Player(50, 50, xScale, yScale);
 		startRoom = new Room();
 		Gdx.input.setInputProcessor(this);
-        Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 	}
 
 	@Override
 	public void resize(int width, int height) {
+        viewPort.update(width, height);
 	}
 
 	@Override
@@ -65,6 +71,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 			timeCounter = 0f;
 		}
 
+        camera.update();
 		Gdx.gl.glClearColor(0.1f, 0.1f, 0.1f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
