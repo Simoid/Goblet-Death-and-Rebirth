@@ -16,10 +16,16 @@ public class WallObject {
     private Position bottomLeft;
     private Position topRight;
 
-    public WallObject(TextureRegion region, TextureRegion regionWithDoor, Direction dir, Position bottomLeft, Position topRight){
+    public WallObject(TextureRegion region, TextureRegion regionWithDoor, Direction dir, Position bottomLeft, Position topRight, boolean doorOnWall){
+        //Se vilken TextureRegion som ska användas i WallObject
+        if(doorOnWall){
+            this.region = regionWithDoor;
+        }else{
+            this.region = region;
+        }
+
         this.bottomLeft = bottomLeft;
         this.topRight = topRight;
-        this.region = region;
         this.dir = dir;
         position = new Position(0, 0);
         setPosition();
