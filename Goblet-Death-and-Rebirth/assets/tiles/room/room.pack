@@ -1,0 +1,96 @@
+
+room.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+spr_floor
+  rotate: false
+  xy: 1, 222
+  size: 420, 270
+  orig: 420, 270
+  offset: 0, 0
+  index: -1
+spr_upper_wall
+  rotate: false
+  xy: 1, 202
+  size: 390, 18
+  orig: 390, 18
+  offset: 0, 0
+  index: -1
+spr_lower_wall
+  rotate: false
+  xy: 423, 474
+  size: 390, 18
+  orig: 390, 18
+  offset: 0, 0
+  index: -1
+spr_upper_wall_path
+  rotate: false
+  xy: 1, 185
+  size: 390, 15
+  orig: 390, 15
+  offset: 0, 0
+  index: -1
+spr_lower_wall_path
+  rotate: false
+  xy: 423, 457
+  size: 390, 15
+  orig: 390, 15
+  offset: 0, 0
+  index: -1
+spr_left_wall
+  rotate: false
+  xy: 423, 185
+  size: 48, 270
+  orig: 48, 270
+  offset: 0, 0
+  index: -1
+spr_right_wall
+  rotate: false
+  xy: 473, 185
+  size: 48, 270
+  orig: 48, 270
+  offset: 0, 0
+  index: -1
+spr_left_wall_path
+  rotate: false
+  xy: 523, 185
+  size: 45, 270
+  orig: 45, 270
+  offset: 0, 0
+  index: -1
+spr_right_wall_path
+  rotate: false
+  xy: 570, 185
+  size: 45, 270
+  orig: 45, 270
+  offset: 0, 0
+  index: -1
+spr_right_door
+  rotate: false
+  xy: 1, 93
+  size: 18, 90
+  orig: 18, 90
+  offset: 0, 0
+  index: -1
+spr_lower_door
+  rotate: false
+  xy: 815, 474
+  size: 90, 18
+  orig: 90, 18
+  offset: 0, 0
+  index: -1
+spr_upper_door
+  rotate: false
+  xy: 617, 437
+  size: 90, 18
+  orig: 90, 18
+  offset: 0, 0
+  index: -1
+spr_left_door
+  rotate: false
+  xy: 1, 1
+  size: 18, 90
+  orig: 18, 90
+  offset: 0, 0
+  index: -1
