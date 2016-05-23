@@ -30,6 +30,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 
 	@Override
 	public void create () {
+		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(Color.GREEN);
