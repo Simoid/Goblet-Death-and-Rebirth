@@ -3,9 +3,11 @@ package com.goblet.gameEngine;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.goblet.entities.Player;
 import com.goblet.graphics.SpriteAnimation;
+import com.goblet.level.Room;
 
 import java.io.FileNotFoundException;
 
@@ -20,15 +22,21 @@ public class Engine implements ApplicationListener, InputProcessor {
 	private Player player;
     private float xScale;
     private float yScale;
+	private OrthographicCamera camera;
+	private Room startRoom;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		font.setColor(Color.GREEN);
-        xScale = Gdx.graphics.getWidth() / 640;
-        yScale = Gdx.graphics.getHeight() / 360;
+		camera = new OrthographicCamera(480, 270);
+		batch.setProjectionMatrix(camera.combined);
+		xScale = 1.0f;
+		yScale = 1.0f;
+		System.out.println("Width: " + Gdx.graphics.getWidth() + ", Height: " + Gdx.graphics.getHeight() + ", xScale: " + xScale + ", yScale: " + yScale + ", 16/9 = " + 16/9 + ", Width/height = " + Gdx.graphics.getWidth()/Gdx.graphics.getHeight());
 		player = new Player(50, 50, xScale, yScale);
+		startRoom = new Room();
 		Gdx.input.setInputProcessor(this);
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 	}
