@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import java.io.*;
 /**
- *En klass som kan läsa information från json filer och returnera dem
+ *En klass som kan läsa information från json filer som innehåller information om fiender och returnera värdena
  * Created by Simoido on 2016-05-19.
  */
 public class EnemyParser {
@@ -56,7 +56,6 @@ public class EnemyParser {
         String moveType = je.getAsJsonObject().get("moveType").getAsString();
         return moveType;
     }
-
 }
 
 /*
