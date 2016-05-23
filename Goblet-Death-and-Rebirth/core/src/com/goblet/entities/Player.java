@@ -16,18 +16,12 @@ import java.util.HashMap;
  * hända när piltangenterna används.
  * Created by Johan on 2016-05-14.
  */
-public class Player {
-
-    private float moveSpeed = 100.0f;
-
-    private float timeSinceAnimationStart;
-    private String spriteLocation = "assets/sprites/mc/";
+public class Player extends Entity{
 
     private Movement movement;
 
     private HashMap<Direction, SpriteAnimation> animations = new HashMap<Direction, SpriteAnimation>();
     private SpriteAnimation currentAnimation;
-    private Position position;
     private Room room;
 
 
@@ -37,7 +31,8 @@ public class Player {
      * @param yPos
      */
     public Player(int xPos, int yPos, float xScale, float yScale){
-        position = new Position(xPos, yPos);
+        super(xPos, yPos);
+        spriteLocation += "mc/";
 
 /*
 
