@@ -1,8 +1,6 @@
 package com.goblet.level;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Gdx.*;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -48,10 +46,10 @@ public class Room {
         tiles = new Tile[16][26];
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
 
-        wallMap.put(Direction.UP, new WallObject(atlas.findRegion("spr_upper_wall"), atlas.findRegion("spr_upper_wall_path"), Direction.UP, bottomLeft, topRight));
-        wallMap.put(Direction.DOWN, new WallObject(atlas.findRegion("spr_lower_wall"), atlas.findRegion("spr_lower_wall_path"), Direction.DOWN, bottomLeft, topRight));
-        wallMap.put(Direction.LEFT, new WallObject(atlas.findRegion("spr_left_wall"), atlas.findRegion("spr_left_wall_path"), Direction.LEFT, bottomLeft, topRight));
-        wallMap.put(Direction.RIGHT, new WallObject(atlas.findRegion("spr_right_wall"), atlas.findRegion("spr_right_wall_path"), Direction.RIGHT, bottomLeft, topRight));
+        wallMap.put(Direction.UP, new WallObject(atlas.findRegion("spr_upper_wall"), atlas.findRegion("spr_upper_wall_path"), Direction.UP, bottomLeft, topRight, false));
+        wallMap.put(Direction.DOWN, new WallObject(atlas.findRegion("spr_lower_wall"), atlas.findRegion("spr_lower_wall_path"), Direction.DOWN, bottomLeft, topRight, true));
+        wallMap.put(Direction.LEFT, new WallObject(atlas.findRegion("spr_left_wall"), atlas.findRegion("spr_left_wall_path"), Direction.LEFT, bottomLeft, topRight, true));
+        wallMap.put(Direction.RIGHT, new WallObject(atlas.findRegion("spr_right_wall"), atlas.findRegion("spr_right_wall_path"), Direction.RIGHT, bottomLeft, topRight, true));
 
         floorTextureRegion = atlas.findRegion("spr_floor");
     }
