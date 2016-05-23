@@ -41,4 +41,8 @@ public class HappyJsonParser {
         int hitbox = je.getAsJsonObject().get("hitbox").getAsInt();
         return hitbox;
     }
+
+    public void changeFile(){
+
+    }
 }
