@@ -37,11 +37,20 @@ public class Movement {
     }
 
     public float getMovementY() {
-        return currentMovementY;
+        if (currentMovementY == 0){
+            return 0;
+        }
+        double angle = Math.atan2(currentMovementY, currentMovementX);
+        System.out.println(currentMovementY / Math.abs(currentMovementY));
+        return (float) (currentMovementY / Math.abs(currentMovementY) * Math.sin(angle) * currentMovementY);
     }
 
     public float getMovementX(){
-        return currentMovementX;
+        if (currentMovementX == 0){
+            return 0;
+        }
+        double angle = Math.atan2(currentMovementY, currentMovementX);
+        return (float) ((currentMovementX / Math.abs(currentMovementX) * Math.cos(angle) * currentMovementX));
     }
 
     public void setMoveFlag(Direction dir, boolean flag){

@@ -26,7 +26,6 @@ public class Enemy extends Entity{
 
     public void update(Player player, float deltaTime){
         Position playerPosition = player.getPosition();
-        System.out.println("X: " + Math.abs(playerPosition.getX() - position.getX() + currentAnimation.getSpriteWidth()/2));
         if (Math.abs(playerPosition.getX() - (position.getX() + currentAnimation.getSpriteWidth()/2)) < 20.0f){
             movement.setMoveFlag(Direction.LEFT, false);
             movement.setMoveFlag(Direction.RIGHT, false);
