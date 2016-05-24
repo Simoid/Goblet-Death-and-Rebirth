@@ -22,38 +22,38 @@ public class EnemyParser {
         }
     }
 
-    public String getName() throws FileNotFoundException{
-        String name = je.getAsJsonObject().get("name").getAsString();
+    public String getName(String enemy) throws FileNotFoundException{
+        String name = je.getAsJsonObject().get(enemy).getAsJsonObject().get("name").getAsString();
         return name;
     }
 
-    public int getHealth() throws FileNotFoundException{
-        int health = je.getAsJsonObject().get("health").getAsInt();
+    public int getHealth(String enemy) throws FileNotFoundException{
+        int health = je.getAsJsonObject().get(enemy).getAsJsonObject().get("health").getAsInt();
         return health;
     }
 
-    public int getDamage() throws FileNotFoundException{
-        int dmg = je.getAsJsonObject().get("damage").getAsInt();
+    public int getDamage(String enemy) throws FileNotFoundException{
+        int dmg = je.getAsJsonObject().get(enemy).getAsJsonObject().get("damage").getAsInt();
         return dmg;
     }
 
-    public int getHitboxSize() throws FileNotFoundException{
-        int hitbox = je.getAsJsonObject().get("hitbox").getAsInt();
+    public int getHitboxSize(String enemy) throws FileNotFoundException{
+        int hitbox = je.getAsJsonObject().get(enemy).getAsJsonObject().get("hitbox").getAsInt();
         return hitbox;
     }
 
-    public int getHiboxOrigin() throws FileNotFoundException{
-        int hitboxOrigin = je.getAsJsonObject().get("hitboxOrigin").getAsInt();
+    public int getHiboxOrigin(String enemy) throws FileNotFoundException{
+        int hitboxOrigin = je.getAsJsonObject().get(enemy).getAsJsonObject().get("hitboxOrigin").getAsInt();
         return hitboxOrigin;
     }
 
-    public String getAttackType() throws FileNotFoundException{
-        String attackType = je.getAsJsonObject().get("attackType").getAsString();
+    public String getAttackType(String enemy) throws FileNotFoundException{
+        String attackType = je.getAsJsonObject().get(enemy).getAsJsonObject().get("attackType").getAsString();
         return attackType;
     }
 
-    public String getMoveType() throws FileNotFoundException{
-        String moveType = je.getAsJsonObject().get("moveType").getAsString();
+    public String getMoveType(String enemy) throws FileNotFoundException{
+        String moveType = je.getAsJsonObject().get(enemy).getAsJsonObject().get("moveType").getAsString();
         return moveType;
     }
 }
