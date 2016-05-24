@@ -73,10 +73,9 @@ public class Engine implements ApplicationListener, InputProcessor {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-        startRoom.draw(batch);
         font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight());
+        startRoom.draw(batch);
 		elapsedTime += Gdx.graphics.getDeltaTime();
-		//mc_walk.draw(batch, mc_x, mc_y, elapsedTime);
 		player.draw(batch);
 		batch.end();
 	}
@@ -86,10 +85,14 @@ public class Engine implements ApplicationListener, InputProcessor {
 	public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.ESCAPE){
             quit();
+        } else if (keycode == Input.Keys.SPACE) {
+            if (!startRoom.doorsAreOpen()) {
+                startRoom.openDoors();
+            } else {
+                startRoom.closeDoors();
+            }
         } else if (keycode == Input.Keys.CONTROL_LEFT){
-            player.increaseScale();
-        } else if (keycode == Input.Keys.SHIFT_LEFT){
-            player.decreaseScale();
+            player.shouldDrawHitbox();
         }
 		player.keyPressed(keycode);
 		return true;

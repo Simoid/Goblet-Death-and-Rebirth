@@ -22,20 +22,19 @@ public class Room {
     private TextureAtlas atlas;
     private Position bottomLeft;
     private Position topRight;
+    private boolean doorsOpen;
 
 
     public void draw(Batch batch){
         batch.draw(floorTextureRegion, -floorTextureRegion.getRegionWidth()/2, bottomLeft.getY(), floorTextureRegion.getRegionWidth(), floorTextureRegion.getRegionHeight());
-
         for (WallObject currentWall : wallMap.values()){
             currentWall.draw(batch);
         }
 
-        /*for (Tile[] tileRow : tiles){
-            for (Tile currentTile : tileRow){
-                currentTile.draw(batch);
-            }
-        }*/
+    }
+
+    public void drawFloor(Batch batch){
+
     }
 
     public Room(float bottomLeftX, float bottomLeftY, float topRightX, float topRightY){
@@ -46,12 +45,30 @@ public class Room {
         tiles = new Tile[16][26];
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
 
-        wallMap.put(Direction.UP, new WallObject(atlas.findRegion("spr_upper_wall"), atlas.findRegion("spr_upper_wall_path"), Direction.UP, bottomLeft, topRight, false));
-        wallMap.put(Direction.DOWN, new WallObject(atlas.findRegion("spr_lower_wall"), atlas.findRegion("spr_lower_wall_path"), Direction.DOWN, bottomLeft, topRight, true));
-        wallMap.put(Direction.LEFT, new WallObject(atlas.findRegion("spr_left_wall"), atlas.findRegion("spr_left_wall_path"), Direction.LEFT, bottomLeft, topRight, true));
-        wallMap.put(Direction.RIGHT, new WallObject(atlas.findRegion("spr_right_wall"), atlas.findRegion("spr_right_wall_path"), Direction.RIGHT, bottomLeft, topRight, true));
+        wallMap.put(Direction.UP, new WallObject(atlas.findRegion("spr_upper_wall"), atlas.findRegion("spr_upper_wall_path"), atlas.findRegion("spr_upper_door"), Direction.UP, bottomLeft, topRight, true));
+        wallMap.put(Direction.DOWN, new WallObject(atlas.findRegion("spr_lower_wall"), atlas.findRegion("spr_lower_wall_path"), atlas.findRegion("spr_lower_door"), Direction.DOWN, bottomLeft, topRight, true));
+        wallMap.put(Direction.LEFT, new WallObject(atlas.findRegion("spr_left_wall"), atlas.findRegion("spr_left_wall_path"), atlas.findRegion("spr_left_door"), Direction.LEFT, bottomLeft, topRight, true));
+        wallMap.put(Direction.RIGHT, new WallObject(atlas.findRegion("spr_right_wall"), atlas.findRegion("spr_right_wall_path"), atlas.findRegion("spr_right_door"), Direction.RIGHT, bottomLeft, topRight, true));
 
         floorTextureRegion = atlas.findRegion("spr_floor");
+    }
+
+    public void openDoors(){
+        for (WallObject currentWall : wallMap.values()){
+            currentWall.openDoor();
+            doorsOpen = true;
+        }
+    }
+
+    public void closeDoors(){
+        for (WallObject currentWall : wallMap.values()){
+            currentWall.closeDoor();
+            doorsOpen = false;
+        }
+    }
+
+    public boolean doorsAreOpen(){
+        return doorsOpen;
     }
 
 
