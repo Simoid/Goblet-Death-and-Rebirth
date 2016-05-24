@@ -39,9 +39,9 @@ public class Engine implements ApplicationListener, InputProcessor {
 
 
 
-		player = new Player(0, 0);
+		player = new Player(0, 0,100f);
 		startRoom = new Room(-camera.viewportWidth/2, -camera.viewportHeight/2, camera.viewportWidth/2, camera.viewportHeight/2);
-        testEnemy = new Enemy(50, 0, "king/king", 2, 3, 3);
+        testEnemy = new Enemy(50, 0, "king/king", 2, 3, 3,50f);
 
 		Gdx.input.setInputProcessor(this);
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
@@ -64,7 +64,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 	}
 
 	public void update(float deltaTime){
-        testEnemy.update(player, deltaTime);
+        testEnemy.update(deltaTime);
 		player.update(deltaTime);
 	}
 
