@@ -52,44 +52,58 @@ spr_lower_wall_path
   orig: 390, 15
   offset: 0, 0
   index: -1
-spr_left_wall
+spr_left_door
   rotate: false
   xy: 423, 1
   size: 48, 270
   orig: 48, 270
   offset: 0, 0
   index: -1
-spr_right_wall
+spr_left_wall
   rotate: false
   xy: 473, 1
   size: 48, 270
   orig: 48, 270
   offset: 0, 0
   index: -1
-spr_left_wall_path
+spr_right_wall
   rotate: false
   xy: 523, 1
+  size: 48, 270
+  orig: 48, 270
+  offset: 0, 0
+  index: -1
+spr_left_wall_path_roof
+  rotate: false
+  xy: 573, 1
+  size: 45, 270
+  orig: 45, 270
+  offset: 0, 0
+  index: -1
+spr_left_wall_path
+  rotate: false
+  xy: 620, 1
   size: 45, 270
   orig: 45, 270
   offset: 0, 0
   index: -1
 spr_right_wall_path
   rotate: false
-  xy: 570, 1
+  xy: 667, 1
+  size: 45, 270
+  orig: 45, 270
+  offset: 0, 0
+  index: -1
+spr_right_wall_path_roof
+  rotate: false
+  xy: 714, 1
   size: 45, 270
   orig: 45, 270
   offset: 0, 0
   index: -1
 spr_right_door
   rotate: false
-  xy: 617, 1
-  size: 18, 270
-  orig: 18, 270
-  offset: 0, 0
-  index: -1
-spr_left_door
-  rotate: false
-  xy: 637, 1
+  xy: 761, 1
   size: 18, 270
   orig: 18, 270
   offset: 0, 0
