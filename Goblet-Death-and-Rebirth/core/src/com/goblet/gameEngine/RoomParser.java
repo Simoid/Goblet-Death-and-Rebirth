@@ -1,5 +1,8 @@
 package com.goblet.gameEngine;
 
+import com.goblet.level.SpawnPoint;
+import com.goblet.level.Tile;
+import com.goblet.level.TileType;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -26,15 +29,39 @@ public class RoomParser {
 
     }
 
-    public String[][] getRoom(String roomName){
-        String[][] array = new String[16][24];
+    public TileType[][] getRoom(String roomName){
+        String[][] stringArray = new String[16][24];
+        TileType[][] returnArray = new TileType[16][24];
         for(int i = 0 ; i < 16 ; i++){
             for(int j = 0 ; j < 24 ; j++){
-                array[i][j] = je.getAsJsonObject().get(roomName).getAsJsonArray().get(i).getAsJsonArray().get(j).getAsString();
+                stringArray[i][j] = je.getAsJsonObject().get(roomName).getAsJsonArray().get(i).getAsJsonArray().get(j).getAsString();
             }
         }
-        return  array;
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 24; j++) {
+                returnArray[i][j] = TileType.translate(stringArray[i][j]);
+            }
+        }
+        return returnArray;
     }
+
+    public SpawnPoint[][] getSpawns(String roomName){
+        String[][] stringArray = new String[16][24];
+        SpawnPoint[][] returnArray = new SpawnPoint[16][24];
+        for(int i = 0 ; i < 16 ; i++){
+            for(int j = 0 ; j < 24 ; j++){
+                stringArray[i][j] = je.getAsJsonObject().get(roomName).getAsJsonArray().get(i).getAsJsonArray().get(j).getAsString();
+            }
+        }
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 24; j++) {
+                returnArray[i][j] = SpawnPoint.translate(stringArray[i][j]);
+            }
+        }
+        return returnArray;
+    }
+
+
 
     /*
     public static void main(String[]arg){
