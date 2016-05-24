@@ -9,7 +9,6 @@
     "attackType" : 1,
     "moveType" : 1
   },
-
   "enemyTest2" :{
     "name" : "test",
     "health" : 10,
