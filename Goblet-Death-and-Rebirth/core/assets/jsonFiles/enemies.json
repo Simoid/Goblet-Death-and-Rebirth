@@ -1,0 +1,22 @@
+{
+  "bat" :{
+    "name" : "bat",
+    "health" : 10,
+    "damage" : 1,
+    "hitboxWidth" : 1,
+    "hitboxHeight" : 1,
+    "hitboxOrigin" : 1,
+    "attackType" : 1,
+    "moveType" : 1
+  },
+  "enemyTest2" :{
+    "name" : "test",
+    "health" : 10,
+    "damage" : 1,
+    "hitboxWidth" : 1,
+    "hitboxHeight" : 1,
+    "hitboxOrigin" : 1,
+    "attackType" : 1,
+    "moveType" : 1
+  }
+}

@@ -9,6 +9,8 @@ import com.goblet.entities.Player;
 import com.goblet.graphics.SpriteAnimation;
 import com.goblet.level.Room;
 
+import java.io.FileNotFoundException;
+
 public class Engine implements ApplicationListener, InputProcessor {
 
 	private float timeBetweenUpdates = 1/120f;
@@ -23,9 +25,11 @@ public class Engine implements ApplicationListener, InputProcessor {
 	private Camera camera;
     private Viewport viewPort;
 	private Room startRoom;
+	private EnemyParser enemyParser;
 
 	@Override
 	public void create () {
+		enemyParser = new EnemyParser("enemies.json");
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		batch = new SpriteBatch();
 		font = new BitmapFont();
@@ -42,6 +46,11 @@ public class Engine implements ApplicationListener, InputProcessor {
 		startRoom = new Room(-camera.viewportWidth/2, -camera.viewportHeight/2, camera.viewportWidth/2, camera.viewportHeight/2);
 		Gdx.input.setInputProcessor(this);
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+		try {
+			System.out.println(enemyParser.getName("bat"));
+		}catch (FileNotFoundException ex){
+
+		}
 	}
 
 	@Override

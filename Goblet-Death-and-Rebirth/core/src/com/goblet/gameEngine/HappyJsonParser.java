@@ -16,7 +16,7 @@ public class HappyJsonParser {
 
     Reader reader;
     try{
-        reader = new FileReader("core/assets/jsonFiles/testfile.json");
+        reader = new FileReader("core/assets/jsonFiles/enemies.json");
     } catch FileNotFoundException exception{
 
     }
