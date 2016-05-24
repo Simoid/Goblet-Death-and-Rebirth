@@ -1,13 +1,13 @@
 package com.goblet.entities;
 
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.goblet.gameEngine.Hitbox;
 import com.goblet.graphics.SpriteAnimation;
 import com.goblet.level.Position;
 import com.goblet.level.Room;
 
 
-import java.awt.*;
 import java.util.HashMap;
 
 /**
@@ -21,8 +21,7 @@ public class Player extends Entity{
     private Movement movement;
 
     private HashMap<Direction, SpriteAnimation> animations = new HashMap<Direction, SpriteAnimation>();
-    private SpriteAnimation currentAnimation;
-    private Room room;
+    private Hitbox hitbox;
 
 
     /**
@@ -30,36 +29,21 @@ public class Player extends Entity{
      * @param xPos
      * @param yPos
      */
-    public Player(int xPos, int yPos, float xScale, float yScale){
+    public Player(int xPos, int yPos){
         super(xPos, yPos);
-        spriteLocation += "mc/";
 
-/*
-
-        animations.put(Direction.DOWN, new SpriteAnimation("assets/sprites/king/" + "king_walk.pack", 3, xScale, yScale, 1/5f));
-        animations.put(Direction.UP, new SpriteAnimation("assets/sprites/king/" + "king_walk.pack", 3, xScale, yScale, 1/5f));
-        animations.put(Direction.LEFT, new SpriteAnimation("assets/sprites/king/" + "king_walk.pack", 3, xScale, yScale, 1/5f));
-        animations.put(Direction.RIGHT, new SpriteAnimation("assets/sprites/king/" + "king_walk.pack", 3, xScale, yScale, 1/5f));
-        animations.put(Direction.IDLE, new SpriteAnimation("assets/sprites/king/" + "king_idle.pack", 2, xScale, yScale, 1f));
-
-
-        animations.put(Direction.DOWN, new SpriteAnimation("assets/sprites/datboi/" + "datboi_move.pack", 4, xScale, yScale, 1/5f));
-        animations.put(Direction.UP, new SpriteAnimation("assets/sprites/datboi/" + "datboi_move.pack", 4, xScale, yScale, 1/5f));
-        animations.put(Direction.LEFT, new SpriteAnimation("assets/sprites/datboi/" + "datboi_move.pack", 4, xScale, yScale, 1/5f));
-        animations.put(Direction.RIGHT, new SpriteAnimation("assets/sprites/datboi/" + "datboi_move.pack", 4, xScale, yScale, 1/5f));
-        animations.put(Direction.IDLE, new SpriteAnimation("assets/sprites/datboi/" + "datboi_move.pack", 4, xScale, yScale, 1f));
-
-*/
-        animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc_move_down.pack", 4, xScale, yScale, 1/5f));
-        animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc_move_up.pack", 4, xScale, yScale, 1/5f));
-        animations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc_move_left.pack", 4, xScale, yScale, 1/5f));
-        animations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc_move_right.pack", 4, xScale, yScale, 1/5f));
-        animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc_idle.pack", 2, xScale, yScale, 1f));
+        animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_move_down.pack", 4, 1.0f, 1.0f, 1/5f));
+        animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_move_up.pack", 4, 1.0f, 1.0f, 1/5f));
+        animations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc/mc_move_left.pack", 4, 1.0f, 1.0f, 1/5f));
+        animations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc/mc_move_right.pack", 4, 1.0f, 1.0f, 1/5f));
+        animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc/mc_idle.pack", 2, 1.0f, 1.0f, 1f));
 
         currentAnimation = animations.get(Direction.IDLE);
 
         movement = new Movement(moveSpeed);
         timeSinceAnimationStart = 0;
+
+        hitbox = new Hitbox(position, 11f, 19f, 2f, 4f);
     }
 
     /**
@@ -67,7 +51,7 @@ public class Player extends Entity{
      */
     public void increaseScale(){
         for(SpriteAnimation animation : animations.values()){
-            animation.changeScale(1.25f);
+            animation.changeScale(2f);
         }
     }
 
@@ -76,7 +60,7 @@ public class Player extends Entity{
      */
     public void decreaseScale() {
         for (SpriteAnimation animation : animations.values()) {
-            animation.changeScale(0.8f);
+            animation.changeScale(0.5f);
         }
     }
 
@@ -93,8 +77,6 @@ public class Player extends Entity{
             return;
         }
         if (!movement.getMoveFlag(dir)){
-            movement.addMovementX(dir);
-            movement.addMovementY(dir);
             movement.setMoveFlag(dir, true);
             selectAnimation();
         }
@@ -140,6 +122,7 @@ public class Player extends Entity{
     public void update(float deltaTime){
         timeSinceAnimationStart += deltaTime;
         position.setPosition(position.getX() + deltaTime*movement.getMovementX(), position.getY() + deltaTime*movement.getMovementY());
+        hitbox.updatePosition(position);
     }
 
     /**
@@ -153,8 +136,6 @@ public class Player extends Entity{
             return;
         }
         if (movement.getMoveFlag(dir)){
-            movement.subMovementX(dir);
-            movement.subMovementY(dir);
             movement.setMoveFlag(dir, false);
             selectAnimation();
         }
@@ -167,12 +148,16 @@ public class Player extends Entity{
         position = newPosition;
     }
 
-    /**
-     * Ritar ut spelarens sprite.
-     * @param batch Batchen som spelaren ska ritas ut på.
-     */
-    public void draw(Batch batch){
-        currentAnimation.draw(batch, position.getX(), position.getY(), timeSinceAnimationStart);
+    public Position getPosition(){
+        return position;
+    }
+
+    public void shouldDrawHitbox(){
+        if (!hitbox.getDrawFlag()) {
+            hitbox.setDrawFlag(true);
+        } else {
+            hitbox.setDrawFlag(false);
+        }
     }
 
     /**
@@ -183,10 +168,4 @@ public class Player extends Entity{
             animation.dispose();
         }
     }
-
-    public void enterRoom(Room newRoom, Direction dir){
-        this.room = newRoom;
-        //position = room.getDoorPosition(dir);
-    }
-
 }
