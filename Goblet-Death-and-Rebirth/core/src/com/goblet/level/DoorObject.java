@@ -42,9 +42,7 @@ public class DoorObject {
                 position.setPosition(wallPosition.getX() - doorShadowSize, bottomLeft.getY());
                 break;
         }
-
     }
-
 
     public void draw(Batch batch){
         batch.draw(region, position.getX(), position.getY(), region.getRegionWidth(), region.getRegionHeight());
