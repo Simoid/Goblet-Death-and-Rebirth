@@ -55,6 +55,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 		startRoom = new Room(-camera.viewportWidth/2, -camera.viewportHeight/2, camera.viewportWidth/2, camera.viewportHeight/2);
         testEnemy = new Enemy(50, 0, "king/king", 2, 3, 3,50f);
 
+        enemies = new ArrayList<Entity>();
         enemies.add(testEnemy);
 
 		Gdx.input.setInputProcessor(this);
