@@ -7,7 +7,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.goblet.entities.Enemy;
 import com.goblet.entities.Player;
-import com.goblet.graphics.SpriteAnimation;
 import com.goblet.level.Room;
 
 import java.io.FileNotFoundException;

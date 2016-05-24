@@ -12,24 +12,20 @@ import java.util.HashMap;
 
 /**
  * En klass för spelaren som objekt.
- * Innehåller spelarens position och dess animationer, samt håller reda på vad som ska
- * hända när piltangenterna används.
+ * Innehåller spelarens position och dess animationer.
  * Created by Johan on 2016-05-14.
  */
 public class Player extends Entity{
 
-    private Movement movement;
-
-    private HashMap<Direction, SpriteAnimation> animations = new HashMap<Direction, SpriteAnimation>();
     private Hitbox hitbox;
 
 
     /**
-     * Konstruktorn
-     * @param xPos
-     * @param yPos
+     * Konstruktorn för player.
+     * @param xPos Startpositionen i x-led.
+     * @param yPos Startpositionen i y-led.
      */
-    public Player(int xPos, int yPos){
+    public Player(int xPos, int yPos, float moveSpeed){
         super(xPos, yPos);
 
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_move_down.pack", 4, 1.0f, 1.0f, 1/5f));
@@ -102,18 +98,6 @@ public class Player extends Entity{
         }
     }
 
-    /**
-     * Sätter animationen för spelaren.
-     * Om animationen redan är startad ska den inte startas om, så därför kollar metoden
-     * först om animationen redan körs.
-     * @param dir Vilken animation som ska spelas.
-     */
-    private void setAnimation(Direction dir){
-        if (currentAnimation != animations.get(dir)) {
-            currentAnimation = animations.get(dir);
-            timeSinceAnimationStart = 0;
-        }
-    }
 
     /**
      * Uppdaterar spelarens position och animation.
@@ -148,10 +132,17 @@ public class Player extends Entity{
         position = newPosition;
     }
 
+    /**
+     * Returnerar spelaren position.
+     * @return Spelarens position.
+     */
     public Position getPosition(){
         return position;
     }
 
+    /**
+     * Ändrar i fall hitboxen ritas ut eller inte.
+     */
     public void shouldDrawHitbox(){
         if (!hitbox.getDrawFlag()) {
             hitbox.setDrawFlag(true);
@@ -160,12 +151,4 @@ public class Player extends Entity{
         }
     }
 
-    /**
-     * Tar bort de objekt som javas GC inte tar hand om från minnet.
-     */
-    public void dispose(){
-        for (SpriteAnimation animation : animations.values()){
-            animation.dispose();
-        }
-    }
 }
