@@ -79,7 +79,6 @@ public class Movement {
             return 0;
         }
         double angle = Math.atan2(currentMovementY, currentMovementX);
-        System.out.println(currentMovementY / Math.abs(currentMovementY));
         return (float) (currentMovementY / Math.abs(currentMovementY) * Math.sin(angle) * currentMovementY);
     }
 
