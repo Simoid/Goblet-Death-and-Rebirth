@@ -52,13 +52,13 @@ public class Enemy extends Entity{
             movement.setMoveFlag(Direction.RIGHT, !moveLeft);
         }
         if (Math.abs(playerPosition.getY() - (position.getY() + currentAnimation.getSpriteHeight()/2)) < 20.0f){
-        movement.setMoveFlag(Direction.DOWN, false);
-        movement.setMoveFlag(Direction.UP, false);
+            movement.setMoveFlag(Direction.DOWN, false);
+            movement.setMoveFlag(Direction.UP, false);
         }
         else {
-        boolean moveDown = playerPosition.getY() < position.getY() + currentAnimation.getSpriteHeight()/2;
-        movement.setMoveFlag(Direction.DOWN, moveDown);
-        movement.setMoveFlag(Direction.UP, !moveDown);
+            boolean moveDown = playerPosition.getY() < position.getY() + currentAnimation.getSpriteHeight()/2;
+            movement.setMoveFlag(Direction.DOWN, moveDown);
+            movement.setMoveFlag(Direction.UP, !moveDown);
         }
         selectAnimation();
         this.update(deltaTime);
