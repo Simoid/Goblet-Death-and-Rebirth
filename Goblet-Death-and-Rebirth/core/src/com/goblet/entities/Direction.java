@@ -6,7 +6,7 @@ import com.badlogic.gdx.Input;
  * Created by johan on 5/16/16.
  */
 public enum Direction {
-    IDLE, LEFT, RIGHT, UP, DOWN;
+    IDLE, LEFT, RIGHT, UP, DOWN, ATTACK;
 
     public static Direction keyCodeTranslate(int keycode){
         switch (keycode){

@@ -5,7 +5,11 @@ package com.goblet.gameEngine;
  */
 public class EnemyConstructor {
     EnemyParser ep;
+
+
     public EnemyConstructor(){
         ep = new EnemyParser("enemies.json");
     }
+
+
 }

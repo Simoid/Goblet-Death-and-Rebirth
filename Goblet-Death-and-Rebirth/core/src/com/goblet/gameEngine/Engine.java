@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.goblet.entities.Enemy;
 import com.goblet.entities.Player;
 import com.goblet.graphics.SpriteAnimation;
 import com.goblet.level.Room;
@@ -16,34 +17,33 @@ public class Engine implements ApplicationListener, InputProcessor {
 	private float timeBetweenUpdates = 1/120f;
 	private float timeCounter = 0f;
 	private SpriteBatch batch;
-	private BitmapFont font;
-	private float elapsedTime = 0f;
-	private SpriteAnimation mc_walk;
-	private Player player;
-    private float xScale;
-    private float yScale;
 	private Camera camera;
     private Viewport viewPort;
-	private Room startRoom;
+
+    private Player player;
+    private Room startRoom;
 	private EnemyParser enemyParser;
+    private Enemy testEnemy;
 
 	@Override
 	public void create () {
 		enemyParser = new EnemyParser("enemies.json");
+
+
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		batch = new SpriteBatch();
-		font = new BitmapFont();
-		font.setColor(Color.GREEN);
 		camera = new OrthographicCamera();
         viewPort = new FitViewport(480, 270, camera);
         viewPort.apply();
         camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 		batch.setProjectionMatrix(camera.combined);
-		xScale = 1.0f;
-		yScale = 1.0f;
-		System.out.println("Width: " + Gdx.graphics.getWidth() + ", Height: " + Gdx.graphics.getHeight() + ", xScale: " + xScale + ", yScale: " + yScale + ", 16/9 = " + 16/9 + ", Width/height = " + (float)Gdx.graphics.getWidth()/Gdx.graphics.getHeight());
-		player = new Player(50, 50, xScale, yScale);
+
+
+
+		player = new Player(0, 0);
 		startRoom = new Room(-camera.viewportWidth/2, -camera.viewportHeight/2, camera.viewportWidth/2, camera.viewportHeight/2);
+        testEnemy = new Enemy(50, 0, "king/king", 2, 3, 3);
+
 		Gdx.input.setInputProcessor(this);
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		try {
@@ -60,12 +60,12 @@ public class Engine implements ApplicationListener, InputProcessor {
 
 	@Override
 	public void dispose(){
-		font.dispose();
         player.dispose();
         batch.dispose();
 	}
 
 	public void update(float deltaTime){
+        testEnemy.update(player, deltaTime);
 		player.update(deltaTime);
 	}
 
@@ -82,9 +82,8 @@ public class Engine implements ApplicationListener, InputProcessor {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-        font.draw(batch, "FPS: " + Gdx.graphics.getFramesPerSecond(), 0, Gdx.graphics.getHeight());
         startRoom.draw(batch);
-		elapsedTime += Gdx.graphics.getDeltaTime();
+        testEnemy.draw(batch);
 		player.draw(batch);
 		batch.end();
 	}

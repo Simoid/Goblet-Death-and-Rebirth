@@ -32,10 +32,6 @@ public class Movement {
 
     }
 
-    public float getMovementX(Direction dir) {
-        return xMovement.get(dir);
-    }
-
     public boolean getMoveFlag(Direction dir){
         return movementBools.get(dir);
     }
@@ -49,7 +45,15 @@ public class Movement {
     }
 
     public void setMoveFlag(Direction dir, boolean flag){
-        movementBools.put(dir, flag);
+        if (flag && !movementBools.get(dir)) {
+            movementBools.put(dir, flag);
+            addMovementX(dir);
+            addMovementY(dir);
+        } else if (!flag && movementBools.get(dir)) {
+            movementBools.put(dir, flag);
+            subMovementX(dir);
+            subMovementY(dir);
+        }
     }
 
     public void addMovementX(Direction dir){

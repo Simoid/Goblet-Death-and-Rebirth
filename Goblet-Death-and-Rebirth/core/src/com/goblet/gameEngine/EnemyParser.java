@@ -1,25 +1,38 @@
 package com.goblet.gameEngine;
 
 
+import com.goblet.entities.Enemy;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.*;
+import java.lang.reflect.Type;
+import java.util.List;
+
 /**
  *En klass som kan läsa information från json filer som innehåller information om fiender och returnera värdena
  * Created by Simoido on 2016-05-19.
  */
 public class EnemyParser {
-    Reader reader;
-    JsonElement je;
+    private Reader reader;
+    private JsonElement je;
+    private Gson gson;
+    private List<Enemy> enemyList;
 
     public EnemyParser(String filename){
         try{
-            reader = new FileReader("core/assets/jsonFiles/" + filename);
+            reader = new FileReader("assets/jsonFiles/" + filename);
             je = new JsonParser().parse(reader);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void read(){
+        Type collectionType = new TypeToken<List<Enemy>>(){}.getType();
+        List<Enemy> students = gson.fromJson(je, collectionType);
     }
 
     public String getName(String enemy) throws FileNotFoundException{
