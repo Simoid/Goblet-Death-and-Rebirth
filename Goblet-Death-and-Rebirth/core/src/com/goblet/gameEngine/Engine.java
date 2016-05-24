@@ -64,7 +64,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 	}
 
 	public void update(float deltaTime){
-        testEnemy.update(deltaTime);
+        testEnemy.updateTowardsPlayer(player, deltaTime);
 		player.update(deltaTime);
 	}
 
