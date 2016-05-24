@@ -7,6 +7,10 @@ import com.goblet.graphics.SpriteAnimation;
 import java.util.HashMap;
 
 /**
+ * En klass för fienderna i spelet.
+ *
+ * Innehåller metoder för att röra sig mot spelarens position.
+ *
  * Created by Johan on 2016-05-24.
  */
 public class Enemy extends Entity{
@@ -15,6 +19,16 @@ public class Enemy extends Entity{
     private HashMap<Direction, SpriteAnimation> animations = new HashMap<Direction, SpriteAnimation>();
     private Hitbox hitbox;
 
+    /**
+     * Konstruktorn för fiendeklassen.
+     * @param xPos Startposition i x-led.
+     * @param yPos Startposition i y-led
+     * @param atlasLocation Pathen till filerna som fienden ska använda sig av.
+     * @param idleFrames Hur många frames fiendens animation har när den står stilla.
+     * @param moveFrames Hur många frames fiendens animation har när den rör sig.
+     * @param attackFrames Hur många frames fiendens animation har när den attackerar.
+     * @param movementSpeed Fiendens rörelsehastighet.
+     */
     public Enemy(int xPos, int yPos, String atlasLocation, int idleFrames, int moveFrames, int attackFrames){
         super(xPos, yPos);
         animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + atlasLocation + "_idle.pack", idleFrames, 1.0f, 1.0f, 1f));
@@ -24,6 +38,11 @@ public class Enemy extends Entity{
         currentAnimation = animations.get(Direction.IDLE);
     }
 
+    /**
+     * Uppdaterar fienden och flyttar den mot spelaren.
+     * @param player Objektet för spelaren.
+     * @param deltaTime Tiden som har passerat sen senaste uppdateringen.
+     */
     public void update(Player player, float deltaTime){
         Position playerPosition = player.getPosition();
         System.out.println("X: " + Math.abs(playerPosition.getX() - position.getX() + currentAnimation.getSpriteWidth()/2));
@@ -48,6 +67,9 @@ public class Enemy extends Entity{
         this.update(deltaTime);
     }
 
+    /**
+     * Väljer animation för fienden, beroende på i fall den attackerar, rör sig eller står still.
+     */
     public void selectAnimation(){
         if (movement.getMoveFlag(Direction.DOWN) || movement.getMoveFlag(Direction.LEFT) || movement.getMoveFlag(Direction.UP) || movement.getMoveFlag(Direction.RIGHT)){
             setAnimation(Direction.DOWN);
