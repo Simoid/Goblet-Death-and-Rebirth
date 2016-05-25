@@ -188,6 +188,7 @@ public class Room {
     }
 
     private void fixMovementGObstacle(GObstacles obstacle, Entity entity){
+        System.out.println(entity);
         if (entity.getHitbox().getX()  < obstacle.getPosition().getX()){
             if (entity.getHitbox().getY() < obstacle.getPosition().getY()){
                 if (Math.abs(entity.getHitbox().getX() + entity.getHitbox().getWidth() - obstacle.getPosition().getX())

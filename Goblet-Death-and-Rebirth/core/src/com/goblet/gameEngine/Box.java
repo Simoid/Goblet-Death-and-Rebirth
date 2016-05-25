@@ -33,14 +33,14 @@ public class Box {
     public boolean collides(Box otherBox){
         boolean xCollides = false;
         boolean yCollides = false;
-        if (this.getX() > otherBox.getX() && this.getX() < otherBox.getX() + otherBox.getWidth()){
+        if (this.getX() >= otherBox.getX() && this.getX() <= otherBox.getX() + otherBox.getWidth()){
             xCollides = true;
-        } else if (otherBox.getX() > this.getX() && otherBox.getX() < this.getX() + width) {
+        } else if (otherBox.getX() >= this.getX() && otherBox.getX() <= this.getX() + width) {
             xCollides = true;
         }
-        if (this.getY() > otherBox.getY() && this.getY() < otherBox.getY() + otherBox.getHeight()){
+        if (this.getY() >= otherBox.getY() && this.getY() <= otherBox.getY() + otherBox.getHeight()){
             yCollides = true;
-        } else if (otherBox.getY() > this.getY() && otherBox.getY() < this.getY() + height) {
+        } else if (otherBox.getY() >= this.getY() && otherBox.getY() <= this.getY() + height) {
             yCollides = true;
         }
         return (xCollides && yCollides);
