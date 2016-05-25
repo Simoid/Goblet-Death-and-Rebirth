@@ -53,7 +53,9 @@ public class RoomParser {
     public Room createRoom(String roomName){
         //TODO
 
-        Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
+        //Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
+        //Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
+        Position bottomLeft = new Position(45, 15);
         Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
         Room room = new Room(bottomLeft, topRight);
 
