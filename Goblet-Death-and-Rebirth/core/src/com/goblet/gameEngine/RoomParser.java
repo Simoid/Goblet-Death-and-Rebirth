@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.goblet.level.Room;
-import com.goblet.level.SpawnPoint;
-import com.goblet.level.Tile;
-import com.goblet.level.TileType;
+import com.goblet.level.*;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -51,16 +48,18 @@ public class RoomParser {
 
     }
 
-    public Room createRoom(float bottomLeftX, float bottomLeftY, float topRightX, float topRightY, String roomName){
+    public Room createRoom(String roomName, float bottomLeftX, float bottomLeftY, float topRightX, float topRightY){
         //TODO
-        Room room = new Room(-camera.viewportWidth/2, -camera.viewportHeight/2, camera.viewportWidth/2, camera.viewportHeight/2, null, null);
+        Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
+        Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
+        Room room = new Room(bottomLeft,topRight, null, null);
         TileType[][] roomTiles = getRoomTiles(roomName);
         SpawnPoint[][] spawnPoints = getSpawns(roomName);
         for(int i = 0 ; i < tilesHeight ; i++){
             for(int j = 0 ; j < tilesWidth ; j++){
                 if( roomTiles[i][j] == TileType.STONE){
                     //Put stone on position vertical = i, horizontal  = j;
-
+                    room.addGObstacles(new Rock(j * 15, i * 15, 15,15,"assets/tiles/rock/rock.pack"));
                 }
             }
         }

@@ -17,11 +17,11 @@ public abstract class GObstacles {
     protected TextureAtlas atlas;
     protected TextureRegion region;
 
-    public GObstacles(float posX, float posY, float width, float height, String atlasLocation){
+    public GObstacles(float posX, float posY, float boxWidth, float boxHeight, String atlasLocation){
         this.position = new Position(posX, posY);
-        this.width = width;
-        this.height = height;
-        this.hitbox = new Box(position, width, height, 0, 0);
+        this.width = boxWidth;
+        this.height = boxHeight;
+        this.hitbox = new Box(position, boxWidth, boxHeight, 0, 0);
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
     }
 

@@ -12,8 +12,8 @@ import java.util.Random;
  */
 public class Rock extends GObstacles{
 
-    public Rock(float posX, float posY, float width, float height, String atlasLocation){
-        super(posX, posY, width, height, atlasLocation);
+    public Rock(float posX, float posY, float boxWidth, float boxHeight, String atlasLocation){
+        super(posX, posY, boxWidth, boxHeight, atlasLocation);
         Random randomizer = new Random();
         region = atlas.findRegion(String.format("%04d", randomizer.nextInt(9)));
     }

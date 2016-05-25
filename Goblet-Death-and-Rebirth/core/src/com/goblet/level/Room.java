@@ -24,6 +24,7 @@ public class Room {
     private Map<Direction, WallObject> wallMap;
     private Map<Direction, RoofObject> roofMap;
     private ArrayList<Enemy> enemies;
+    private ArrayList<GObstacles> gObstacles;
     private TextureAtlas atlas;
     private Position bottomLeft;
     private Position topRight;
@@ -42,8 +43,12 @@ public class Room {
         drawRoof(batch);
     }
 
+    public void addGObstacles(GObstacles GOb){
+        gObstacles.add(GOb);
+    }
+
     /**
-     * Ritar ut golvet och väggarna.
+     * Ritar ut golvet, väggarna och GObstacles
      * @param batch Batchen som ska ritas på.
      */
     private void drawFloorAndWalls(Batch batch){
@@ -51,7 +56,12 @@ public class Room {
         for (WallObject currentWall : wallMap.values()){
             currentWall.draw(batch);
         }
+
+        for (GObstacles currentGObstacle : gObstacles){
+            currentGObstacle.draw(batch);
+        }
     }
+
 
     /**
      * Ritar ut alla enemies, och spelaren.
