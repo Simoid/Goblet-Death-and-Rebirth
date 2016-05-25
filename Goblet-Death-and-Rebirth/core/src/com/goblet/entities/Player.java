@@ -62,7 +62,7 @@ public class Player extends Entity{
     @Override
     public void draw(Batch batch){
 
-        attackRight.draw(batch,position.getX(),position.getY(),timeSinceAttackAnimation);
+        attackRight.draw(batch,position.getX() ,position.getY(),timeSinceAttackAnimation);
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
         //hitbox.draw(batch);
         //hitbox.drawPosition(batch);
