@@ -106,7 +106,7 @@ public class EnemyParser {
     }
 
     public int getAttackAnimationSpeed(String enemy) throws FileNotFoundException{
-        int speed = je.getAsJsonObject().get(enemy).getAsJsonObject().get("attackAnimationspeed").getAsInt();
+        int speed = je.getAsJsonObject().get(enemy).getAsJsonObject().get("attackAnimationSpeed").getAsInt();
         return speed;
     }
 

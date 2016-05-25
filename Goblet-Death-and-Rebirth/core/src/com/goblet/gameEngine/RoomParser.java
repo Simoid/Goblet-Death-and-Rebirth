@@ -60,43 +60,43 @@ public class RoomParser {
         SpawnPoint[][] spawnPoints = getSpawns(roomName);
         for(int i = 0 ; i < tilesHeight ; i++){
             for(int j = 0 ; j < tilesWidth ; j++){
-                System.out.printf(roomTiles[i][j].toString());
                 if( roomTiles[i][j] == TileType.STONE){
                     //Put stone on position vertical = i, horizontal  = j;
-
                     room.addGObstacles(new Rock(bottomLeft.getX() + j*15 + 45,topRight.getY()-15*i-30, 15,15,"assets/tiles/rock/rock.pack"));
                 }
             }
         }
-/*
+
         for(int i = 0 ; i < tilesHeight ; i++){
             for(int j = 0 ; j < tilesWidth ; j++){
                     //Put enemies on position vertical = i, horizontal  = j;
-                switch (spawnPoints[i][j]){
-                    case KING:
-                        room.addEnemy(enemyConstructor.createEnemy("king",i*15,j*15));
-                        break;
-                    case BAT:
-                        room.addEnemy(enemyConstructor.createEnemy("bat",i*15,j*15));
-                        break;
-                    case DATBOI:
-                        room.addEnemy(enemyConstructor.createEnemy("datboi",i*15,j*15));
-                        break;
-                    case MASK:
-                        room.addEnemy(enemyConstructor.createEnemy("mask",i*15,j*15));
-                        break;
-                    case SPIDER:
-                        room.addEnemy(enemyConstructor.createEnemy("spider",i*15,j*15));
-                        break;
-                    case PRISM:
-                        room.addEnemy(enemyConstructor.createEnemy("prism",i*15,j*15));
-                        break;
-                    case EYE:
-                        room.addEnemy(enemyConstructor.createEnemy("eye",i*15,j*15));
-                        break;
+                if(spawnPoints[i][j] != null) {
+                    switch (spawnPoints[i][j]) {
+                        case KING:
+                            room.addEnemy(enemyConstructor.createEnemy("king", i * 15, j * 15));
+                            break;
+                        case BAT:
+                            room.addEnemy(enemyConstructor.createEnemy("bat", i * 15, j * 15));
+                            break;
+                        case DATBOI:
+                            room.addEnemy(enemyConstructor.createEnemy("datboi", i * 15, j * 15));
+                            break;
+                        case MASK:
+                            room.addEnemy(enemyConstructor.createEnemy("mask", i * 15, j * 15));
+                            break;
+                        case SPIDER:
+                            room.addEnemy(enemyConstructor.createEnemy("spider", i * 15, j * 15));
+                            break;
+                        case PRISM:
+                            room.addEnemy(enemyConstructor.createEnemy("prism", i * 15, j * 15));
+                            break;
+                        case EYE:
+                            room.addEnemy(enemyConstructor.createEnemy("eye", i * 15, j * 15));
+                            break;
+                    }
                 }
             }
-        }*/
+        }
         return room;
     }
 

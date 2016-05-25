@@ -41,6 +41,7 @@
     "hitboxOffsetY": 39,
     "attackType": 1,
     "moveType": 1,
+    "moveSpeed" : 50,
     "moveAnimationSpeed" : 0.333,
     "attackAnimationSpeed" : 0.111
   }
