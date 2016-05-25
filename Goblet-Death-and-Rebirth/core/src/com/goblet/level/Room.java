@@ -30,40 +30,61 @@ public class Room {
     private boolean doorsOpen;
 
 
-
+    /**
+     * Ritar ut allt i rummet.
+     * Sakerna ritas ut i en logisk ordning: Först golvet och väggarna, sedan alla entities, och sist taket.
+     * @param batch Batchen som ska ritas på.
+     * @param player Spelaren som ska ritas ut.
+     */
     public void draw(Batch batch, Player player){
         drawFloorAndWalls(batch);
         drawEntitites(batch, player);
         drawRoof(batch);
     }
 
+    /**
+     * Ritar ut golvet och väggarna.
+     * @param batch Batchen som ska ritas på.
+     */
     private void drawFloorAndWalls(Batch batch){
-        drawFloor(batch);
+        batch.draw(floorTextureRegion, -floorTextureRegion.getRegionWidth()/2, bottomLeft.getY(), floorTextureRegion.getRegionWidth(), floorTextureRegion.getRegionHeight());
         for (WallObject currentWall : wallMap.values()){
             currentWall.draw(batch);
         }
     }
 
-    private void drawFloor(Batch batch){
-        batch.draw(floorTextureRegion, -floorTextureRegion.getRegionWidth()/2, bottomLeft.getY(), floorTextureRegion.getRegionWidth(), floorTextureRegion.getRegionHeight());
-    }
-
+    /**
+     * Ritar ut alla enemies, och spelaren.
+     * @param batch Batchen som ska ritas på.
+     * @param player Spelaren som ska ritas ut.
+     */
     private void drawEntitites(Batch batch, Player player){
-        player.draw(batch);
         for (Enemy currentEnemy : enemies){
             currentEnemy.draw(batch);
         }
+        player.draw(batch);
     }
 
+    /**
+     * Ritar ut taket ovanför dörrarna till vänster och höger.
+     * @param batch Batchen som ska ritas på.
+     */
     private void drawRoof(Batch batch){
         for (RoofObject currentRoof : roofMap.values()){
             currentRoof.draw(batch);
         }
     }
 
-    public Room(float bottomLeftX, float bottomLeftY, float topRightX, float topRightY, TileType[][] tileTypes, SpawnPoint[][] spawnPoints){
-        bottomLeft = new Position(bottomLeftX, bottomLeftY);
-        topRight = new Position(topRightX, topRightY);
+    /**
+     * Konstruktorn för rummet.
+     * @param bottomLeft Nedre vänstra hörnet på skärmen.
+     * @param topRight Högre högra hörnet på skärmen.
+     * @param tileTypes En array som beskriver var stenar och hål ska ritas ut.
+     * @param spawnPoints En array som beskriver var fiender ska spawnas.
+     */
+    public Room(Position bottomLeft, Position topRight, TileType[][] tileTypes, SpawnPoint[][] spawnPoints){
+        bottomLeft = new Position(bottomLeft);
+        topRight = new Position(topRight);
 
         wallMap = new HashMap<Direction, WallObject>();
         roofMap = new HashMap<Direction, RoofObject>();

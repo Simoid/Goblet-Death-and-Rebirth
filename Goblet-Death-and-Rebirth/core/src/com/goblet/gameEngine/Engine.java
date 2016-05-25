@@ -9,6 +9,7 @@ import com.goblet.entities.Enemy;
 import com.goblet.entities.Entity;
 import com.goblet.entities.Player;
 import com.goblet.level.Room;
+import com.goblet.level.Position;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -52,7 +53,9 @@ public class Engine implements ApplicationListener, InputProcessor {
 
 
 		player = new Player(0, 0,100f);
-		currentRoom = new Room(-camera.viewportWidth/2, -camera.viewportHeight/2, camera.viewportWidth/2, camera.viewportHeight/2, null, null);
+        Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
+        Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
+		currentRoom = new Room(bottomLeft, topRight, null, null);
 
         enemies = new ArrayList<Entity>();
         enemies.add(testEnemy);
