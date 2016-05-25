@@ -11,6 +11,14 @@ import com.goblet.graphics.SpriteAnimation;
  * Created by Johan on 2016-05-24.
  */
 public class Enemy extends Entity{
+    String name;
+    int health;
+    int damage;
+    int moveSpeed;
+    String moveType;
+    String attackType;
+    int hitboxHeight;
+    int hitboxWidth;
 
 
     /**
@@ -59,6 +67,10 @@ public class Enemy extends Entity{
         }
         selectAnimation();
         this.update(deltaTime);
+    }
+
+    public void attack(String attackType, int damage,){
+
     }
 
     /**
