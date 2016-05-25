@@ -232,6 +232,12 @@ public class Room {
         return doorsOpen;
     }
 
+    public void dispose(){
+        for (Enemy enemy : enemies){
+            enemy.dispose();
+        }
+    }
+
 
 
 }

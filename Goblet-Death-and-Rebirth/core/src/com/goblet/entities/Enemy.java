@@ -69,7 +69,7 @@ public class Enemy extends Entity{
     }
 
     public boolean isAttacking(){
-        return currentAnimation == animations.get(Direction.ATTACK) && timeSinceAnimationStart > attackSpeed / 2;
+        return currentAnimation == animations.get(Direction.ATTACK) && timeSinceAnimationStart > attackSpeed * 2 / 3;
     }
 
     public float getAttackRange(){

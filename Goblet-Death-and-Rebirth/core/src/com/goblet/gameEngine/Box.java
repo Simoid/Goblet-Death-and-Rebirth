@@ -84,6 +84,6 @@ public class Box {
     }
 
     public void drawPosition(Batch batch){
-        batch.draw(redSquare, this.getX() + width/2, this.getY() + height/2, 1, 1);
+        //batch.draw(redSquare, this.getX() + width/2, this.getY() + height/2, 1, 1);
     }
 }
