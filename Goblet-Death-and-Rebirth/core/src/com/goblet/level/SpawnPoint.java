@@ -15,13 +15,13 @@ public enum SpawnPoint {
      * @return Inputsträngen översatt till en SpawnPoint.
      */
     public static SpawnPoint translate(String s){
-        if (s.equals("k")) {return KING;}
-        else if (s.equals("d")){return DATBOI;}
-        else if (s.equals("b")){return BAT;}
-        else if (s.equals("m")){return MASK;}
-        else if (s.equals("s")){return SPIDER;}
-        else if (s.equals("p")){return PRISM;}
-        else if (s.equals("e")){return EYE;}
+        if (s.toLowerCase().equals("k")) {return KING;}
+        else if (s.toLowerCase().equals("d")){return DATBOI;}
+        else if (s.toLowerCase().equals("b")){return BAT;}
+        else if (s.toLowerCase().equals("m")){return MASK;}
+        else if (s.toLowerCase().equals("s")){return SPIDER;}
+        else if (s.toLowerCase().equals("p")){return PRISM;}
+        else if (s.toLowerCase().equals("e")){return EYE;}
         else return null;
     }
 }
