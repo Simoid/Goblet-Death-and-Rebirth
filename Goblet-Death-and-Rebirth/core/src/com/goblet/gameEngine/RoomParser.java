@@ -93,7 +93,7 @@ public class RoomParser {
                 }
             }
         }
-        return null;
+        return room;
     }
 
     public TileType[][] getRoomTiles(String roomName){
