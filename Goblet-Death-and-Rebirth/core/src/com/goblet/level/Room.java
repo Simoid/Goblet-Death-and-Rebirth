@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.entities.Direction;
 import com.goblet.entities.Enemy;
 import com.goblet.entities.Player;
+import com.goblet.gameEngine.Box;
 
 import java.awt.*;
 import java.util.ArrayList;
