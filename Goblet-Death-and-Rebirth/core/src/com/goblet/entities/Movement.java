@@ -1,6 +1,7 @@
 package com.goblet.entities;
 
 import java.util.HashMap;
+import com.goblet.level.Position;
 
 /**
  * En klass som hanterar en entitites rörelser.
@@ -26,12 +27,15 @@ public class Movement {
     private HashMap<Direction, Float> yMovement = new HashMap<Direction, Float>();
     private float currentMovementX = 0f;
     private float currentMovementY = 0f;
+    private float moveSpeed;
 
     /**
      * Konstruktorn för klassen, moveSpeed sätts från början men kan ändras senare vid behov.
      * @param moveSpeed Rörelsehastigheten för objektet som har Movement-objektet.
      */
     public Movement(float moveSpeed){
+
+        this.moveSpeed = moveSpeed;
 
         movementBools.put(Direction.DOWN, false);
         movementBools.put(Direction.UP, false);
@@ -55,6 +59,7 @@ public class Movement {
      * @param newSpeed Den nya rörelsehastigheten för objektet.
      */
     public void setMoveSpeed(float newSpeed){
+        this.moveSpeed = newSpeed;
         xMovement.put(Direction.LEFT, -newSpeed);
         xMovement.put(Direction.RIGHT, newSpeed);
         yMovement.put(Direction.DOWN, -newSpeed);

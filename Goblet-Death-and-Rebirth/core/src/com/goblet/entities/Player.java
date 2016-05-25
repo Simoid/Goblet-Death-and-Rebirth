@@ -1,14 +1,7 @@
 package com.goblet.entities;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.goblet.gameEngine.Hitbox;
+import com.goblet.level.Box;
 import com.goblet.graphics.SpriteAnimation;
-import com.goblet.level.Position;
-import com.goblet.level.Room;
-
-
-import java.util.HashMap;
 
 /**
  * En klass för spelaren som objekt.
@@ -17,7 +10,7 @@ import java.util.HashMap;
  */
 public class Player extends Entity{
 
-    private Hitbox hitbox;
+    private Box box;
 
 
     /**
@@ -39,7 +32,7 @@ public class Player extends Entity{
         movement = new Movement(moveSpeed);
         timeSinceAnimationStart = 0;
 
-        hitbox = new Hitbox(position, 11f, 19f, 2f, 4f);
+        box = new Box(position, 11f, 19f, 2f, 4f);
     }
 
     /**
@@ -106,7 +99,7 @@ public class Player extends Entity{
     public void update(float deltaTime){
         timeSinceAnimationStart += deltaTime;
         position.setPosition(position.getX() + deltaTime*movement.getMovementX(), position.getY() + deltaTime*movement.getMovementY());
-        hitbox.updatePosition(position);
+        box.updatePosition(position);
     }
 
     /**
@@ -122,32 +115,6 @@ public class Player extends Entity{
         if (movement.getMoveFlag(dir)){
             movement.setMoveFlag(dir, false);
             selectAnimation();
-        }
-    }
-
-    /**
-     * Ändrar spelarens position.
-     */
-    private void setPosition(Position newPosition){
-        position = newPosition;
-    }
-
-    /**
-     * Returnerar spelaren position.
-     * @return Spelarens position.
-     */
-    public Position getPosition(){
-        return position;
-    }
-
-    /**
-     * Ändrar i fall hitboxen ritas ut eller inte.
-     */
-    public void shouldDrawHitbox(){
-        if (!hitbox.getDrawFlag()) {
-            hitbox.setDrawFlag(true);
-        } else {
-            hitbox.setDrawFlag(false);
         }
     }
 

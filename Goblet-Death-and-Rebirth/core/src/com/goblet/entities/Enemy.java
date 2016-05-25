@@ -1,10 +1,7 @@
 package com.goblet.entities;
 
 import com.goblet.level.Position;
-import com.goblet.gameEngine.Hitbox;
 import com.goblet.graphics.SpriteAnimation;
-
-import java.util.HashMap;
 
 /**
  * En klass för fienderna i spelet.
