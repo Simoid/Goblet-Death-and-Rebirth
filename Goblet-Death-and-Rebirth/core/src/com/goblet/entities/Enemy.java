@@ -27,7 +27,7 @@ public class Enemy extends Entity{
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames, 1.0f, 1.0f, 1/5f));
         animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames, 1.0f, 1.0f, 1/5f));
         movement = new Movement(movementSpeed);
-        currentAnimation = animations.get(Direction.IDLE);
+        currentAnimation = animations.get(Direction.DOWN);
     }
 
     /**
@@ -70,7 +70,7 @@ public class Enemy extends Entity{
         if (movement.getMoveFlag(Direction.DOWN) || movement.getMoveFlag(Direction.LEFT) || movement.getMoveFlag(Direction.UP) || movement.getMoveFlag(Direction.RIGHT)){
             setAnimation(Direction.DOWN);
         } else {
-            setAnimation(Direction.IDLE);
+            setAnimation(Direction.ATTACK);
         }
     }
 
