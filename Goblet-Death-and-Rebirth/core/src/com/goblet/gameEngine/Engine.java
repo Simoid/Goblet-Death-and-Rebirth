@@ -32,7 +32,7 @@ public class Engine implements ApplicationListener, InputProcessor {
     private Player player;
     private Room currentRoom;
 	private EnemyParser enemyParser;
-    private Enemy testEnemy;
+    //private Enemy testEnemy;
 
     /**
      * Skapar grafiken för spelet, och sedan de objekt som ska finnas från början: spelaren, och ett rum (+testfiender).
@@ -61,7 +61,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 		//currentRoom = new Room(bottomLeft, topRight);
 
         enemies = new ArrayList<Entity>();
-        enemies.add(testEnemy);
+        //enemies.add(testEnemy);
 
 		Gdx.input.setInputProcessor(this);
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());

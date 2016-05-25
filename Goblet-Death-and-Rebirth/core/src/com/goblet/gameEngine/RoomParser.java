@@ -56,12 +56,15 @@ public class RoomParser {
         Room room = new Room(bottomLeft, topRight);
 
         TileType[][] roomTiles = getRoomTiles(roomName);
+
         SpawnPoint[][] spawnPoints = getSpawns(roomName);
         for(int i = 0 ; i < tilesHeight ; i++){
             for(int j = 0 ; j < tilesWidth ; j++){
+                System.out.printf(roomTiles[i][j].toString());
                 if( roomTiles[i][j] == TileType.STONE){
                     //Put stone on position vertical = i, horizontal  = j;
-                    room.addGObstacles(new Rock(bottomLeft.getX() +45+ j * 15,bottomLeft.getY() +15+ i * 15, 15,15,"assets/tiles/rock/rock.pack"));
+
+                    room.addGObstacles(new Rock(bottomLeft.getX() + j*15 + 45,topRight.getY()-15*i-30, 15,15,"assets/tiles/rock/rock.pack"));
                 }
             }
         }
