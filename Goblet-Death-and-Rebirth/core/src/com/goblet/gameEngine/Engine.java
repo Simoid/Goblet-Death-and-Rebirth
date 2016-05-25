@@ -53,7 +53,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 
 		player = new Player(0, 0,100f);
 		currentRoom = new Room(-camera.viewportWidth/2, -camera.viewportHeight/2, camera.viewportWidth/2, camera.viewportHeight/2, null, null);
-        testEnemy = new Enemy(50, 0, "king/king", 2, 3, 3,50f);
+        //testEnemy = new Enemy(50, 0, "king/king", 2, 3, 3,50f);
 
         enemies = new ArrayList<Entity>();
         enemies.add(testEnemy);

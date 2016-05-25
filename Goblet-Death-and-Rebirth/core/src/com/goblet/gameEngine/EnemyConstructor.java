@@ -40,24 +40,5 @@ public class EnemyConstructor {
         }
 
         return enemy;
-        /*
-        switch (enemySpawnPoint){
-            case KING:
-                enemy.
-                return enemy;
-            case DATBOI:
-                return enemy;
-            case BAT:
-                return enemy;
-            case MASK:
-                return enemy;
-            case SPIDER:
-                return enemy;
-            case PRISM:
-                return enemy;
-            default:
-                return null;
-        }
-        */
     }
 }
