@@ -6,9 +6,9 @@ package com.goblet.level;
 public enum TileType {
     FLOOR, STONE, HOLE;
     public static TileType translate(String s){
-        if (s.equals("0")){return FLOOR;}
-        else if (s.equals("s")){return STONE;}
-        else if (s.equals("h")){return HOLE;}
+        if (s.toLowerCase().equals("0")){return FLOOR;}
+        else if (s.toLowerCase().equals("x")){return STONE;}
+        else if (s.toLowerCase().equals("h")){return HOLE;}
         else return FLOOR;
     }
 

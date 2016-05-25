@@ -36,7 +36,7 @@ public class DoorObject {
                 position.setPosition(-region.getRegionWidth()/2,topRight.getY() - region.getRegionHeight());
                 break;
             case LEFT:
-                position.setPosition(wallPosition.getX() + 30.0f, wallPosition.getY());
+                position.setPosition(wallPosition.getX(), wallPosition.getY());
                 break;
             case RIGHT:
                 position.setPosition(wallPosition.getX() - doorShadowSize, bottomLeft.getY());

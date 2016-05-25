@@ -37,10 +37,11 @@ public abstract class Entity {
     protected HashMap<Direction, SpriteAnimation> animations = new HashMap<Direction, SpriteAnimation>();
 
     public Entity(Position position){
-        position = new Position(position);
+        this.position = new Position(position);
     }
 
     public void draw(Batch batch){
+        System.out.println(currentAnimation);
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
     }
 

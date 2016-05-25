@@ -61,4 +61,21 @@ public class Position {
     public float getY(){
         return yPos;
     }
+
+    /**
+     * Räknar ut sträckan mellan två punkter i planet med pythagoras sats.
+     * @param position Den andra positionen.
+     * @return Sträckan mellan denna position och inputargumentet.
+     */
+    public float distance(Position position){
+        return (float) Math.sqrt(Math.pow(xPos - position.getX(), 2) + Math.pow(yPos - position.getY(), 2));
+    }
+
+    public float xDistance(float x){
+        return (float) Math.abs(xPos - x);
+    }
+
+    public float yDistance(float y){
+        return (float) Math.abs(yPos - y);
+    }
 }

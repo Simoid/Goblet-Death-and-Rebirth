@@ -72,7 +72,7 @@ public class Room {
         //allowedArea = new Box(new Position())
 
         enemies = new ArrayList<Enemy>();
-        enemies.add(new Enemy(50, 0, "king/king", 2, 3, 3,50f));
+        enemies.add(new Enemy(new Position(150, 150), "king/king", 2, 1, 50f, 100, 2, "move", "melee", new Box(new Position(150, 150), 75, 49, 40, 39)));
 
 
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));

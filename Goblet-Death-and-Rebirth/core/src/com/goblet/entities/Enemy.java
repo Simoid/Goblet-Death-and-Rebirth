@@ -16,10 +16,7 @@ public class Enemy extends Entity{
 
     /**
      * Konstruktorn för fiendeklassen.
-     * @param xPos Startposition i x-led.
-     * @param yPos Startposition i y-led
      * @param atlasLocation Pathen till filerna som fienden ska använda sig av.
-     * @param idleFrames Hur många frames fiendens animation har när den står stilla.
      * @param moveFrames Hur många frames fiendens animation har när den rör sig.
      * @param attackFrames Hur många frames fiendens animation har när den attackerar.
      * @param movementSpeed Fiendens rörelsehastighet.
@@ -28,7 +25,7 @@ public class Enemy extends Entity{
         super(position);
         //animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + atlasLocation + "_idle.pack", idleFrames, 1.0f, 1.0f, 1f));
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames, 1.0f, 1.0f, 1/5f));
-        animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", attackFrames, 1.0f, 1.0f, 1/5f));
+        animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames, 1.0f, 1.0f, 1/5f));
         movement = new Movement(movementSpeed);
         currentAnimation = animations.get(Direction.IDLE);
     }

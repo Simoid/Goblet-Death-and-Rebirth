@@ -1,5 +1,6 @@
 package com.goblet.gameEngine;
 
+import com.goblet.level.Room;
 import com.goblet.level.SpawnPoint;
 import com.goblet.level.Tile;
 import com.goblet.level.TileType;
@@ -19,7 +20,7 @@ public class RoomParser {
     JsonElement je;
 
 
-    public RoomParser(String fileName/* Tile[][] tiles*/){
+    public RoomParser(String fileName){
         try {
             reader = new FileReader("assets/jsonFiles/" + fileName);
             je = new JsonParser().parse(reader);
@@ -29,7 +30,12 @@ public class RoomParser {
 
     }
 
-    public TileType[][] getRoom(String roomName){
+    public Room createRoom(float bottomLeftX, float bottomLeftY, float topRightX, float topRightY){
+        //TODO
+        return null;
+    }
+
+    public TileType[][] getRoomTiles(String roomName){
         String[][] stringArray = new String[16][24];
         TileType[][] returnArray = new TileType[16][24];
         for(int i = 0 ; i < 16 ; i++){
