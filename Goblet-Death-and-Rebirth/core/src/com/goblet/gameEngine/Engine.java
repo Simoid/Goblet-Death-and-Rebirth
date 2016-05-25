@@ -111,7 +111,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-        startRoom.draw(batch);
+		startRoom.draw(batch);
         testEnemy.draw(batch);
 		player.draw(batch);
 		batch.end();

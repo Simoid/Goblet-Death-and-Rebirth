@@ -17,19 +17,24 @@ public class EnemyConstructor {
 
     public Enemy createEnemy(String name, int xPos, int yPos){
         SpawnPoint enemy = sp.translate(name);
+        String atlasLocation = name +"/"+ name;
+        Enemy newEnemy;
         switch (enemy){
             case KING:
-                break;
+                newEnemy = new Enemy(xPos,yPos,atlasLocation,2,3,3,50f);
+                return newEnemy;
             case DATBOI:
-                break;
+                return newEnemy;
             case BAT:
-                break;
+                return newEnemy;
             case MASK:
-                break;
+                return newEnemy;
             case SPIDER:
-                break;
+                return newEnemy;
             case PRISM:
-                break;
+                return newEnemy;
+            default:
+                return null;
         }
     }
 }
