@@ -27,7 +27,7 @@ import java.util.HashMap;
  */
 public abstract class Entity {
 
-    protected Box box;
+    protected Box hitbox;
     protected Movement movement;
     protected Position position;
 
@@ -36,8 +36,8 @@ public abstract class Entity {
     protected SpriteAnimation currentAnimation;
     protected HashMap<Direction, SpriteAnimation> animations = new HashMap<Direction, SpriteAnimation>();
 
-    public Entity(float xPos, float yPos){
-        position = new Position(xPos, yPos);
+    public Entity(Position position){
+        position = new Position(position);
     }
 
     public void draw(Batch batch){
