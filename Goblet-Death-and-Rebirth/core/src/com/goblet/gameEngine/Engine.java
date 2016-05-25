@@ -32,7 +32,10 @@ public class Engine implements ApplicationListener, InputProcessor {
     private Player player;
     private Room currentRoom;
 	private EnemyParser enemyParser;
-    //private Enemy testEnemy;
+	private Position bottomLeft;
+	private Position topRight;
+
+	//private Enemy testEnemy;
 
     /**
      * Skapar grafiken för spelet, och sedan de objekt som ska finnas från början: spelaren, och ett rum (+testfiender).
@@ -52,11 +55,11 @@ public class Engine implements ApplicationListener, InputProcessor {
 		batch.setProjectionMatrix(camera.combined);
 
 
-        Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
-        Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
+		bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
+		topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
 
         enemyParser = new EnemyParser("enemies.json");
-        roomParser = new RoomParser("rooms.json", bottomLeft);
+        roomParser = new RoomParser("rooms.json");
 
 		player = new Player(0, 0,100f);
 
@@ -203,7 +206,7 @@ public class Engine implements ApplicationListener, InputProcessor {
     }
 
 	public void setCurrentRoom(String roomName){
-		currentRoom = roomParser.createRoom(roomName) ;
+		currentRoom = roomParser.createRoom(roomName,bottomLeft,topRight) ;
 	}
 
 }

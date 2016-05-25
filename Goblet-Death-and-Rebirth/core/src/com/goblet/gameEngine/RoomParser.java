@@ -25,20 +25,10 @@ public class RoomParser {
     private Camera camera;
     private Viewport viewPort;
     private EnemyConstructor enemyConstructor;
-    private Position bottomLeft;
 
-
-
-    public RoomParser(String fileName, Position bottomLeft){
-        this.bottomLeft = bottomLeft;
+    public RoomParser(String fileName){
         enemyConstructor = new EnemyConstructor();
         batch = new SpriteBatch();
-        camera = new OrthographicCamera();
-        viewPort = new FitViewport(480, 270, camera);
-        viewPort.apply();
-        camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
-        batch.setProjectionMatrix(camera.combined);
-
         tilesHeight = 16;
         tilesWidth = 26;
         try {
@@ -50,11 +40,8 @@ public class RoomParser {
 
     }
 
-    public Room createRoom(String roomName){
+    public Room createRoom(String roomName, Position bottomLeft, Position topRight){
         //TODO
-
-        Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
-        Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
         Room room = new Room(bottomLeft, topRight);
 
         TileType[][] roomTiles = getRoomTiles(roomName);
