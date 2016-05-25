@@ -2,6 +2,7 @@ package com.goblet.entities;
 
 import com.goblet.level.Box;
 import com.goblet.graphics.SpriteAnimation;
+import com.goblet.level.Position;
 
 /**
  * En klass för spelaren som objekt.
@@ -19,7 +20,7 @@ public class Player extends Entity{
      * @param yPos Startpositionen i y-led.
      */
     public Player(int xPos, int yPos, float moveSpeed){
-        super(xPos, yPos);
+        super(new Position(xPos, yPos));
 
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_move_down.pack", 4, 1.0f, 1.0f, 1/5f));
         animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_move_up.pack", 4, 1.0f, 1.0f, 1/5f));
