@@ -32,6 +32,12 @@ public class RoomParser {
 
     public Room createRoom(float bottomLeftX, float bottomLeftY, float topRightX, float topRightY){
         //TODO
+        TileType[][] roomTiles = getRoomTiles("room1");
+        for(int i = 0 ; i < 16 ; i++){
+            for(int j = 0 ; j < 24 ; j++){
+                //if ()
+            }
+        }
         return null;
     }
 

@@ -10,7 +10,9 @@
     "hitboxOffsetX": 1,
     "hitboxOffsetY": 1,
     "attackType": 1,
-    "moveType": 1
+    "moveType": 1,
+    "moveAnimationSpeed" : 1,
+    "attackAnimationSpeed" : 1
   },
   "enemyTest2": {
     "name": "test",

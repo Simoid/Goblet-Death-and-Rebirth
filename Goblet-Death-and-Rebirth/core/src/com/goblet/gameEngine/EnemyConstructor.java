@@ -34,7 +34,8 @@ public class EnemyConstructor {
 
         try{
             enemy = new Enemy(position,atlasLocation,ep.getMoveFrames(name),ep.getAttackFrames(name),(float) ep.getMoveSpeed(name)
-                    ,ep.getHealth(name),ep.getDamage(name),ep.getMoveType(name),ep.getAttackType(name),box);
+                    ,ep.getHealth(name),ep.getDamage(name),ep.getMoveType(name),ep.getAttackType(name),box,ep.getMoveAnimationSpeed(name),
+                    ep.getAttackAnimationSpeed(name));
         }catch (FileNotFoundException ex){
             return null;
         }

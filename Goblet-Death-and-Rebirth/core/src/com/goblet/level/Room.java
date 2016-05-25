@@ -72,7 +72,7 @@ public class Room {
         //allowedArea = new Box(new Position())
 
         enemies = new ArrayList<Enemy>();
-        enemies.add(new Enemy(new Position(50, 50), "king/king", 3, 9, 50f, 100, 2, "move", "melee", new Box(new Position(50, 50), 75, 49, 40, 39)));
+        enemies.add(new Enemy(new Position(150, 150), "king/king", 3, 9, 50f, 100, 2, "move", "melee", new Box(new Position(150, 150), 75, 49, 40, 39),1/5f,1/9f));
 
 
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
@@ -118,6 +118,7 @@ public class Room {
     public boolean doorsAreOpen(){
         return doorsOpen;
     }
+
 
 
 }

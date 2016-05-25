@@ -21,10 +21,12 @@ public class Enemy extends Entity{
      * @param attackFrames Hur många frames fiendens animation har när den attackerar.
      * @param movementSpeed Fiendens rörelsehastighet.
      */
-    public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, int health, int damage, String moveType, String attackType,  Box hitBox){
+    public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, int health, int damage, String moveType, String attackType,  Box hitBox,
+                 float moveAnimationSpeed, float attackAnimationSpeed){
         super(position);
-        animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames, 1/5f, true));
-        animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames, 1f/attackFrames, false));
+        //animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + atlasLocation + "_idle.pack", idleFrames, 1.0f, 1.0f, 1f));
+        animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames,  moveAnimationSpeed,true));
+        animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames,attackAnimationSpeed,false));
         movement = new Movement(movementSpeed);
         currentAnimation = animations.get(Direction.DOWN);
     }
