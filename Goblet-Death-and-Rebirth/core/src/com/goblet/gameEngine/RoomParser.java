@@ -22,8 +22,6 @@ public class RoomParser {
     private int tilesHeight;
     private int tilesWidth;
     private SpriteBatch batch;
-    private Camera camera;
-    private Viewport viewPort;
     private EnemyConstructor enemyConstructor;
 
     public RoomParser(String fileName){
