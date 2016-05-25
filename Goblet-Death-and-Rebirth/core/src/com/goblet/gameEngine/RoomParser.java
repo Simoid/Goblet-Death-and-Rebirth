@@ -65,25 +65,25 @@ public class RoomParser {
                 if(spawnPoints[i][j] != null) {
                     switch (spawnPoints[i][j]) {
                         case KING:
-                            room.addEnemy(enemyConstructor.createEnemy("king", bottomLeft.getX() + j * 15, bottomLeft.getY() + i * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("king", bottomLeft.getX() + j*15 + 45, topRight.getY()-15*i-30));
                             break;
                         case BAT:
-                            room.addEnemy(enemyConstructor.createEnemy("bat", bottomLeft.getX() + j * 15, bottomLeft.getY() + i * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("bat", bottomLeft.getX() + j*15 + 45, topRight.getY()-15*i-30));
                             break;
                         case DATBOI:
-                            room.addEnemy(enemyConstructor.createEnemy("datboi", bottomLeft.getX() + j * 15, bottomLeft.getY() + i * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("datboi", bottomLeft.getX() + j*15 + 45, topRight.getY()-15*i-30));
                             break;
                         case MASK:
-                            room.addEnemy(enemyConstructor.createEnemy("mask", bottomLeft.getX() + j * 15, bottomLeft.getY() + i * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("mask", bottomLeft.getX() + j*15 + 45, topRight.getY()-15*i-30));
                             break;
                         case SPIDER:
-                            room.addEnemy(enemyConstructor.createEnemy("spider", bottomLeft.getX() + j * 15, bottomLeft.getY() + i * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("spider", bottomLeft.getX() + j*15 + 45, topRight.getY()-15*i-30));
                             break;
                         case PRISM:
-                            room.addEnemy(enemyConstructor.createEnemy("prism", bottomLeft.getX() + j * 15, bottomLeft.getY() + i * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("prism", bottomLeft.getX() + j*15 + 45, topRight.getY()-15*i-30));
                             break;
                         case EYE:
-                            room.addEnemy(enemyConstructor.createEnemy("eye", bottomLeft.getX() + j * 15, bottomLeft.getY() + i * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("eye",bottomLeft.getX() + j*15 + 45, topRight.getY()-15*i-30));
                             break;
                     }
                 }
