@@ -48,7 +48,7 @@ public class RoomParser {
 
     }
 
-    public Room createRoom(String roomName, float bottomLeftX, float bottomLeftY, float topRightX, float topRightY){
+    public Room createRoom(String roomName){
         //TODO
 
         Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
@@ -65,7 +65,7 @@ public class RoomParser {
                 }
             }
         }
-
+/*
         for(int i = 0 ; i < tilesHeight ; i++){
             for(int j = 0 ; j < tilesWidth ; j++){
                     //Put enemies on position vertical = i, horizontal  = j;
@@ -93,7 +93,7 @@ public class RoomParser {
                         break;
                 }
             }
-        }
+        }*/
         return room;
     }
 

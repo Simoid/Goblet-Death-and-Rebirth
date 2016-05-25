@@ -28,7 +28,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 	private Camera camera;
     private Viewport viewPort;
     private ArrayList<Entity> enemies;
-
+	private RoomParser roomParser;
     private Player player;
     private Room currentRoom;
 	private EnemyParser enemyParser;
@@ -40,6 +40,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 	@Override
 	public void create () {
 		enemyParser = new EnemyParser("enemies.json");
+		roomParser = new RoomParser("rooms.json");
 
 
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
@@ -55,7 +56,9 @@ public class Engine implements ApplicationListener, InputProcessor {
 		player = new Player(0, 0,100f);
         Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
         Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
-		currentRoom = new Room(bottomLeft, topRight);
+
+		setCurrentRoom("room1");
+		//currentRoom = new Room(bottomLeft, topRight);
 
         enemies = new ArrayList<Entity>();
         enemies.add(testEnemy);
@@ -196,8 +199,8 @@ public class Engine implements ApplicationListener, InputProcessor {
         Gdx.app.exit();
     }
 
-	public void setCurrentRoom(Room newRoom){
-		currentRoom = newRoom;
+	public void setCurrentRoom(String roomName){
+		currentRoom = roomParser.createRoom(roomName) ;
 	}
 
 }
