@@ -52,7 +52,6 @@ public class RoomParser {
         //TODO
         Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
         Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
-        Room room = new Room(bottomLeft,topRight, null, null);
         TileType[][] roomTiles = getRoomTiles(roomName);
         SpawnPoint[][] spawnPoints = getSpawns(roomName);
         for(int i = 0 ; i < tilesHeight ; i++){
@@ -63,6 +62,7 @@ public class RoomParser {
                 }
             }
         }
+        Room room = new Room(bottomLeft, topRight, roomTiles, null);
 
         for(int i = 0 ; i < tilesHeight ; i++){
             for(int j = 0 ; j < tilesWidth ; j++){
