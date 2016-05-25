@@ -25,7 +25,7 @@ public class Enemy extends Entity{
         super(position);
         //animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + atlasLocation + "_idle.pack", idleFrames, 1.0f, 1.0f, 1f));
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames, 1.0f, 1.0f, 1/5f));
-        animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames, 1.0f, 1.0f, 1/5f));
+        animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames, 1.0f, 1.0f, 1f/attackFrames));
         movement = new Movement(movementSpeed);
         currentAnimation = animations.get(Direction.DOWN);
     }
