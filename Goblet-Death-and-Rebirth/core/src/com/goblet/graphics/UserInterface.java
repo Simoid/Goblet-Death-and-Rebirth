@@ -28,6 +28,9 @@ public class UserInterface {
         for (int i = 0; i < player.getHP(); i++) {
             batch.draw(heartFull, position.getX() + (i + 1) * (heartFull.getRegionWidth() + 3), position.getY());
         }
+        for (int i = player.getHP(); i < player.getMaxHP(); i ++){
+            batch.draw(heartEmpty, position.getX() + (i + 1) * (heartFull.getRegionWidth() + 3), position.getY());
+        }
     }
 
 }
