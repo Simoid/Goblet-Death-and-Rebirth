@@ -80,10 +80,10 @@ public class Box {
     }
 
     public void draw(Batch batch){
-        batch.draw(blueSquare, this.getX(), this.getY(), width, height);
+        //batch.draw(blueSquare, this.getX(), this.getY(), width, height);
     }
 
     public void drawPosition(Batch batch){
-        batch.draw(redSquare, this.getX() + width/2, this.getY() + height/2, 1, 1);
+        //batch.draw(redSquare, this.getX() + width/2, this.getY() + height/2, 1, 1);
     }
 }

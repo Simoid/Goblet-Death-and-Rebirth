@@ -3,6 +3,8 @@ package com.goblet.gameEngine;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.goblet.entities.Enemy;
@@ -26,6 +28,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 	private float timeBetweenUpdates = 1/120f;
 	private float timeCounter = 0f;
 	private SpriteBatch batch;
+    private BitmapFont font;
 	private Camera camera;
     private Viewport viewPort;
     private ArrayList<Entity> enemies;
@@ -34,6 +37,7 @@ public class Engine implements ApplicationListener, InputProcessor {
     private Room currentRoom;
 	private EnemyParser enemyParser;
     private UserInterface ui;
+    private boolean gameover = false;
     //private Enemy testEnemy;
 
     /**
@@ -41,17 +45,15 @@ public class Engine implements ApplicationListener, InputProcessor {
      */
 	@Override
 	public void create () {
-
-
-
-
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		batch = new SpriteBatch();
+        font = new BitmapFont();
+        font.setColor(Color.RED);
 		camera = new OrthographicCamera();
         viewPort = new FitViewport(480, 270, camera);
         viewPort.apply();
         camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
-		batch.setProjectionMatrix(camera.combined);
+        batch.setProjectionMatrix(camera.combined);
 
 
         Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
@@ -90,9 +92,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 	public void dispose(){
         player.dispose();
         batch.dispose();
-        for (Entity entity : enemies){
-            entity.dispose();
-        }
+        currentRoom.dispose();
 	}
 
     /**
@@ -112,15 +112,27 @@ public class Engine implements ApplicationListener, InputProcessor {
 	public void render () {
         // Uppdatera om det har gått tillräckligt lång tid sen senaste uppdateringen.
 		timeCounter += Gdx.graphics.getDeltaTime();
-		if (timeCounter > timeBetweenUpdates){
+		if (timeCounter > timeBetweenUpdates && !gameover){
 			update(timeCounter);
 			timeCounter = 0f;
+            if (player.getHP() <= 0){
+                gameover = true;
+                timeCounter = 1f;
+                pause();
+            }
 		}
 
         camera.update();
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+        if (gameover){
+            timeCounter -= Gdx.graphics.getDeltaTime()*2;
+            if (timeCounter <= 0){
+                timeCounter = 0;
+            }
+            batch.setColor(1, 1, 1, timeCounter);
+        }
         currentRoom.draw(batch, player);
         ui.draw(batch, player);
 		batch.end();
