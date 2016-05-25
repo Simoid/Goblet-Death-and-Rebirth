@@ -36,8 +36,9 @@ public abstract class Entity {
     protected SpriteAnimation currentAnimation;
     protected HashMap<Direction, SpriteAnimation> animations = new HashMap<Direction, SpriteAnimation>();
 
-    public Entity(Position position){
+    public Entity(Position position, Box hitbox){
         this.position = new Position(position);
+        this.hitbox = hitbox;
     }
 
     public void draw(Batch batch){
@@ -67,12 +68,13 @@ public abstract class Entity {
     }
 
     /**
-     * Uppdaterar spelarens position och animation.
+     * Uppdaterar karaktärens position och animation.
      * @param deltaTime Hur lång tid som har passerat sedan senaste uppdateringen.
      */
     public void update(float deltaTime){
         timeSinceAnimationStart += deltaTime;
         position.setPosition(position.getX() + deltaTime*movement.getMovementX(), position.getY() + deltaTime*movement.getMovementY());
+        hitbox.updatePosition(position);
     }
 
 

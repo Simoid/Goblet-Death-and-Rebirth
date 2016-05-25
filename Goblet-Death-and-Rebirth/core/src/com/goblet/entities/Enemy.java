@@ -23,8 +23,7 @@ public class Enemy extends Entity{
      */
     public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, int health, int damage, String moveType, String attackType,  Box hitBox,
                  float moveAnimationSpeed, float attackAnimationSpeed){
-        super(position);
-        //animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + atlasLocation + "_idle.pack", idleFrames, 1.0f, 1.0f, 1f));
+        super(position, hitBox);
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames,  moveAnimationSpeed,true));
         animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames,attackAnimationSpeed,false));
         movement = new Movement(movementSpeed);
