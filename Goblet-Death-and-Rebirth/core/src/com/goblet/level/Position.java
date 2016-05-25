@@ -1,5 +1,9 @@
 package com.goblet.level;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+
 /**
  * En klass som håller en position med floats.
  * Created by johan on 5/21/16.
@@ -7,6 +11,7 @@ package com.goblet.level;
 public class Position {
     private float xPos;
     private float yPos;
+    private Texture texture;
 
     /**
      * Konstruktor för klassen med x- och y-koordinaten.
@@ -16,6 +21,7 @@ public class Position {
     public Position(float xPos, float yPos){
         this.xPos = xPos;
         this.yPos = yPos;
+        texture = new Texture(Gdx.files.internal("assets/sprites/hitbox/position.png"));
     }
 
     /**
@@ -25,6 +31,7 @@ public class Position {
     public Position(Position position){
         xPos = position.getX();
         yPos = position.getY();
+        texture = new Texture(Gdx.files.internal("assets/sprites/hitbox/position.png"));
     }
 
     /**
@@ -78,4 +85,9 @@ public class Position {
     public float yDistance(float y){
         return (float) Math.abs(yPos - y);
     }
+
+    public void draw(Batch batch){
+        batch.draw(texture, xPos, yPos, 1.0f, 1.0f);
+    }
+
 }

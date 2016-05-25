@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.entities.Direction;
 import com.goblet.entities.Enemy;
 import com.goblet.entities.Player;
+import com.goblet.gameEngine.Box;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,8 +90,6 @@ public class Room {
      * Konstruktorn för rummet.
      * @param bottomLeft Nedre vänstra hörnet på skärmen.
      * @param topRight Högre högra hörnet på skärmen.
-     * @param tileTypes En array som beskriver var stenar och hål ska ritas ut.
-     * @param spawnPoints En array som beskriver var fiender ska spawnas.
      */
     public Room(Position bottomLeft, Position topRight){
         this.bottomLeft = new Position(bottomLeft);
@@ -103,7 +101,7 @@ public class Room {
         tiles = new Tile[16][26];
 
         enemies = new ArrayList<Enemy>();
-        enemies.add(new Enemy(new Position(150, 150), "king/king", 3, 9, 50f, 100, 2, "move", "melee", new Box(new Position(150, 150), 75, 49, 40, 39),1/5f,1/9f));
+        enemies.add(new Enemy(new Position(150, 150), "king/king", 3, 9, 50f, 100, 2, "move", "melee", new Box(new Position(150, 150), 75, 49),1/5f,1/9f));
 
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
 

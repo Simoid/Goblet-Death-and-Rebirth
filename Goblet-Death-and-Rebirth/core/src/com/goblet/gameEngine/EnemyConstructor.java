@@ -26,7 +26,7 @@ public class EnemyConstructor {
 
         try{
             box =  new Box(position
-                    ,ep.getHitboxWidth(name),ep.getHitboxHeight(name),ep.getHitboxOffsetX(name),ep.getHitboxOffsetY(name));
+                    ,ep.getHitboxWidth(name),ep.getHitboxHeight(name));
         }catch (FileNotFoundException ex){
             box = null;
         }

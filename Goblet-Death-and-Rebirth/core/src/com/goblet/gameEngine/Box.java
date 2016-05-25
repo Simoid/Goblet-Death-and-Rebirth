@@ -14,45 +14,41 @@ public class Box {
     private Position position;
     private float width;
     private float height;
-    private float offsetX;
-    private float offsetY;
     private Texture texture;
 
-    public Box(Position position, float width, float height, float offsetX, float offsetY) {
-        this.position = new Position(position.getX() - width/2, position.getY() - height/2);
+    public Box(Position position, float width, float height) {
+        this.position = position;
         this.width = width;
         this.height = height;
-        this.offsetX = offsetX;
-        this.offsetY = offsetY;
         texture = new Texture(Gdx.files.internal("assets/sprites/hitbox/hitbox.png"));
     }
 
     public boolean collides(Box otherBox){
         boolean xCollides = false;
         boolean yCollides = false;
-        if (position.getX() > otherBox.getX() && position.getX() < otherBox.getX() + otherBox.getWidth()){
+        if (this.getX() > otherBox.getX() && this.getX() < otherBox.getX() + otherBox.getWidth()){
             xCollides = true;
-        } else if (otherBox.getX() > position.getX() && otherBox.getX() < position.getX() + width) {
+        } else if (otherBox.getX() > this.getX() && otherBox.getX() < this.getX() + width) {
             xCollides = true;
         }
-        if (position.getY() > otherBox.getY() && position.getY() < otherBox.getY() + otherBox.getHeight()){
+        if (this.getY() > otherBox.getY() && this.getY() < otherBox.getY() + otherBox.getHeight()){
             yCollides = true;
-        } else if (otherBox.getY() > position.getY() && otherBox.getY() < position.getY() + height) {
+        } else if (otherBox.getY() > this.getY() && otherBox.getY() < this.getY() + height) {
             yCollides = true;
         }
         return (xCollides && yCollides);
     }
 
-    public void updatePosition(Position playerPosition){
-        position.setPosition(playerPosition.getX() - offsetX - width/2, playerPosition.getY() - offsetY - height/2);
+    public void updatePosition(Position newPosition){
+        this.position = newPosition;
     }
 
     public float getX(){
-        return position.getX();
+        return position.getX() - width/2;
     }
 
     public float getY(){
-        return position.getY();
+        return position.getY() - height/2;
     }
 
     public float getWidth(){
@@ -69,6 +65,6 @@ public class Box {
     }
 
     public void draw(Batch batch){
-        batch.draw(texture, position.getX(), position.getY(), width, height);
+        batch.draw(texture, position.getX() - width/2, position.getY()-height/2, width, height);
     }
 }
