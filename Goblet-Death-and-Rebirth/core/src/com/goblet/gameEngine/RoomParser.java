@@ -61,7 +61,7 @@ public class RoomParser {
             for(int j = 0 ; j < tilesWidth ; j++){
                 if( roomTiles[i][j] == TileType.STONE){
                     //Put stone on position vertical = i, horizontal  = j;
-                    room.addGObstacles(new Rock(j * 15, i * 15, 15,15,"assets/tiles/rock/rock.pack"));
+                    room.addGObstacles(new Rock(bottomLeft.getX() +45+ j * 15,bottomLeft.getY() +15+ i * 15, 15,15,"assets/tiles/rock/rock.pack"));
                 }
             }
         }
