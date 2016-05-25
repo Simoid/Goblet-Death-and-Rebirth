@@ -1,5 +1,10 @@
 package com.goblet.gameEngine;
 
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.goblet.level.Room;
 import com.goblet.level.SpawnPoint;
 import com.goblet.level.Tile;
@@ -19,9 +24,22 @@ public class RoomParser {
     JsonElement je;
     private int tilesHeight;
     private int tilesWidth;
+    private SpriteBatch batch;
+    private Camera camera;
+    private Viewport viewPort;
+    private EnemyConstructor enemyConstructor;
+
 
 
     public RoomParser(String fileName){
+        enemyConstructor = new EnemyConstructor();
+        batch = new SpriteBatch();
+        camera = new OrthographicCamera();
+        viewPort = new FitViewport(480, 270, camera);
+        viewPort.apply();
+        camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
+        batch.setProjectionMatrix(camera.combined);
+
         tilesHeight = 16;
         tilesWidth = 26;
         try {
@@ -33,12 +51,46 @@ public class RoomParser {
 
     }
 
-    public Room createRoom(float bottomLeftX, float bottomLeftY, float topRightX, float topRightY){
+    public Room createRoom(float bottomLeftX, float bottomLeftY, float topRightX, float topRightY, String roomName){
         //TODO
-        TileType[][] roomTiles = getRoomTiles("room1");
+        Room room = new Room(-camera.viewportWidth/2, -camera.viewportHeight/2, camera.viewportWidth/2, camera.viewportHeight/2, null, null);
+        TileType[][] roomTiles = getRoomTiles(roomName);
+        SpawnPoint[][] spawnPoints = getSpawns(roomName);
         for(int i = 0 ; i < tilesHeight ; i++){
             for(int j = 0 ; j < tilesWidth ; j++){
-                //if ()
+                if( roomTiles[i][j] == TileType.STONE){
+                    //Put stone on position vertical = i, horizontal  = j;
+
+                }
+            }
+        }
+
+        for(int i = 0 ; i < tilesHeight ; i++){
+            for(int j = 0 ; j < tilesWidth ; j++){
+                    //Put enemies on position vertical = i, horizontal  = j;
+                switch (spawnPoints[i][j]){
+                    case KING:
+                        room.addEnemy(enemyConstructor.createEnemy("king",i*15,j*15));
+                        break;
+                    case BAT:
+                        room.addEnemy(enemyConstructor.createEnemy("bat",i*15,j*15));
+                        break;
+                    case DATBOI:
+                        room.addEnemy(enemyConstructor.createEnemy("datboi",i*15,j*15));
+                        break;
+                    case MASK:
+                        room.addEnemy(enemyConstructor.createEnemy("mask",i*15,j*15));
+                        break;
+                    case SPIDER:
+                        room.addEnemy(enemyConstructor.createEnemy("spider",i*15,j*15));
+                        break;
+                    case PRISM:
+                        room.addEnemy(enemyConstructor.createEnemy("prism",i*15,j*15));
+                        break;
+                    case EYE:
+                        room.addEnemy(enemyConstructor.createEnemy("eye",i*15,j*15));
+                        break;
+                }
             }
         }
         return null;

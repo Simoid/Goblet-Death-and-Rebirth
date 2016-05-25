@@ -15,23 +15,33 @@
     "attackAnimationSpeed" : 1
   },
   "datboi": {
-    "name": "test",
+    "name": "bat",
     "health": 10,
     "damage": 1,
+    "moveFrames" : 1,
+    "attackFrames" : 1,
     "hitboxWidth": 1,
     "hitboxHeight": 1,
-    "hitboxOrigin": 1,
+    "hitboxOffsetX": 1,
+    "hitboxOffsetY": 1,
     "attackType": 1,
-    "moveType": 1
+    "moveType": 1,
+    "moveAnimationSpeed" : 1,
+    "attackAnimationSpeed" : 1
   },
   "king": {
-    "name": "king",
+    "name": "bat",
     "health": 10,
     "damage": 1,
+    "moveFrames" : 1,
+    "attackFrames" : 1,
     "hitboxWidth": 1,
     "hitboxHeight": 1,
-    "hitboxOrigin": 1,
+    "hitboxOffsetX": 1,
+    "hitboxOffsetY": 1,
     "attackType": 1,
-    "moveType": 1
+    "moveType": 1,
+    "moveAnimationSpeed" : 1,
+    "attackAnimationSpeed" : 1
   }
 }
