@@ -49,7 +49,6 @@ public class SpriteAnimation {
     }
 
     public boolean isAnimationComplete(float deltaTime){
-        System.out.println(!loop && animation.isAnimationFinished(deltaTime));
         return !loop && animation.isAnimationFinished(deltaTime);
     }
 

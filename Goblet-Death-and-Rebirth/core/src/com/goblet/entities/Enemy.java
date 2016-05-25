@@ -36,7 +36,7 @@ public class Enemy extends Entity{
      */
     public void updateTowardsPlayer(Player player, float deltaTime){
         Position playerPosition = player.getPosition();
-        if (currentAnimation == animations.get(Direction.ATTACK) && !currentAnimation.isAnimationComplete(deltaTime)){
+        if (currentAnimation == animations.get(Direction.ATTACK) && !currentAnimation.isAnimationComplete(timeSinceAnimationStart)){
             timeSinceAnimationStart += deltaTime;
             return;
         }
