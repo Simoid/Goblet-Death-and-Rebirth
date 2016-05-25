@@ -41,7 +41,7 @@ public abstract class Entity {
     }
 
     public void draw(Batch batch){
-        currentAnimation.draw(batch, position.getX() + currentAnimation.getSpriteWidth()/2, position.getY()+currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
+        currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
     }
 
     /**

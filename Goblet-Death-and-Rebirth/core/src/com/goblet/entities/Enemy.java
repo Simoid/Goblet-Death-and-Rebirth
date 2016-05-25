@@ -39,21 +39,21 @@ public class Enemy extends Entity{
      */
     public void updateTowardsPlayer(Player player, float deltaTime){
         Position playerPosition = player.getPosition();
-        if (Math.abs(playerPosition.getX() - (position.getX() + currentAnimation.getSpriteWidth()/2)) < 20.0f){
+        if (Math.abs(playerPosition.getX() - (position.getX())) < 20.0f){
             movement.setMoveFlag(Direction.LEFT, false);
             movement.setMoveFlag(Direction.RIGHT, false);
         }
         else {
-            boolean moveLeft = playerPosition.getX() < position.getX() + currentAnimation.getSpriteWidth()/2;
+            boolean moveLeft = playerPosition.getX() < position.getX();
             movement.setMoveFlag(Direction.LEFT, moveLeft);
             movement.setMoveFlag(Direction.RIGHT, !moveLeft);
         }
-        if (Math.abs(playerPosition.getY() - (position.getY() + currentAnimation.getSpriteHeight()/2)) < 20.0f){
+        if (Math.abs(playerPosition.getY() - (position.getY())) < 20.0f){
         movement.setMoveFlag(Direction.DOWN, false);
         movement.setMoveFlag(Direction.UP, false);
         }
         else {
-        boolean moveDown = playerPosition.getY() < position.getY() + currentAnimation.getSpriteHeight()/2;
+        boolean moveDown = playerPosition.getY() < position.getY();
         movement.setMoveFlag(Direction.DOWN, moveDown);
         movement.setMoveFlag(Direction.UP, !moveDown);
         }
