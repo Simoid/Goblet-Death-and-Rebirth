@@ -1,0 +1,68 @@
+
+king_attack.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0000
+  rotate: false
+  xy: 1, 293
+  size: 154, 144
+  orig: 154, 144
+  offset: 0, 0
+  index: -1
+0001
+  rotate: false
+  xy: 1, 147
+  size: 154, 144
+  orig: 154, 144
+  offset: 0, 0
+  index: -1
+0002
+  rotate: false
+  xy: 157, 293
+  size: 154, 144
+  orig: 154, 144
+  offset: 0, 0
+  index: -1
+0003
+  rotate: false
+  xy: 1, 1
+  size: 154, 144
+  orig: 154, 144
+  offset: 0, 0
+  index: -1
+0004
+  rotate: false
+  xy: 157, 147
+  size: 154, 144
+  orig: 154, 144
+  offset: 0, 0
+  index: -1
+0005
+  rotate: false
+  xy: 313, 293
+  size: 154, 144
+  orig: 154, 144
+  offset: 0, 0
+  index: -1
+0006
+  rotate: false
+  xy: 157, 1
+  size: 154, 144
+  orig: 154, 144
+  offset: 0, 0
+  index: -1
+0007
+  rotate: false
+  xy: 313, 147
+  size: 154, 144
+  orig: 154, 144
+  offset: 0, 0
+  index: -1
+0008
+  rotate: false
+  xy: 313, 1
+  size: 154, 144
+  orig: 154, 144
+  offset: 0, 0
+  index: -1
