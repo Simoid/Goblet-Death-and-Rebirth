@@ -23,14 +23,23 @@ public class EnemyConstructor {
         String atlasLocation = name +"/"+ name;
         Enemy enemy;
         Position position = new Position(xPos,yPos);
-        try{
-            enemy = new Enemy(position,atlasLocation,ep.getMoveFrames(name),ep.getAttackFrames(name),(float) ep.getMoveSpeed(name)
-                    ,ep.getHealth(name),ep.getDamage(name),ep.getMoveType(name),ep.getAttackType(name),new Box(position
-                    ,ep.getHitboxWidth(name),ep.getHitboxHeight(name),ep.getHitboxOffsetX(name),ep.getHitboxOffsetY(name)));
-        }catch (FileNotFoundException ex){
+        Box box;
 
+        try{
+            box =  new Box(position
+                    ,ep.getHitboxWidth(name),ep.getHitboxHeight(name),ep.getHitboxOffsetX(name),ep.getHitboxOffsetY(name));
+        }catch (FileNotFoundException ex){
+            box = null;
         }
 
+        try{
+            enemy = new Enemy(position,atlasLocation,ep.getMoveFrames(name),ep.getAttackFrames(name),(float) ep.getMoveSpeed(name)
+                    ,ep.getHealth(name),ep.getDamage(name),ep.getMoveType(name),ep.getAttackType(name),box);
+        }catch (FileNotFoundException ex){
+            return null;
+        }
+
+        return enemy;
         /*
         switch (enemySpawnPoint){
             case KING:
