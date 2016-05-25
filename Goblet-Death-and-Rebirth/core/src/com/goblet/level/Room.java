@@ -92,7 +92,7 @@ public class Room {
      * @param tileTypes En array som beskriver var stenar och hål ska ritas ut.
      * @param spawnPoints En array som beskriver var fiender ska spawnas.
      */
-    public Room(Position bottomLeft, Position topRight, TileType[][] tileTypes, SpawnPoint[][] spawnPoints){
+    public Room(Position bottomLeft, Position topRight){
         this.bottomLeft = new Position(bottomLeft);
         this.topRight = new Position(topRight);
 
