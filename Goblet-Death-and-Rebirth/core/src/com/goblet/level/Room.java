@@ -42,7 +42,6 @@ public class Room {
         for (WallObject currentWall : wallMap.values()){
             currentWall.draw(batch);
         }
-
     }
 
     private void drawFloor(Batch batch){
