@@ -48,7 +48,15 @@ public class Box {
 
     public void updatePosition(Position newPosition){
         this.position = newPosition;
-        middlePos.setPosition(position.getX() - offsetX, position.getY() - offsetY);
+        middlePos.setPosition(position.getX() + offsetX, position.getY() + offsetY);
+    }
+
+    public float getOffsetX(){
+        return offsetX;
+    }
+
+    public float getOffsetY(){
+        return offsetY;
     }
 
     public float getX(){

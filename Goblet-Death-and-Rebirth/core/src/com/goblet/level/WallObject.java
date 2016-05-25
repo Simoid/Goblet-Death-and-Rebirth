@@ -45,6 +45,10 @@ public class WallObject {
         return noEntititesZone;
     }
 
+    public Direction getDir(){
+        return dir;
+    }
+
     private void setNoEntititesZone(Direction dir){
         float offsetX = 0;
         float offsetY = 0;
@@ -88,7 +92,7 @@ public class WallObject {
         if (hasDoor && !doorOpened){
             door.draw(batch);
         }
-        noEntititesZone.draw(batch);
+        //noEntititesZone.draw(batch);
     }
 
     public void closeDoor(){
