@@ -40,7 +40,6 @@ public class RoomParser {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     public Room createRoom(String roomName){
@@ -125,18 +124,4 @@ public class RoomParser {
         return returnArray;
     }
 
-
-
-    /*
-    public static void main(String[]arg){
-        RoomParser rp = new RoomParser("room1","rooms.json");
-        String[][] array = rp.getRoom("room1");
-        for(int i = 0; i < 16 ; i++){
-            for(int j = 0 ; j < 26 ; j++){
-                System.out.print(array[i][j]);
-            }
-            System.out.println();
-        }
-    }
-    */
 }

@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
  * Created by Simoido on 2016-05-23.
  */
 public class EnemyConstructor {
-    SpawnPoint sp;
     EnemyParser ep;
 
     public EnemyConstructor(){
@@ -18,7 +17,6 @@ public class EnemyConstructor {
     }
 
     public Enemy createEnemy(String name, float xPos, float yPos){
-        SpawnPoint enemySpawnPoint = sp.translate(name);
         String atlasLocation = name +"/"+ name;
         Enemy enemy;
         Position position = new Position(xPos,yPos);
