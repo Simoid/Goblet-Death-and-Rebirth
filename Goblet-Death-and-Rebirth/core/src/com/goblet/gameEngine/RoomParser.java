@@ -25,10 +25,12 @@ public class RoomParser {
     private Camera camera;
     private Viewport viewPort;
     private EnemyConstructor enemyConstructor;
+    private Position bottomLeft;
 
 
 
-    public RoomParser(String fileName){
+    public RoomParser(String fileName, Position bottomLeft){
+        this.bottomLeft = bottomLeft;
         enemyConstructor = new EnemyConstructor();
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
@@ -73,7 +75,7 @@ public class RoomParser {
                 if(spawnPoints[i][j] != null) {
                     switch (spawnPoints[i][j]) {
                         case KING:
-                            room.addEnemy(enemyConstructor.createEnemy("king", i * 15, j * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("king", (int)(bottomLeft.getX() + i * 15), (int)(bottomLeft.getY() + j * 15)));
                             break;
                         case BAT:
                             room.addEnemy(enemyConstructor.createEnemy("bat", i * 15, j * 15));
