@@ -1,5 +1,6 @@
 package com.goblet.entities;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.gameEngine.Box;
@@ -25,6 +26,7 @@ public class Player extends Entity{
     private SpriteAnimation attackDown;
     private SpriteAnimation currentAttack;
     private float timeSinceAttackAnimation;
+    private boolean attackFlag;
 
     /**
      * Konstruktorn för player.
@@ -62,12 +64,31 @@ public class Player extends Entity{
     @Override
     public void draw(Batch batch){
 
-        attackRight.draw(batch,position.getX() ,position.getY(),timeSinceAttackAnimation);
+        if (attackFlag) {
+            System.out.println("HEJ");
+            attackRight.draw(batch, position.getX(), position.getY(), timeSinceAttackAnimation);
+        }
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
         //hitbox.draw(batch);
         //hitbox.drawPosition(batch);
     }
 
+
+    /**
+     * Uppdaterar karaktärens position och animation.
+     * @param deltaTime Hur lång tid som har passerat sedan senaste uppdateringen.
+     */
+    @Override
+    public void update(float deltaTime){
+        timeSinceAnimationStart += deltaTime;
+        timeSinceDamageTaken += deltaTime;
+        timeSinceAttackAnimation += deltaTime;
+        if (timeSinceAttackAnimation > 1){
+            attackFlag = false;
+        }
+        position.setPosition(position.getX() + deltaTime*movement.getMovementX(), position.getY() + deltaTime*movement.getMovementY());
+        hitbox.updatePosition(position);
+    }
 
     public Position getPosition(){ return this.position; }
 
@@ -130,6 +151,9 @@ public class Player extends Entity{
         Direction dir = Direction.keyCodeTranslate(keycode);
         if (dir == Direction.IDLE){
             return;
+        }
+        if (keycode == Input.Keys.Z){
+            attackFlag = true;
         }
         if (!movement.getMoveFlag(dir)){
             movement.setMoveFlag(dir, true);
