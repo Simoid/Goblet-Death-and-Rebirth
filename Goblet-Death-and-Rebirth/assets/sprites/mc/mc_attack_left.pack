@@ -1,0 +1,33 @@
+
+mc_attack_left.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0000
+  rotate: false
+  xy: 1, 1
+  size: 27, 18
+  orig: 27, 18
+  offset: 0, 0
+  index: -1
+0001
+  rotate: false
+  xy: 30, 1
+  size: 27, 18
+  orig: 27, 18
+  offset: 0, 0
+  index: -1
+0002
+  rotate: false
+  xy: 59, 1
+  size: 27, 18
+  orig: 27, 18
+  offset: 0, 0
+  index: -1
+0003
+  rotate: false
+  xy: 88, 1
+  size: 27, 18
+  orig: 27, 18
+  offset: 0, 0
+  index: -1
