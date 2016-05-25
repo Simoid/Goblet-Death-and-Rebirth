@@ -11,6 +11,10 @@ import com.goblet.level.Position;
  */
 public class Player extends Entity{
 
+
+    private int hP;
+    private int maxHP;
+
     /**
      * Konstruktorn för player.
      * @param xPos Startpositionen i x-led.
@@ -18,6 +22,9 @@ public class Player extends Entity{
      */
     public Player(int xPos, int yPos, float moveSpeed){
         super(new Position(xPos, yPos), new Box(new Position(xPos, yPos), 13f, 25f, 0, 0));
+
+        maxHP = 3;
+        hP = maxHP;
 
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_move_down.pack", 4, 1/5f, true));
         animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_move_up.pack", 4, 1/5f, true));
@@ -30,6 +37,14 @@ public class Player extends Entity{
         movement = new Movement(moveSpeed);
         timeSinceAnimationStart = 0;
 
+    }
+
+    public int getHP(){
+        return hP;
+    }
+
+    public int getMaxHP(){
+        return maxHP;
     }
 
     /**

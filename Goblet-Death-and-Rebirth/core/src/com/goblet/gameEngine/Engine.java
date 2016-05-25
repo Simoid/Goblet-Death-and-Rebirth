@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.goblet.entities.Enemy;
 import com.goblet.entities.Entity;
 import com.goblet.entities.Player;
+import com.goblet.graphics.UserInterface;
 import com.goblet.level.Room;
 import com.goblet.level.Position;
 
@@ -32,6 +33,7 @@ public class Engine implements ApplicationListener, InputProcessor {
     private Player player;
     private Room currentRoom;
 	private EnemyParser enemyParser;
+    private UserInterface ui;
     //private Enemy testEnemy;
 
     /**
@@ -59,6 +61,7 @@ public class Engine implements ApplicationListener, InputProcessor {
         roomParser = new RoomParser("rooms.json", bottomLeft, topRight);
 
 		player = new Player(0, 0,100f);
+        ui = new UserInterface(bottomLeft, topRight);
 
 		setCurrentRoom("room1");
 		//currentRoom = new Room(bottomLeft, topRight);
@@ -119,6 +122,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
         currentRoom.draw(batch, player);
+        ui.draw(batch, player);
 		batch.end();
 	}
 
