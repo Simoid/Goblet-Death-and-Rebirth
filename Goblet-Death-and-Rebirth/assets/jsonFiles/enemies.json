@@ -2,7 +2,7 @@
   "bat": {
     "name": "bat",
     "health": 10,
-    "damage": 1,
+    "attackrange": 1,
     "moveFrames" : 3,
     "attackFrames" : 9,
     "hitboxWidth": 75,
@@ -18,7 +18,7 @@
   "datboi": {
     "name": "bat",
     "health": 10,
-    "damage": 1,
+    "attackrange": 1,
     "moveFrames" : 3,
     "attackFrames" : 9,
     "hitboxWidth": 75,
@@ -34,7 +34,7 @@
   "king": {
     "name": "king",
     "health": 10,
-    "damage": 1,
+    "attackrange": 75,
     "moveFrames" : 3,
     "attackFrames" : 9,
     "hitboxWidth": 75,

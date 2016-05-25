@@ -138,6 +138,9 @@ public class Room {
         for (Enemy currentEnemy : enemies){
             currentEnemy.updateTowardsPlayer(player, deltaTime);
             checkPosition(currentEnemy.getPosition());
+            if (currentEnemy.isAttacking() && player.getHitbox().getMiddlePos().distance(currentEnemy.getHitbox().getMiddlePos()) < currentEnemy.getAttackRange()){
+                player.takeDamage();
+            }
         }
         player.update(deltaTime);
         checkPosition(player.getPosition());

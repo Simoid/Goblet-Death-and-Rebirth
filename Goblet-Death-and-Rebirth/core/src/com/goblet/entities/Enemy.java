@@ -13,6 +13,8 @@ import com.goblet.graphics.SpriteAnimation;
  */
 public class Enemy extends Entity{
 
+    private float attackRange;
+    private float attackSpeed;
 
     /**
      * Konstruktorn för fiendeklassen.
@@ -21,9 +23,11 @@ public class Enemy extends Entity{
      * @param attackFrames Hur många frames fiendens animation har när den attackerar.
      * @param movementSpeed Fiendens rörelsehastighet.
      */
-    public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, int health, int damage, String moveType, String attackType,  Box hitBox,
+    public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, int health, float attackRange, String moveType, String attackType,  Box hitBox,
                  float moveAnimationSpeed, float attackAnimationSpeed){
         super(position, hitBox);
+        this.attackRange = attackRange;
+        this.attackSpeed = attackAnimationSpeed * attackFrames;
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames,  moveAnimationSpeed,true));
         animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames,attackAnimationSpeed,false));
         movement = new Movement(movementSpeed);
@@ -64,8 +68,12 @@ public class Enemy extends Entity{
         this.update(deltaTime);
     }
 
-    public void attack(String attackType, int damage){
+    public boolean isAttacking(){
+        return currentAnimation == animations.get(Direction.ATTACK) && timeSinceAnimationStart > attackSpeed / 2;
+    }
 
+    public float getAttackRange(){
+        return attackRange;
     }
 
     /**

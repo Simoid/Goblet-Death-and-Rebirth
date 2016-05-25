@@ -11,19 +11,23 @@ import com.goblet.level.Position;
 public class Box {
 
     private Position position;
+    private Position middlePos;
     private float width;
     private float height;
     private float offsetX;
     private float offsetY;
-    private Texture texture;
+    private Texture blueSquare;
+    private Texture redSquare;
 
     public Box(Position position, float width, float height, float offsetX, float offsetY) {
         this.position = position;
+        middlePos = new Position(position.getX() - offsetX, position.getY() - offsetY);
         this.width = width;
         this.height = height;
         this.offsetX = offsetX;
         this.offsetY = offsetY;
-        texture = new Texture(Gdx.files.internal("assets/sprites/hitbox/hitbox.png"));
+        blueSquare = new Texture(Gdx.files.internal("assets/sprites/hitbox/hitbox.png"));
+        redSquare = new Texture(Gdx.files.internal("assets/sprites/hitbox/position.png"));
     }
 
     public boolean collides(Box otherBox){
@@ -44,6 +48,7 @@ public class Box {
 
     public void updatePosition(Position newPosition){
         this.position = newPosition;
+        middlePos.setPosition(position.getX() - offsetX, position.getY() - offsetY);
     }
 
     public float getX(){
@@ -62,12 +67,15 @@ public class Box {
         return height;
     }
 
-    public boolean containsPosition(Position position){
-        return position.getX() < this.position.getX() + this.width && position.getX() > this.position.getX() &&
-                position.getY() < this.position.getY() + this.height && position.getY() > this.position.getY();
+    public Position getMiddlePos(){
+        return middlePos;
     }
 
     public void draw(Batch batch){
-        batch.draw(texture, position.getX() - width/2 + offsetX, position.getY()-height/2 + offsetY, width, height);
+        batch.draw(blueSquare, this.getX(), this.getY(), width, height);
+    }
+
+    public void drawPosition(Batch batch){
+        batch.draw(redSquare, this.getX() + width/2, this.getY() + height/2, 1, 1);
     }
 }

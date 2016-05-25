@@ -32,6 +32,7 @@ public abstract class Entity {
     protected Position position;
 
     protected float timeSinceAnimationStart;
+    protected float timeSinceDamageTaken;
     protected String spriteLocation = "assets/sprites/";
     protected SpriteAnimation currentAnimation;
     protected HashMap<Direction, SpriteAnimation> animations = new HashMap<Direction, SpriteAnimation>();
@@ -48,7 +49,7 @@ public abstract class Entity {
     public void draw(Batch batch){
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
         hitbox.draw(batch);
-        position.draw(batch);
+        hitbox.drawPosition(batch);
     }
 
     /**
@@ -79,6 +80,7 @@ public abstract class Entity {
      */
     public void update(float deltaTime){
         timeSinceAnimationStart += deltaTime;
+        timeSinceDamageTaken += deltaTime;
         position.setPosition(position.getX() + deltaTime*movement.getMovementX(), position.getY() + deltaTime*movement.getMovementY());
         hitbox.updatePosition(position);
     }

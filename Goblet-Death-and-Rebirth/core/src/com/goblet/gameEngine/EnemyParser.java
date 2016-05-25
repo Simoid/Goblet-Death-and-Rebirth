@@ -45,8 +45,8 @@ public class EnemyParser {
         return health;
     }
 
-    public int getDamage(String enemy) throws FileNotFoundException{
-        int dmg = je.getAsJsonObject().get(enemy).getAsJsonObject().get("damage").getAsInt();
+    public float getAttackRange(String enemy) throws FileNotFoundException{
+        float dmg = je.getAsJsonObject().get(enemy).getAsJsonObject().get("attackrange").getAsFloat();
         return dmg;
     }
 

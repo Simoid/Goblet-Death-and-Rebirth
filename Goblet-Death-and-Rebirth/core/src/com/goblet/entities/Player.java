@@ -11,6 +11,7 @@ import com.goblet.level.Position;
  */
 public class Player extends Entity{
 
+    private final float damageCooldown = 2.0f;
 
     private int hP;
     private int maxHP;
@@ -36,6 +37,7 @@ public class Player extends Entity{
 
         movement = new Movement(moveSpeed);
         timeSinceAnimationStart = 0;
+        timeSinceDamageTaken = 0;
 
     }
 
@@ -45,6 +47,13 @@ public class Player extends Entity{
 
     public int getMaxHP(){
         return maxHP;
+    }
+
+    public void takeDamage(){
+        if (timeSinceDamageTaken > damageCooldown) {
+            hP--;
+            timeSinceDamageTaken = 0;
+        }
     }
 
     /**
