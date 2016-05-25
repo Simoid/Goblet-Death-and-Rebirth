@@ -5,8 +5,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.entities.Direction;
+import com.goblet.entities.Enemy;
+import com.goblet.entities.Player;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,19 +17,27 @@ import java.util.Map;
  * Created by johan on 5/21/16.
  */
 public class Room {
-    private HashMap<Direction, Point> doorLocations;
+
     private Tile[][] tiles;
-    String atlasLocation = "assets/tiles/room/room.pack";
+    private String atlasLocation = "assets/tiles/room/room.pack";
     private TextureRegion floorTextureRegion;
     private Map<Direction, WallObject> wallMap;
     private Map<Direction, RoofObject> roofMap;
+    private ArrayList<Enemy> enemies;
     private TextureAtlas atlas;
     private Position bottomLeft;
     private Position topRight;
     private boolean doorsOpen;
 
 
-    public void drawFloorAndWalls(Batch batch){
+
+    public void draw(Batch batch, Player player){
+        drawFloorAndWalls(batch);
+        drawEntitites(batch, player);
+        drawRoof(batch);
+    }
+
+    private void drawFloorAndWalls(Batch batch){
         drawFloor(batch);
         for (WallObject currentWall : wallMap.values()){
             currentWall.draw(batch);
@@ -38,19 +49,33 @@ public class Room {
         batch.draw(floorTextureRegion, -floorTextureRegion.getRegionWidth()/2, bottomLeft.getY(), floorTextureRegion.getRegionWidth(), floorTextureRegion.getRegionHeight());
     }
 
-    public void drawRoof(Batch batch){
+    private void drawEntitites(Batch batch, Player player){
+        for (Enemy currentEnemy : enemies){
+            currentEnemy.draw(batch);
+        }
+        player.draw(batch);
+    }
+
+    private void drawRoof(Batch batch){
         for (RoofObject currentRoof : roofMap.values()){
             currentRoof.draw(batch);
         }
     }
 
-    public Room(float bottomLeftX, float bottomLeftY, float topRightX, float topRightY){
+    public Room(float bottomLeftX, float bottomLeftY, float topRightX, float topRightY, TileType[][] tileTypes, SpawnPoint[][] spawnPoints){
         bottomLeft = new Position(bottomLeftX, bottomLeftY);
         topRight = new Position(topRightX, topRightY);
 
         wallMap = new HashMap<Direction, WallObject>();
         roofMap = new HashMap<Direction, RoofObject>();
         tiles = new Tile[16][26];
+
+        //allowedArea = new Box(new Position())
+
+        enemies = new ArrayList<Enemy>();
+        enemies.add(new Enemy(50, 0, "king/king", 2, 3, 3,50f));
+
+
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
 
         wallMap.put(Direction.UP, new WallObject(atlas.findRegion("spr_upper_wall"), atlas.findRegion("spr_upper_wall_path"), atlas.findRegion("spr_upper_door"), Direction.UP, bottomLeft, topRight, true));
@@ -76,6 +101,19 @@ public class Room {
             currentWall.closeDoor();
             doorsOpen = false;
         }
+    }
+
+    public void updateEntities(float deltaTime, Player player){
+        for (Enemy currentEnemy : enemies){
+            currentEnemy.updateTowardsPlayer(player, deltaTime);
+            checkPosition(currentEnemy.getPosition());
+        }
+        player.update(deltaTime);
+        checkPosition(player.getPosition());
+    }
+
+    private void checkPosition(Position position){
+
     }
 
     public boolean doorsAreOpen(){
