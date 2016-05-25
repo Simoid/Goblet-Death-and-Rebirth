@@ -41,14 +41,25 @@ public class Player extends Entity{
 
     }
 
+    /**
+     * Returnernar hur mycket hp spelaren har.
+     * @return Hur mycket hp spelaren har.
+     */
     public int getHP(){
         return hP;
     }
 
+    /**
+     * Returnerar det maximala hp:et som spelaren kan ha.
+     * @return Det maximala hp:et som spelaren kan ha.
+     */
     public int getMaxHP(){
         return maxHP;
     }
 
+    /**
+     * Gör skada på spelaren.
+     */
     public void takeDamage(){
         if (timeSinceDamageTaken > damageCooldown) {
             hP--;

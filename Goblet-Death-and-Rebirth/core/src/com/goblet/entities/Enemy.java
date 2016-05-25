@@ -68,6 +68,10 @@ public class Enemy extends Entity{
         this.update(deltaTime);
     }
 
+    /**
+     * Returnerar en boolean som beksriver om fienden har kommit tillräckligt långt i en attackanimation för att göra skada.
+     * @return true om fiender har gjort 2/3 av sin attack, false annars.
+     */
     public boolean isAttacking(){
         return currentAnimation == animations.get(Direction.ATTACK) && timeSinceAnimationStart > attackSpeed * 2 / 3;
     }

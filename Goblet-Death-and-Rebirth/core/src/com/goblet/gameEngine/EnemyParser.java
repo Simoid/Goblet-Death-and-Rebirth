@@ -12,7 +12,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 /**
- *En klass som kan läsa information från json filer som innehåller information om fiender och returnera värdena
+ *En klass som kan läsa information från json filer som innehåller information om fiender och returnera värdena.
  * Created by Simoido on 2016-05-19.
  */
 public class EnemyParser {

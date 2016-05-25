@@ -7,15 +7,29 @@ import com.goblet.level.SpawnPoint;
 import java.io.FileNotFoundException;
 
 /**
+ * En klass som används för att skapa Enemy-objekt genom att läsa info från enemies.json.
+ *
+ * ( enemies.json ligger i assets/jsonFiles/ )
+ *
  * Created by Simoido on 2016-05-23.
  */
 public class EnemyConstructor {
     EnemyParser ep;
 
+    /**
+     * Konstruktorn för klassen. Skapar ett EnemyParser-objekt.
+     */
     public EnemyConstructor(){
         ep = new EnemyParser("enemies.json");
     }
 
+    /**
+     * Skapar en fiendeobjekt utifrån enemies.json.
+     * @param name Namnet på fienden som ska skapas.
+     * @param xPos x-positionen för fienden.
+     * @param yPos y-positionen för fienden.
+     * @return
+     */
     public Enemy createEnemy(String name, float xPos, float yPos){
         String atlasLocation = name +"/"+ name;
         Enemy enemy;
