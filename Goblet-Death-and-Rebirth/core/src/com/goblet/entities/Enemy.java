@@ -23,9 +23,8 @@ public class Enemy extends Entity{
      */
     public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, int health, int damage, String moveType, String attackType,  Box hitBox){
         super(position);
-        //animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + atlasLocation + "_idle.pack", idleFrames, 1.0f, 1.0f, 1f));
-        animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames, 1.0f, 1.0f, 1/5f));
-        animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames, 1.0f, 1.0f, 1f/attackFrames));
+        animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames, 1/5f, true));
+        animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames, 1f/attackFrames, false));
         movement = new Movement(movementSpeed);
         currentAnimation = animations.get(Direction.DOWN);
     }
@@ -37,6 +36,10 @@ public class Enemy extends Entity{
      */
     public void updateTowardsPlayer(Player player, float deltaTime){
         Position playerPosition = player.getPosition();
+        if (currentAnimation == animations.get(Direction.ATTACK) && !currentAnimation.isAnimationComplete(deltaTime)){
+            timeSinceAnimationStart += deltaTime;
+            return;
+        }
         if (Math.abs(playerPosition.getX() - (position.getX())) < 20.0f){
             movement.setMoveFlag(Direction.LEFT, false);
             movement.setMoveFlag(Direction.RIGHT, false);
@@ -71,6 +74,7 @@ public class Enemy extends Entity{
             setAnimation(Direction.DOWN);
         } else {
             setAnimation(Direction.ATTACK);
+            timeSinceAnimationStart = 0;
         }
     }
 

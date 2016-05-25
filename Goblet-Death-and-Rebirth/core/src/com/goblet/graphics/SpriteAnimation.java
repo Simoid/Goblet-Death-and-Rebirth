@@ -11,23 +11,21 @@ import com.badlogic.gdx.graphics.g2d.*;
  */
 public class SpriteAnimation {
     private TextureRegion[] regions;
-    private float xScale;
-    private float yScale;
+    private float xScale = 1.0f;
+    private float yScale = 1.0f;
     private Animation animation;
     private TextureAtlas atlas;
     private TextureRegion currentRegion;
+    private boolean loop;
 
     /**
      * Konstruktur för klassen.
      * @param atlasLocation Filvägen till atlas filen (oftast "assets/sprites/***.pack")
      * @param numberOfSprites Hur många bilder som ingår i animationen.
-     * @param xScale Skalan på bilden i x-led.
-     * @param yScale Skalan på bilden i y-led.
      * @param animationTime Tidsskillnaden mellan bildbyte.
      */
-    public SpriteAnimation(String atlasLocation, int numberOfSprites, float xScale, float yScale, float animationTime){
-        this.xScale = xScale;
-        this.yScale = yScale;
+    public SpriteAnimation(String atlasLocation, int numberOfSprites, float animationTime, boolean loop){
+        this.loop = loop;
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
         regions = new TextureRegion[numberOfSprites];
         for (int i = 0; i < numberOfSprites; i++){
@@ -36,6 +34,7 @@ public class SpriteAnimation {
         animation = new Animation(animationTime, regions);
         currentRegion = animation.getKeyFrame(0);
     }
+
 
     /**
      * Funktion för att sätta storleken på bilden som ritas ut.
@@ -47,6 +46,11 @@ public class SpriteAnimation {
     public void changeScale(float scale){
         xScale *= scale;
         yScale *= scale;
+    }
+
+    public boolean isAnimationComplete(float deltaTime){
+        System.out.println(!loop && animation.isAnimationFinished(deltaTime));
+        return !loop && animation.isAnimationFinished(deltaTime);
     }
 
     /**
@@ -73,7 +77,7 @@ public class SpriteAnimation {
      * @param time Tiden som har passerat sen animationen började.
      */
     public void draw(Batch batch, float x, float y, float time){
-        currentRegion = animation.getKeyFrame(time, true);
+        currentRegion = animation.getKeyFrame(time, loop);
         batch.draw(currentRegion, x, y, currentRegion.getRegionWidth()*xScale, currentRegion.getRegionHeight()*yScale);
     }
 
