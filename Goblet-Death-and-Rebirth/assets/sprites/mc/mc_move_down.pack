@@ -3,14 +3,14 @@ mc_move_down.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-0002
+0000
   rotate: false
   xy: 1, 1
   size: 15, 27
   orig: 15, 27
   offset: 0, 0
   index: -1
-0000
+0002
   rotate: false
   xy: 1, 1
   size: 15, 27

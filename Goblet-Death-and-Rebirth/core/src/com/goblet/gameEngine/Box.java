@@ -3,7 +3,6 @@ package com.goblet.gameEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.goblet.level.Position;
 
 /**
@@ -14,12 +13,16 @@ public class Box {
     private Position position;
     private float width;
     private float height;
+    private float offsetX;
+    private float offsetY;
     private Texture texture;
 
-    public Box(Position position, float width, float height) {
+    public Box(Position position, float width, float height, float offsetX, float offsetY) {
         this.position = position;
         this.width = width;
         this.height = height;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
         texture = new Texture(Gdx.files.internal("assets/sprites/hitbox/hitbox.png"));
     }
 
@@ -44,11 +47,11 @@ public class Box {
     }
 
     public float getX(){
-        return position.getX() - width/2;
+        return position.getX() - width/2 + offsetX;
     }
 
     public float getY(){
-        return position.getY() - height/2;
+        return position.getY() - height/2 + offsetY;
     }
 
     public float getWidth(){
@@ -65,6 +68,6 @@ public class Box {
     }
 
     public void draw(Batch batch){
-        batch.draw(texture, position.getX() - width/2, position.getY()-height/2, width, height);
+        batch.draw(texture, position.getX() - width/2 + offsetX, position.getY()-height/2 + offsetY, width, height);
     }
 }

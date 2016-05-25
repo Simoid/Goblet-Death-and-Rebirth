@@ -78,22 +78,22 @@ public class RoomParser {
                             room.addEnemy(enemyConstructor.createEnemy("king", (int)(bottomLeft.getX() + i * 15), (int)(bottomLeft.getY() + j * 15)));
                             break;
                         case BAT:
-                            room.addEnemy(enemyConstructor.createEnemy("bat", i * 15, j * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("bat", (int)(bottomLeft.getX() + i * 15), (int)(bottomLeft.getY() + j * 15)));
                             break;
                         case DATBOI:
-                            room.addEnemy(enemyConstructor.createEnemy("datboi", i * 15, j * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("datboi", (int)(bottomLeft.getX() + i * 15), (int)(bottomLeft.getY() + j * 15)));
                             break;
                         case MASK:
-                            room.addEnemy(enemyConstructor.createEnemy("mask", i * 15, j * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("mask", (int)(bottomLeft.getX() + i * 15), (int)(bottomLeft.getY() + j * 15)));
                             break;
                         case SPIDER:
-                            room.addEnemy(enemyConstructor.createEnemy("spider", i * 15, j * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("spider", (int)(bottomLeft.getX() + i * 15), (int)(bottomLeft.getY() + j * 15)));
                             break;
                         case PRISM:
-                            room.addEnemy(enemyConstructor.createEnemy("prism", i * 15, j * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("prism", (int)(bottomLeft.getX() + i * 15), (int)(bottomLeft.getY() + j * 15)));
                             break;
                         case EYE:
-                            room.addEnemy(enemyConstructor.createEnemy("eye", i * 15, j * 15));
+                            room.addEnemy(enemyConstructor.createEnemy("eye", (int)(bottomLeft.getX() + i * 15), (int)(bottomLeft.getY() + j * 15)));
                             break;
                     }
                 }

@@ -22,7 +22,7 @@ public abstract class GObstacles {
         this.position = new Position(posX, posY);
         this.width = boxWidth;
         this.height = boxHeight;
-        this.hitbox = new Box(position, boxWidth, boxHeight);
+        this.hitbox = new Box(position, boxWidth, boxHeight, 0, 0);
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
     }
 

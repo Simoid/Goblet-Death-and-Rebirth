@@ -17,7 +17,7 @@ public class Player extends Entity{
      * @param yPos Startpositionen i y-led.
      */
     public Player(int xPos, int yPos, float moveSpeed){
-        super(new Position(xPos, yPos), new Box(new Position(xPos, yPos), 11f, 19f));
+        super(new Position(xPos, yPos), new Box(new Position(xPos, yPos), 13f, 25f, 0, 0));
 
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_move_down.pack", 4, 1/5f, true));
         animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_move_up.pack", 4, 1/5f, true));
