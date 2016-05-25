@@ -1,7 +1,7 @@
 package com.goblet.entities;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.goblet.level.Box;
+import com.goblet.gameEngine.Box;
 import com.goblet.graphics.SpriteAnimation;
 import com.goblet.level.Position;
 
@@ -41,8 +41,13 @@ public abstract class Entity {
         this.hitbox = hitbox;
     }
 
+    /**
+     * Ritar ut karaktären.
+     * @param batch Batchen som ska ritas ut på.
+     */
     public void draw(Batch batch){
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
+        hitbox.draw(batch);
     }
 
     /**
@@ -86,6 +91,7 @@ public abstract class Entity {
         return position;
     }
 
+
     /**
      * Ändrar karaktärens position.
      */
@@ -93,4 +99,11 @@ public abstract class Entity {
         position = newPosition;
     }
 
+    /**
+     * Returnerar karaktärens hitbox.
+     * @return Karaktärens hitbox.
+     */
+    public Box getHitbox(){
+        return hitbox;
+    }
 }

@@ -1,6 +1,6 @@
 package com.goblet.entities;
 
-import com.goblet.level.Box;
+import com.goblet.gameEngine.Box;
 import com.goblet.level.Position;
 import com.goblet.graphics.SpriteAnimation;
 
@@ -29,6 +29,7 @@ public class Enemy extends Entity{
         movement = new Movement(movementSpeed);
         currentAnimation = animations.get(Direction.DOWN);
     }
+
 
     /**
      * Uppdaterar fienden och flyttar den mot spelaren.
@@ -59,7 +60,7 @@ public class Enemy extends Entity{
         movement.setMoveFlag(Direction.DOWN, moveDown);
         movement.setMoveFlag(Direction.UP, !moveDown);
         }
-        selectAnimation();
+        selectAnimation(player);
         this.update(deltaTime);
     }
 
@@ -70,8 +71,12 @@ public class Enemy extends Entity{
     /**
      * Väljer animation för fienden, beroende på i fall den attackerar, rör sig eller står still.
      */
-    public void selectAnimation(){
-        if (movement.getMoveFlag(Direction.DOWN) || movement.getMoveFlag(Direction.LEFT) || movement.getMoveFlag(Direction.UP) || movement.getMoveFlag(Direction.RIGHT)){
+    public void selectAnimation(Player player){
+        if (hitbox.collides(player.getHitbox())){
+            setAnimation(Direction.ATTACK);
+            timeSinceAnimationStart = 0;
+        }
+        else if (movement.getMoveFlag(Direction.DOWN) || movement.getMoveFlag(Direction.LEFT) || movement.getMoveFlag(Direction.UP) || movement.getMoveFlag(Direction.RIGHT)){
             setAnimation(Direction.DOWN);
         } else {
             setAnimation(Direction.ATTACK);

@@ -1,8 +1,10 @@
-package com.goblet.level;
+package com.goblet.gameEngine;
 
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.goblet.level.Position;
 
 /**
  * Created by Johan on 2016-05-24.
@@ -14,13 +16,15 @@ public class Box {
     private float height;
     private float offsetX;
     private float offsetY;
+    private Texture texture;
 
     public Box(Position position, float width, float height, float offsetX, float offsetY) {
-        this.position = new Position(position);
+        this.position = new Position(position.getX() - width/2, position.getY() - height/2);
         this.width = width;
         this.height = height;
         this.offsetX = offsetX;
         this.offsetY = offsetY;
+        texture = new Texture(Gdx.files.internal("assets/sprites/hitbox/hitbox.png"));
     }
 
     public boolean collides(Box otherBox){
@@ -40,7 +44,7 @@ public class Box {
     }
 
     public void updatePosition(Position playerPosition){
-        position.setPosition(playerPosition.getX() - offsetX, playerPosition.getY() - offsetY);
+        position.setPosition(playerPosition.getX() - offsetX - width/2, playerPosition.getY() - offsetY - height/2);
     }
 
     public float getX(){
@@ -62,5 +66,9 @@ public class Box {
     public boolean containsPosition(Position position){
         return position.getX() < this.position.getX() + this.width && position.getX() > this.position.getX() &&
                 position.getY() < this.position.getY() + this.height && position.getY() > this.position.getY();
+    }
+
+    public void draw(Batch batch){
+        batch.draw(texture, position.getX(), position.getY(), width, height);
     }
 }

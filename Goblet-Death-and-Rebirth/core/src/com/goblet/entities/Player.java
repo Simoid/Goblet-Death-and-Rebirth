@@ -1,6 +1,6 @@
 package com.goblet.entities;
 
-import com.goblet.level.Box;
+import com.goblet.gameEngine.Box;
 import com.goblet.graphics.SpriteAnimation;
 import com.goblet.level.Position;
 

@@ -1,7 +1,6 @@
 package com.goblet.gameEngine;
 
 import com.goblet.entities.Enemy;
-import com.goblet.level.Box;
 import com.goblet.level.Position;
 import com.goblet.level.SpawnPoint;
 
