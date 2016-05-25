@@ -55,7 +55,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 		player = new Player(0, 0,100f);
         Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
         Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
-		currentRoom = new Room(bottomLeft, topRight, null, null);
+		currentRoom = new Room(bottomLeft, topRight);
 
         enemies = new ArrayList<Entity>();
         enemies.add(testEnemy);

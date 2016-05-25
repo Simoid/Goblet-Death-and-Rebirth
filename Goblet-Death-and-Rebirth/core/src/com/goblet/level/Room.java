@@ -57,6 +57,7 @@ public class Room {
             currentWall.draw(batch);
         }
 
+
         for (GObstacles currentGObstacle : gObstacles){
             currentGObstacle.draw(batch);
         }
@@ -96,6 +97,7 @@ public class Room {
         this.bottomLeft = new Position(bottomLeft);
         this.topRight = new Position(topRight);
 
+        gObstacles = new ArrayList<GObstacles>();
         wallMap = new HashMap<Direction, WallObject>();
         roofMap = new HashMap<Direction, RoofObject>();
         tiles = new Tile[16][26];
