@@ -116,6 +116,10 @@ public class Room {
         }
     }
 
+    public void addEnemy(Enemy enemy){
+        enemies.add(enemy);
+    }
+
     public void closeDoors(){
         for (WallObject currentWall : wallMap.values()){
             currentWall.closeDoor();

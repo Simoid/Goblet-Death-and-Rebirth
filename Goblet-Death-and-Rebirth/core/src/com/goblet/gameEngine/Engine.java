@@ -196,4 +196,8 @@ public class Engine implements ApplicationListener, InputProcessor {
         Gdx.app.exit();
     }
 
+	public void setCurrentRoom(Room newRoom){
+		currentRoom = newRoom;
+	}
+
 }
