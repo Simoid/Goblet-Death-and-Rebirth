@@ -100,13 +100,13 @@ public class EnemyParser {
         return offY;
     }
 
-    public int getMoveAnimationSpeed(String enemy) throws FileNotFoundException{
-        int speed = je.getAsJsonObject().get(enemy).getAsJsonObject().get("moveAnimationSpeed").getAsInt();
+    public double getMoveAnimationSpeed(String enemy) throws FileNotFoundException{
+        double speed = je.getAsJsonObject().get(enemy).getAsJsonObject().get("moveAnimationSpeed").getAsDouble();
         return speed;
     }
 
-    public int getAttackAnimationSpeed(String enemy) throws FileNotFoundException{
-        int speed = je.getAsJsonObject().get(enemy).getAsJsonObject().get("attackAnimationSpeed").getAsInt();
+    public double getAttackAnimationSpeed(String enemy) throws FileNotFoundException{
+        double speed = je.getAsJsonObject().get(enemy).getAsJsonObject().get("attackAnimationSpeed").getAsDouble();
         return speed;
     }
 
