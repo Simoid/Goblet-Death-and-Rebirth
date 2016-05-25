@@ -30,18 +30,18 @@
     "attackAnimationSpeed" : 1
   },
   "king": {
-    "name": "bat",
+    "name": "king",
     "health": 10,
     "damage": 1,
-    "moveFrames" : 1,
-    "attackFrames" : 1,
-    "hitboxWidth": 1,
-    "hitboxHeight": 1,
-    "hitboxOffsetX": 1,
-    "hitboxOffsetY": 1,
+    "moveFrames" : 3,
+    "attackFrames" : 9,
+    "hitboxWidth": 75,
+    "hitboxHeight": 49,
+    "hitboxOffsetX": 40,
+    "hitboxOffsetY": 39,
     "attackType": 1,
     "moveType": 1,
-    "moveAnimationSpeed" : 1,
-    "attackAnimationSpeed" : 1
+    "moveAnimationSpeed" : 0.333,
+    "attackAnimationSpeed" : 0.111
   }
 }
