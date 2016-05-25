@@ -22,24 +22,15 @@ public class RoomParser {
     private int tilesHeight;
     private int tilesWidth;
     private SpriteBatch batch;
-    private Camera camera;
-    private Viewport viewPort;
     private EnemyConstructor enemyConstructor;
     private Position bottomLeft;
     private Position topRight;
-
-
 
     public RoomParser(String fileName, Position bottomLeft, Position topRight){
         this.bottomLeft = bottomLeft;
         this.topRight = topRight;
         enemyConstructor = new EnemyConstructor();
         batch = new SpriteBatch();
-        camera = new OrthographicCamera();
-        viewPort = new FitViewport(480, 270, camera);
-        viewPort.apply();
-        camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
-        batch.setProjectionMatrix(camera.combined);
 
         tilesHeight = 16;
         tilesWidth = 26;
