@@ -25,6 +25,10 @@ public abstract class GObstacles {
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
     }
 
+    public Box getHitbox(){
+        return hitbox;
+    }
+
     public void draw(Batch batch){
         batch.draw(region, position.getX(), position.getY());
     }
