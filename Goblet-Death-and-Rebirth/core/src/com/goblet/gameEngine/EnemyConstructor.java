@@ -17,7 +17,7 @@ public class EnemyConstructor {
         ep = new EnemyParser("enemies.json");
     }
 
-    public Enemy createEnemy(String name, int xPos, int yPos){
+    public Enemy createEnemy(String name, float xPos, float yPos){
         SpawnPoint enemySpawnPoint = sp.translate(name);
         String atlasLocation = name +"/"+ name;
         Enemy enemy;
