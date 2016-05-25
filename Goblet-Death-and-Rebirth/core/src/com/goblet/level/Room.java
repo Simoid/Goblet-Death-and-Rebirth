@@ -49,10 +49,10 @@ public class Room {
     }
 
     private void drawEntitites(Batch batch, Player player){
+        player.draw(batch);
         for (Enemy currentEnemy : enemies){
             currentEnemy.draw(batch);
         }
-        player.draw(batch);
     }
 
     private void drawRoof(Batch batch){
