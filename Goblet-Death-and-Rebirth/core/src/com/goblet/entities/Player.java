@@ -11,16 +11,13 @@ import com.goblet.level.Position;
  */
 public class Player extends Entity{
 
-    private Box box;
-
-
     /**
      * Konstruktorn för player.
      * @param xPos Startpositionen i x-led.
      * @param yPos Startpositionen i y-led.
      */
     public Player(int xPos, int yPos, float moveSpeed){
-        super(new Position(xPos, yPos));
+        super(new Position(xPos, yPos), new Box(new Position(xPos, yPos), 11f, 19f, 2f, 4f));
 
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_move_down.pack", 4, 1/5f, true));
         animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_move_up.pack", 4, 1/5f, true));
@@ -33,7 +30,6 @@ public class Player extends Entity{
         movement = new Movement(moveSpeed);
         timeSinceAnimationStart = 0;
 
-        box = new Box(position, 11f, 19f, 2f, 4f);
     }
 
     /**
@@ -90,17 +86,6 @@ public class Player extends Entity{
         } else {
             setAnimation(Direction.IDLE);
         }
-    }
-
-
-    /**
-     * Uppdaterar spelarens position och animation.
-     * @param deltaTime Hur lång tid som har passerat sedan senaste uppdateringen.
-     */
-    public void update(float deltaTime){
-        timeSinceAnimationStart += deltaTime;
-        position.setPosition(position.getX() + deltaTime*movement.getMovementX(), position.getY() + deltaTime*movement.getMovementY());
-        box.updatePosition(position);
     }
 
     /**
