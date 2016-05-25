@@ -1,5 +1,7 @@
 package com.goblet.entities;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.gameEngine.Box;
 import com.goblet.graphics.SpriteAnimation;
 import com.goblet.level.Position;
@@ -15,6 +17,14 @@ public class Player extends Entity{
 
     private int hP;
     private int maxHP;
+    private Box HorizontalAttack;
+    private Box VerticalAttack;
+    private SpriteAnimation attackRight;
+    private SpriteAnimation attackLeft;
+    private SpriteAnimation attackUp;
+    private SpriteAnimation attackDown;
+    private SpriteAnimation currentAttack;
+    private float timeSinceAttackAnimation;
 
     /**
      * Konstruktorn för player.
@@ -23,6 +33,13 @@ public class Player extends Entity{
      */
     public Player(int xPos, int yPos, float moveSpeed){
         super(new Position(xPos, yPos), new Box(new Position(xPos, yPos), 13f, 25f, 0, 0));
+        attackRight = new SpriteAnimation(spriteLocation + "mc/mc_attack_right.pack",4,1/9f,false);
+        attackLeft = new SpriteAnimation(spriteLocation + "mc/mc_attack_Left.pack",4,1/9f,false);
+        attackUp = new SpriteAnimation(spriteLocation + "mc/mc_attack_Up.pack",4,1/9f,false);
+        attackDown = new SpriteAnimation(spriteLocation + "mc/mc_attack_Down.pack",4,1/9f,false);
+
+        HorizontalAttack = new Box(this.position,27,18,0,0);
+        VerticalAttack = new Box(this.position,18,27,0,0);
 
         maxHP = 3;
         hP = maxHP;
@@ -36,10 +53,23 @@ public class Player extends Entity{
         currentAnimation = animations.get(Direction.IDLE);
 
         movement = new Movement(moveSpeed);
+        timeSinceAttackAnimation = 0;
         timeSinceAnimationStart = 0;
         timeSinceDamageTaken = 0;
 
     }
+
+    @Override
+    public void draw(Batch batch){
+
+        attackRight.draw(batch,position.getX() ,position.getY(),timeSinceAttackAnimation);
+        currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
+        //hitbox.draw(batch);
+        //hitbox.drawPosition(batch);
+    }
+
+
+    public Position getPosition(){ return this.position; }
 
     /**
      * Returnernar hur mycket hp spelaren har.
@@ -65,6 +95,10 @@ public class Player extends Entity{
             hP--;
             timeSinceDamageTaken = 0;
         }
+    }
+
+    public void attack(){
+        return;
     }
 
     /**
