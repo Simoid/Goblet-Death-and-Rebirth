@@ -50,9 +50,14 @@ public class EnemyParser {
         return dmg;
     }
 
-    public int getHitboxSize(String enemy) throws FileNotFoundException{
-        int hitbox = je.getAsJsonObject().get(enemy).getAsJsonObject().get("hitbox").getAsInt();
-        return hitbox;
+    public int getHitboxWidth(String enemy) throws FileNotFoundException{
+        int width = je.getAsJsonObject().get(enemy).getAsJsonObject().get("hitboxWidth").getAsInt();
+        return width;
+    }
+
+    public int getHitboxHeight(String enemy) throws FileNotFoundException{
+        int height = je.getAsJsonObject().get(enemy).getAsJsonObject().get("hitboxHeight").getAsInt();
+        return height;
     }
 
     public int getHiboxOrigin(String enemy) throws FileNotFoundException{
@@ -74,6 +79,28 @@ public class EnemyParser {
         int moveSpeed = je.getAsJsonObject().get(enemy).getAsJsonObject().get("moveSpeed").getAsInt();
         return moveSpeed;
     }
+
+    public int getMoveFrames(String enemy) throws FileNotFoundException{
+        int moveFrames = je.getAsJsonObject().get(enemy).getAsJsonObject().get("moveFrames").getAsInt();
+        return moveFrames;
+    }
+
+    public int getAttackFrames(String enemy) throws FileNotFoundException{
+        int attackFrames = je.getAsJsonObject().get(enemy).getAsJsonObject().get("attackFrames").getAsInt();
+        return attackFrames;
+    }
+
+    public int getHitboxOffsetX(String enemy) throws FileNotFoundException{
+        int offX = je.getAsJsonObject().get(enemy).getAsJsonObject().get("hitboxOffsetX").getAsInt();
+        return offX;
+    }
+
+    public int getHitboxOffsetY(String enemy) throws FileNotFoundException{
+        int offY = je.getAsJsonObject().get(enemy).getAsJsonObject().get("hitboxOffsetY").getAsInt();
+        return offY;
+    }
+
+
 
 }
 

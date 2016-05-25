@@ -1,5 +1,6 @@
 package com.goblet.entities;
 
+import com.goblet.level.Box;
 import com.goblet.level.Position;
 import com.goblet.graphics.SpriteAnimation;
 
@@ -11,14 +12,6 @@ import com.goblet.graphics.SpriteAnimation;
  * Created by Johan on 2016-05-24.
  */
 public class Enemy extends Entity{
-    String name;
-    int health;
-    int damage;
-    int moveSpeed;
-    String moveType;
-    String attackType;
-    int hitboxHeight;
-    int hitboxWidth;
 
 
     /**
@@ -31,9 +24,9 @@ public class Enemy extends Entity{
      * @param attackFrames Hur många frames fiendens animation har när den attackerar.
      * @param movementSpeed Fiendens rörelsehastighet.
      */
-    public Enemy(int xPos, int yPos, String atlasLocation, int idleFrames, int moveFrames, int attackFrames, float movementSpeed){
-        super(xPos, yPos);
-        animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + atlasLocation + "_idle.pack", idleFrames, 1.0f, 1.0f, 1f));
+    public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, int health, int damage, String moveType, String attackType,  Box hitBox){
+        super(position);
+        //animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + atlasLocation + "_idle.pack", idleFrames, 1.0f, 1.0f, 1f));
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames, 1.0f, 1.0f, 1/5f));
         animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", attackFrames, 1.0f, 1.0f, 1/5f));
         movement = new Movement(movementSpeed);
@@ -69,7 +62,7 @@ public class Enemy extends Entity{
         this.update(deltaTime);
     }
 
-    public void attack(String attackType, int damage,){
+    public void attack(String attackType, int damage){
 
     }
 

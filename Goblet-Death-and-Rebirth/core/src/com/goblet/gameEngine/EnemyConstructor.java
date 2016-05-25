@@ -1,8 +1,11 @@
 package com.goblet.gameEngine;
 
 import com.goblet.entities.Enemy;
+import com.goblet.level.Box;
 import com.goblet.level.Position;
 import com.goblet.level.SpawnPoint;
+
+import java.io.FileNotFoundException;
 
 /**
  * Created by Simoido on 2016-05-23.
@@ -16,25 +19,36 @@ public class EnemyConstructor {
     }
 
     public Enemy createEnemy(String name, int xPos, int yPos){
-        SpawnPoint enemy = sp.translate(name);
+        SpawnPoint enemySpawnPoint = sp.translate(name);
         String atlasLocation = name +"/"+ name;
-        Enemy newEnemy;
-        switch (enemy){
+        Enemy enemy;
+        Position position = new Position(xPos,yPos);
+        try{
+            enemy = new Enemy(position,atlasLocation,ep.getMoveFrames(name),ep.getAttackFrames(name),(float) ep.getMoveSpeed(name)
+                    ,ep.getHealth(name),ep.getDamage(name),ep.getMoveType(name),ep.getAttackType(name),new Box(position
+                    ,ep.getHitboxWidth(name),ep.getHitboxHeight(name),ep.getHitboxOffsetX(name),ep.getHitboxOffsetY(name)));
+        }catch (FileNotFoundException ex){
+
+        }
+
+        /*
+        switch (enemySpawnPoint){
             case KING:
-                newEnemy = new Enemy(xPos,yPos,atlasLocation,2,3,3,50f);
-                return newEnemy;
+                enemy.
+                return enemy;
             case DATBOI:
-                return newEnemy;
+                return enemy;
             case BAT:
-                return newEnemy;
+                return enemy;
             case MASK:
-                return newEnemy;
+                return enemy;
             case SPIDER:
-                return newEnemy;
+                return enemy;
             case PRISM:
-                return newEnemy;
+                return enemy;
             default:
                 return null;
         }
+        */
     }
 }
