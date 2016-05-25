@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.entities.Direction;
 import com.goblet.entities.Enemy;
+import com.goblet.entities.Entity;
 import com.goblet.entities.Player;
 import com.goblet.gameEngine.Box;
 
@@ -143,7 +144,57 @@ public class Room {
             }
         }
         player.update(deltaTime);
+        for (WallObject wall : wallMap.values()){
+            if (wall.getNoEntititesZone().collides(player.getHitbox())){
+
+            }
+        }
+        for (GObstacles obstacle : gObstacles){
+            if (obstacle.getHitbox().collides(player.getHitbox())){
+                fixMovement(obstacle, player);
+            }
+        }
         checkPosition(player.getPosition());
+    }
+
+    private void fixMovement(GObstacles obstacle, Entity entity){
+        if (entity.getHitbox().getMiddlePos().getX() - entity.getHitbox().getWidth()/2 < obstacle.getPosition().getX()){
+            if (entity.getHitbox().getMiddlePos().getY() - entity.getHitbox().getHeight()/2 < obstacle.getPosition().getY()){
+                if (Math.abs(entity.getHitbox().getMiddlePos().getX() + entity.getHitbox().getWidth()/2 - obstacle.getPosition().getX())
+                  > Math.abs(entity.getHitbox().getMiddlePos().getY() + entity.getHitbox().getHeight()/2 - obstacle.getPosition().getY())) {
+                    entity.setPosition(new Position(entity.getPosition().getX(), obstacle.getPosition().getY() - entity.getHitbox().getHeight()/2));
+                } else {
+                    entity.setPosition(new Position(obstacle.getPosition().getX() - entity.getHitbox().getWidth()/2, entity.getPosition().getY()));
+                }
+            } else {
+                if (Math.abs(entity.getHitbox().getMiddlePos().getX() + entity.getHitbox().getWidth()/2 - obstacle.getPosition().getX())
+                        > Math.abs(entity.getHitbox().getMiddlePos().getY() - entity.getHitbox().getHeight()/2 - (obstacle.getPosition().getY() + obstacle.getHeight()))) {
+                    entity.setPosition(new Position(entity.getPosition().getX(), obstacle.getPosition().getY() + obstacle.getHeight() + entity.getHitbox().getHeight()/2));
+                } else {
+                    entity.setPosition(new Position(obstacle.getPosition().getX() - entity.getHitbox().getWidth()/2, entity.getPosition().getY()));
+                }
+            }
+        } else {
+            if (entity.getHitbox().getMiddlePos().getY() - entity.getHitbox().getHeight()/2 < obstacle.getPosition().getY()){
+                if (Math.abs(entity.getHitbox().getMiddlePos().getX() - entity.getHitbox().getWidth()/2 - (obstacle.getPosition().getX() + obstacle.getWidth()))
+                        > Math.abs(entity.getHitbox().getMiddlePos().getY() + entity.getHitbox().getHeight()/2 - obstacle.getPosition().getY())) {
+                    System.out.println("1");
+                    entity.setPosition(new Position(entity.getPosition().getX(), obstacle.getPosition().getY() - entity.getHitbox().getHeight()/2));
+                } else {
+                    System.out.println("2");
+                    entity.setPosition(new Position(obstacle.getPosition().getX() + obstacle.getWidth() + entity.getHitbox().getWidth()/2, entity.getPosition().getY()));
+                }
+            } else {
+                if (Math.abs(entity.getHitbox().getMiddlePos().getX() - entity.getHitbox().getWidth()/2 - (obstacle.getPosition().getX() + obstacle.getWidth()))
+                        > Math.abs(entity.getHitbox().getMiddlePos().getY() - entity.getHitbox().getHeight()/2 - (obstacle.getPosition().getY() + obstacle.getHeight()))) {
+                    System.out.println("3");
+                    entity.setPosition(new Position(entity.getPosition().getX(), obstacle.getPosition().getY() + obstacle.getHeight() + entity.getHitbox().getHeight()/2));
+                } else {
+                    System.out.println("4");
+                    entity.setPosition(new Position(obstacle.getPosition().getX() + obstacle.getWidth() + entity.getHitbox().getWidth()/2, entity.getPosition().getY()));
+                }
+            }
+        }
     }
 
     private void checkPosition(Position position){

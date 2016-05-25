@@ -3,6 +3,7 @@ package com.goblet.level;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.entities.Direction;
+import com.goblet.gameEngine.Box;
 import com.goblet.level.Position;
 
 /**
@@ -18,14 +19,15 @@ public class WallObject {
     private Position topRight;
     private Boolean hasDoor;
     private Boolean doorOpened;
+    private Box noEntititesZone;
 
-    public WallObject(TextureRegion region, TextureRegion regionWithDoor, TextureRegion doorTexture, Direction dir, Position bottomLeft, Position topRight, boolean hasDoor){
+    public WallObject(TextureRegion region, TextureRegion regionWithDoor, TextureRegion doorTexture, Direction dir, Position bottomLeft, Position topRight, boolean hasDoor) {
         //Se vilken TextureRegion som ska användas i WallObject
         this.hasDoor = hasDoor;
         doorOpened = false;
-        if(hasDoor){
+        if (hasDoor) {
             this.region = regionWithDoor;
-        }else{
+        } else {
             this.region = region;
         }
         this.bottomLeft = bottomLeft;
@@ -33,9 +35,35 @@ public class WallObject {
         this.dir = dir;
         position = new Position(0, 0);
         setPosition();
-        if (hasDoor){
+        setNoEntititesZone(dir);
+        if (hasDoor) {
             door = new DoorObject(doorTexture, dir, bottomLeft, topRight, position);
         }
+    }
+
+    public Box getNoEntititesZone(){
+        return noEntititesZone;
+    }
+
+    private void setNoEntititesZone(Direction dir){
+        float offsetX = 0;
+        float offsetY = 0;
+        switch(dir){
+            case DOWN:
+                offsetY = -1;
+                break;
+            case LEFT:
+                offsetX = -1;
+                break;
+            case UP:
+                offsetY = 2;
+                break;
+            case RIGHT:
+                offsetX = 2;
+                break;
+        }
+
+        noEntititesZone = new Box(new Position(position.getX() + region.getRegionWidth() / 2, position.getY() + region.getRegionHeight() / 2), region.getRegionWidth(), region.getRegionHeight(), offsetX, offsetY);
     }
 
     private void setPosition(){
@@ -60,6 +88,7 @@ public class WallObject {
         if (hasDoor && !doorOpened){
             door.draw(batch);
         }
+        noEntititesZone.draw(batch);
     }
 
     public void closeDoor(){

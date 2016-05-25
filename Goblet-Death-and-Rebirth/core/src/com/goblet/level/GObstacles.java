@@ -22,8 +22,20 @@ public abstract class GObstacles {
         this.position = new Position(posX, posY);
         this.width = boxWidth;
         this.height = boxHeight;
-        this.hitbox = new Box(position, boxWidth, boxHeight, 0, 0);
+        this.hitbox = new Box(new Position(position.getX() + boxWidth/2, position.getY() + boxHeight/2), boxWidth, boxHeight, 0, 0);
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
+    }
+
+    public Position getPosition(){
+        return position;
+    }
+
+    public float getWidth(){
+        return width;
+    }
+
+    public float getHeight(){
+        return height;
     }
 
     public Box getHitbox(){
@@ -32,6 +44,7 @@ public abstract class GObstacles {
 
     public void draw(Batch batch){
         batch.draw(region, position.getX(), position.getY());
+        hitbox.draw(batch);
     }
 
 }

@@ -109,4 +109,5 @@ public abstract class Entity {
     public Box getHitbox(){
         return hitbox;
     }
+
 }
