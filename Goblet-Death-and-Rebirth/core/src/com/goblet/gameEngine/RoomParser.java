@@ -26,11 +26,13 @@ public class RoomParser {
     private Viewport viewPort;
     private EnemyConstructor enemyConstructor;
     private Position bottomLeft;
+    private Position topRight;
 
 
 
-    public RoomParser(String fileName, Position bottomLeft){
+    public RoomParser(String fileName, Position bottomLeft, Position topRight){
         this.bottomLeft = bottomLeft;
+        this.topRight = topRight;
         enemyConstructor = new EnemyConstructor();
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
@@ -53,8 +55,6 @@ public class RoomParser {
     public Room createRoom(String roomName){
         //TODO
 
-        Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
-        Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
         Room room = new Room(bottomLeft, topRight);
 
         TileType[][] roomTiles = getRoomTiles(roomName);
