@@ -29,7 +29,7 @@ public class Engine implements ApplicationListener, InputProcessor {
     private ArrayList<Entity> enemies;
 
     private Player player;
-    private Room startRoom;
+    private Room currentRoom;
 	private EnemyParser enemyParser;
     private Enemy testEnemy;
 
@@ -52,7 +52,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 
 
 		player = new Player(0, 0,100f);
-		startRoom = new Room(-camera.viewportWidth/2, -camera.viewportHeight/2, camera.viewportWidth/2, camera.viewportHeight/2);
+		currentRoom = new Room(-camera.viewportWidth/2, -camera.viewportHeight/2, camera.viewportWidth/2, camera.viewportHeight/2, null, null);
         testEnemy = new Enemy(50, 0, "king/king", 2, 3, 3,50f);
 
         enemies = new ArrayList<Entity>();
@@ -89,8 +89,7 @@ public class Engine implements ApplicationListener, InputProcessor {
      * @param deltaTime
      */
 	public void update(float deltaTime){
-        testEnemy.updateTowardsPlayer(player, deltaTime);
-		player.update(deltaTime);
+        currentRoom.updateEntities(deltaTime, player);
 	}
 
     /**
@@ -111,9 +110,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-        startRoom.draw(batch);
-        testEnemy.draw(batch);
-		player.draw(batch);
+        currentRoom.draw(batch, player);
 		batch.end();
 	}
 
@@ -131,13 +128,11 @@ public class Engine implements ApplicationListener, InputProcessor {
         if (keycode == Input.Keys.ESCAPE){
             quit();
         } else if (keycode == Input.Keys.SPACE) {
-            if (!startRoom.doorsAreOpen()) {
-                startRoom.openDoors();
+            if (!currentRoom.doorsAreOpen()) {
+                currentRoom.openDoors();
             } else {
-                startRoom.closeDoors();
+                currentRoom.closeDoors();
             }
-        } else if (keycode == Input.Keys.CONTROL_LEFT){
-            player.shouldDrawHitbox();
         }
 		player.keyPressed(keycode);
 		return true;
