@@ -46,7 +46,7 @@ public class Player extends Entity{
         currentAttackAnimation = animations.get(Direction.DOWN);
 
         for (SpriteAnimation anim : attackAnimations.values()){
-            anim.changeScale(2.0f);
+            anim.changeScale(1.0f);
         }
 
         HorizontalAttack = new Box(this.position,27*2.0f,18*2.0f,0,0);
@@ -75,7 +75,7 @@ public class Player extends Entity{
     @Override
     public void draw(Batch batch){
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
-        if (attackFlag){
+        if (attackFlag && timeSinceAttackAnimation < 6/9f){
             currentAttackAnimation.draw(batch, attackPosition.getX() - currentAttackAnimation.getSpriteWidth()/2, attackPosition.getY() - currentAttackAnimation.getSpriteHeight()/2, timeSinceAttackAnimation);
         }
     }
@@ -96,7 +96,7 @@ public class Player extends Entity{
             attackFlag = true;
         }
         selectAnimation();
-        if (timeSinceAttackAnimation >= 5/9f){
+        if (timeSinceAttackAnimation >= 1f){
             attackFlag = false;
             timeSinceAttackAnimation = 0;
         }
@@ -207,7 +207,7 @@ public class Player extends Entity{
         Direction dir = Direction.keyCodeTranslate(keycode);
         if (dir == Direction.ATTACK){
             keepAttacking = true;
-        } else if (!movement.getMoveFlag(dir)){
+        } else if (dir != Direction.IDLE && !movement.getMoveFlag(dir)){
             movement.setMoveFlag(dir, true);
         }
     }
@@ -240,14 +240,14 @@ public class Player extends Entity{
      */
     @Override
     protected void setAnimation(Direction dir){
-        if (!attackFlag) {
+        if (!attackFlag || timeSinceAttackAnimation >= 6/9f) {
             currentAttackDirection = dir;
         }
         if (currentAnimation != animations.get(dir)) {
             currentAnimation = animations.get(dir);
             timeSinceAnimationStart = 0;
         }
-        if (!attackFlag){
+        if (!attackFlag || timeSinceAttackAnimation >= 6/9f){
             currentAttackAnimation = attackAnimations.get(dir);
         }
     }
@@ -261,7 +261,7 @@ public class Player extends Entity{
         Direction dir = Direction.keyCodeTranslate(keycode);
         if (dir == Direction.ATTACK){
             keepAttacking = false;
-        } else if (movement.getMoveFlag(dir)){
+        } else if (dir != Direction.IDLE && movement.getMoveFlag(dir)){
             movement.setMoveFlag(dir, false);
         }
     }
