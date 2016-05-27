@@ -1,0 +1,33 @@
+
+datboi_walk.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0002
+  rotate: false
+  xy: 1, 1
+  size: 29, 38
+  orig: 29, 38
+  offset: 0, 0
+  index: -1
+0000
+  rotate: false
+  xy: 1, 1
+  size: 29, 38
+  orig: 29, 38
+  offset: 0, 0
+  index: -1
+0001
+  rotate: false
+  xy: 32, 1
+  size: 29, 38
+  orig: 29, 38
+  offset: 0, 0
+  index: -1
+0003
+  rotate: false
+  xy: 63, 1
+  size: 29, 38
+  orig: 29, 38
+  offset: 0, 0
+  index: -1

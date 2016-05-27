@@ -33,6 +33,8 @@ public enum Direction {
                 return Direction.UP;
             case Input.Keys.S:
                 return Direction.DOWN;
+            case Input.Keys.Z:
+                return Direction.ATTACK;
             default:
                 return Direction.IDLE;
         }

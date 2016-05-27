@@ -36,9 +36,9 @@ public class Player extends Entity{
     public Player(int xPos, int yPos, float moveSpeed){
         super(new Position(xPos, yPos), new Box(new Position(xPos, yPos), 13f, 25f, 0, 0));
         attackRight = new SpriteAnimation(spriteLocation + "mc/mc_attack_right.pack",4,1/9f,false);
-        attackLeft = new SpriteAnimation(spriteLocation + "mc/mc_attack_Left.pack",4,1/9f,false);
-        attackUp = new SpriteAnimation(spriteLocation + "mc/mc_attack_Up.pack",4,1/9f,false);
-        attackDown = new SpriteAnimation(spriteLocation + "mc/mc_attack_Down.pack",4,1/9f,false);
+        attackLeft = new SpriteAnimation(spriteLocation + "mc/mc_attack_left.pack",4,1/9f,false);
+        attackUp = new SpriteAnimation(spriteLocation + "mc/mc_attack_up.pack",4,1/9f,false);
+        attackDown = new SpriteAnimation(spriteLocation + "mc/mc_attack_down.pack",4,1/9f,false);
 
         HorizontalAttack = new Box(this.position,27,18,0,0);
         VerticalAttack = new Box(this.position,18,27,0,0);
@@ -83,6 +83,7 @@ public class Player extends Entity{
         timeSinceAnimationStart += deltaTime;
         timeSinceDamageTaken += deltaTime;
         timeSinceAttackAnimation += deltaTime;
+        selectAnimation();
         if (timeSinceAttackAnimation > 1){
             attackFlag = false;
         }
@@ -157,7 +158,6 @@ public class Player extends Entity{
         }
         if (!movement.getMoveFlag(dir)){
             movement.setMoveFlag(dir, true);
-            selectAnimation();
         }
     }
 
@@ -193,7 +193,6 @@ public class Player extends Entity{
         }
         if (movement.getMoveFlag(dir)){
             movement.setMoveFlag(dir, false);
-            selectAnimation();
         }
     }
 

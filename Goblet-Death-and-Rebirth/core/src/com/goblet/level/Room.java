@@ -172,23 +172,27 @@ public class Room {
         Direction dir = wall.getDir();
         switch (dir){
             case LEFT:
-                entity.setPosition(new Position(wall.getNoEntititesZone().getX() + wall.getNoEntititesZone().getWidth() + entity.getHitbox().getWidth()/2, entity.getPosition().getY()));
+                entity.setPosition(new Position(wall.getNoEntititesZone().getX() + wall.getNoEntititesZone().getWidth() + entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY()));
                 break;
             case RIGHT:
-                entity.setPosition(new Position(wall.getNoEntititesZone().getX() - entity.getHitbox().getWidth()/2, entity.getPosition().getY()));
+                entity.setPosition(new Position(wall.getNoEntititesZone().getX() - entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY()));
                 break;
             case UP:
-                entity.setPosition(new Position(entity.getPosition().getX(), wall.getNoEntititesZone().getY() - entity.getHitbox().getHeight()/2));
+                entity.setPosition(new Position(entity.getPosition().getX(), wall.getNoEntititesZone().getY() - entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY()));
                 break;
             case DOWN:
-                entity.setPosition(new Position(entity.getPosition().getX(), wall.getNoEntititesZone().getY() + wall.getNoEntititesZone().getHeight() + entity.getHitbox().getHeight()/2));
+                entity.setPosition(new Position(entity.getPosition().getX(), wall.getNoEntititesZone().getY() + wall.getNoEntititesZone().getHeight() + entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY()));
                 break;
 
         }
     }
 
+    /**
+     * Metoden tittar på en entity och en GObstacle som har kolliderat, och räknar ut var entityn ska placeras.
+     * @param obstacle GObstaclet som kolliderade.
+     * @param entity Entityn som kolliderade.
+     */
     private void fixMovementGObstacle(GObstacles obstacle, Entity entity){
-        System.out.println(entity);
         if (entity.getHitbox().getX()  < obstacle.getPosition().getX()){
             if (entity.getHitbox().getY() < obstacle.getPosition().getY()){
                 if (Math.abs(entity.getHitbox().getX() + entity.getHitbox().getWidth() - obstacle.getPosition().getX())

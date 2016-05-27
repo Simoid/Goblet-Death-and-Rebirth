@@ -21,7 +21,6 @@ public class Position {
     public Position(float xPos, float yPos){
         this.xPos = xPos;
         this.yPos = yPos;
-        texture = new Texture(Gdx.files.internal("assets/sprites/hitbox/position.png"));
     }
 
     /**
@@ -31,7 +30,6 @@ public class Position {
     public Position(Position position){
         xPos = position.getX();
         yPos = position.getY();
-        texture = new Texture(Gdx.files.internal("assets/sprites/hitbox/position.png"));
     }
 
     /**
@@ -84,10 +82,6 @@ public class Position {
 
     public float yDistance(float y){
         return (float) Math.abs(yPos - y);
-    }
-
-    public void draw(Batch batch){
-        batch.draw(texture, xPos, yPos, 1.0f, 1.0f);
     }
 
 }
