@@ -136,6 +136,7 @@ public class Engine implements ApplicationListener, InputProcessor {
         currentRoom.draw(batch, player);
         ui.draw(batch, player);
 		batch.end();
+		System.out.println("FPS: " + Gdx.graphics.getFramesPerSecond());
 	}
 
 

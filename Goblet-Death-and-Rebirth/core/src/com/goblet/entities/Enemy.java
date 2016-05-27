@@ -46,7 +46,7 @@ public class Enemy extends Entity{
             timeSinceAnimationStart += deltaTime;
             return;
         }
-        if (Math.abs(playerPosition.getX() - (position.getX())) < 20.0f){
+        if (Math.abs(player.getHitbox().getMiddlePos().getX() - (hitbox.getMiddlePos().getX())) < attackRange/Math.sqrt(2)){
             movement.setMoveFlag(Direction.LEFT, false);
             movement.setMoveFlag(Direction.RIGHT, false);
         }
@@ -55,7 +55,7 @@ public class Enemy extends Entity{
             movement.setMoveFlag(Direction.LEFT, moveLeft);
             movement.setMoveFlag(Direction.RIGHT, !moveLeft);
         }
-        if (Math.abs(playerPosition.getY() - (position.getY())) < 20.0f){
+        if (Math.abs(player.getHitbox().getMiddlePos().getY() - (hitbox.getMiddlePos().getY())) < attackRange/Math.sqrt(2)){
         movement.setMoveFlag(Direction.DOWN, false);
         movement.setMoveFlag(Direction.UP, false);
         }

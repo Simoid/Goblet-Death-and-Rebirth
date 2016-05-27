@@ -102,6 +102,14 @@ public abstract class Entity {
         position = newPosition;
     }
 
+
+    /**
+     * Ändrar karaktärens position.
+     */
+    public void setPosition(float x, float y){
+        position.setPosition(x, y);
+    }
+
     /**
      * Returnerar karaktärens hitbox.
      * @return Karaktärens hitbox.

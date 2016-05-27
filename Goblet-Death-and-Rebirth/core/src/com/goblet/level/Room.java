@@ -197,32 +197,32 @@ public class Room {
             if (entity.getHitbox().getY() < obstacle.getPosition().getY()){
                 if (Math.abs(entity.getHitbox().getX() + entity.getHitbox().getWidth() - obstacle.getPosition().getX())
                   > Math.abs(entity.getHitbox().getY() + entity.getHitbox().getHeight() - obstacle.getPosition().getY())) {
-                    entity.setPosition(new Position(entity.getPosition().getX(), obstacle.getPosition().getY() - entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY()));
+                    entity.setPosition(entity.getPosition().getX(), obstacle.getPosition().getY() - entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY());
                 } else {
-                    entity.setPosition(new Position(obstacle.getPosition().getX() - entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY()));
+                    entity.setPosition(obstacle.getPosition().getX() - entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY());
                 }
             } else {
                 if (Math.abs(entity.getHitbox().getX() + entity.getHitbox().getWidth() - obstacle.getPosition().getX())
                         > Math.abs(entity.getHitbox().getY() - (obstacle.getPosition().getY() + obstacle.getHeight()))) {
-                    entity.setPosition(new Position(entity.getPosition().getX(), obstacle.getPosition().getY() + obstacle.getHeight() + entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY()));
+                    entity.setPosition(entity.getPosition().getX(), obstacle.getPosition().getY() + obstacle.getHeight() + entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY());
                 } else {
-                    entity.setPosition(new Position(obstacle.getPosition().getX() - entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY()));
+                    entity.setPosition(obstacle.getPosition().getX() - entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY());
                 }
             }
         } else {
             if (entity.getHitbox().getY() < obstacle.getPosition().getY()){
                 if (Math.abs(entity.getHitbox().getX() - (obstacle.getPosition().getX() + obstacle.getWidth()))
                         > Math.abs(entity.getHitbox().getY() + entity.getHitbox().getHeight() - obstacle.getPosition().getY())) {
-                    entity.setPosition(new Position(entity.getPosition().getX(), obstacle.getPosition().getY() - entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY()));
+                    entity.setPosition(entity.getPosition().getX(), obstacle.getPosition().getY() - entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY());
                 } else {
-                    entity.setPosition(new Position(obstacle.getPosition().getX() + obstacle.getWidth() + entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY()));
+                    entity.setPosition(obstacle.getPosition().getX() + obstacle.getWidth() + entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY());
                 }
             } else {
                 if (Math.abs(entity.getHitbox().getX()  - (obstacle.getPosition().getX() + obstacle.getWidth()))
                         > Math.abs(entity.getHitbox().getY() - (obstacle.getPosition().getY() + obstacle.getHeight()))) {
-                    entity.setPosition(new Position(entity.getPosition().getX(), obstacle.getPosition().getY() + obstacle.getHeight() + entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY()));
+                    entity.setPosition(entity.getPosition().getX(), obstacle.getPosition().getY() + obstacle.getHeight() + entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY());
                 } else {
-                    entity.setPosition(new Position(obstacle.getPosition().getX() + obstacle.getWidth() + entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY()));
+                    entity.setPosition(obstacle.getPosition().getX() + obstacle.getWidth() + entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY());
                 }
             }
         }

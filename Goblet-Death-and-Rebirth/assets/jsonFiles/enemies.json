@@ -2,7 +2,7 @@
   "bat": {
     "name": "bat",
     "health": 10,
-    "attackrange": 1,
+    "attackrange": 25,
     "moveFrames" : 3,
     "attackFrames" : 3,
     "hitboxWidth": 40,
@@ -18,7 +18,7 @@
   "datboi": {
     "name": "bat",
     "health": 10,
-    "attackrange": 1,
+    "attackrange": 25,
     "moveFrames" : 3,
     "attackFrames" : 3,
     "hitboxWidth": 29,
