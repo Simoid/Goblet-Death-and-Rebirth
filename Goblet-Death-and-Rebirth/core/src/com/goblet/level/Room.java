@@ -12,6 +12,7 @@ import com.goblet.gameEngine.Box;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -136,7 +137,10 @@ public class Room {
     }
 
     public void updateEntities(float deltaTime, Player player){
-        for (Enemy currentEnemy : enemies){
+        Iterator<Enemy> enemyIterator = enemies.iterator();
+        Enemy currentEnemy;
+        while (enemyIterator.hasNext()){
+            currentEnemy = enemyIterator.next();
             currentEnemy.updateTowardsPlayer(player, deltaTime);
             for (WallObject wall : wallMap.values()){
                 if (wall.getNoEntititesZone().collides(currentEnemy.getHitbox())){
@@ -151,6 +155,10 @@ public class Room {
             checkPosition(currentEnemy.getPosition());
             if (currentEnemy.isAttacking() && player.getHitbox().getMiddlePos().distance(currentEnemy.getHitbox().getMiddlePos()) < currentEnemy.getAttackRange()){
                 player.takeDamage();
+            }
+            if (player.isAttacking() && player.getAttackHitbox().collides(currentEnemy.getHitbox())){
+                currentEnemy.die();
+                enemyIterator.remove();
             }
 
         }

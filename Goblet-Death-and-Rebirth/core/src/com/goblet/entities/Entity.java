@@ -53,7 +53,7 @@ public abstract class Entity {
     }
 
     /**
-     * Sätter animationen för spelaren.
+     * Sätter animationen för karaktären.
      * Om animationen redan är startad ska den inte startas om, så därför kollar metoden
      * först om animationen redan körs.
      * @param dir Vilken animation som ska spelas.
@@ -116,6 +116,16 @@ public abstract class Entity {
      */
     public Box getHitbox(){
         return hitbox;
+    }
+
+    /**
+     * Tar bort alla laddade bilder för karaktären.
+     */
+    public void die(){
+        for (SpriteAnimation anim : animations.values()){
+            anim.dispose();
+            hitbox.dispose();
+        }
     }
 
 }

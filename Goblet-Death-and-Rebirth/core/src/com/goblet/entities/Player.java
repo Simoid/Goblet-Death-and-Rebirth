@@ -7,6 +7,8 @@ import com.goblet.gameEngine.Box;
 import com.goblet.graphics.SpriteAnimation;
 import com.goblet.level.Position;
 
+import java.util.HashMap;
+
 /**
  * En klass för spelaren som objekt.
  * Innehåller spelarens position och dess animationer.
@@ -14,19 +16,19 @@ import com.goblet.level.Position;
  */
 public class Player extends Entity{
 
-    private final float damageCooldown = 2.0f;
+    private final float damageCooldown = 1.2f;
 
     private int hP;
     private int maxHP;
     private Box HorizontalAttack;
     private Box VerticalAttack;
-    private SpriteAnimation attackRight;
-    private SpriteAnimation attackLeft;
-    private SpriteAnimation attackUp;
-    private SpriteAnimation attackDown;
-    private SpriteAnimation currentAttack;
+    private HashMap<Direction, SpriteAnimation> attackAnimations;
     private float timeSinceAttackAnimation;
     private boolean attackFlag;
+    private boolean keepAttacking;
+    private Position attackPosition;
+    private Direction currentAttackDirection;
+    private SpriteAnimation currentAttackAnimation;
 
     /**
      * Konstruktorn för player.
@@ -35,13 +37,21 @@ public class Player extends Entity{
      */
     public Player(int xPos, int yPos, float moveSpeed){
         super(new Position(xPos, yPos), new Box(new Position(xPos, yPos), 13f, 25f, 0, 0));
-        attackRight = new SpriteAnimation(spriteLocation + "mc/mc_attack_right.pack",4,1/9f,false);
-        attackLeft = new SpriteAnimation(spriteLocation + "mc/mc_attack_left.pack",4,1/9f,false);
-        attackUp = new SpriteAnimation(spriteLocation + "mc/mc_attack_up.pack",4,1/9f,false);
-        attackDown = new SpriteAnimation(spriteLocation + "mc/mc_attack_down.pack",4,1/9f,false);
+        attackAnimations = new HashMap<Direction, SpriteAnimation>();
+        attackAnimations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc/mc_attack_right.pack",4,1/9f, false));
+        attackAnimations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc/mc_attack_left.pack",4,1/9f, false));
+        attackAnimations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_attack_up.pack",4,1/9f, false));
+        attackAnimations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_attack_down.pack",4,1/9f, false));
+        attackAnimations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc/mc_attack_down.pack",4,1/9f, false));
+        currentAttackAnimation = animations.get(Direction.DOWN);
 
-        HorizontalAttack = new Box(this.position,27,18,0,0);
-        VerticalAttack = new Box(this.position,18,27,0,0);
+        for (SpriteAnimation anim : attackAnimations.values()){
+            anim.changeScale(2.0f);
+        }
+
+        HorizontalAttack = new Box(this.position,27*2.0f,18*2.0f,0,0);
+        VerticalAttack = new Box(this.position,18*2.0f,27*2.0f,0,0);
+        attackPosition = new Position(0, 0);
 
         maxHP = 3;
         hP = maxHP;
@@ -53,6 +63,7 @@ public class Player extends Entity{
         animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc/mc_idle.pack", 2, 1f, true));
 
         currentAnimation = animations.get(Direction.IDLE);
+        currentAttackDirection = Direction.IDLE;
 
         movement = new Movement(moveSpeed);
         timeSinceAttackAnimation = 0;
@@ -63,14 +74,10 @@ public class Player extends Entity{
 
     @Override
     public void draw(Batch batch){
-
-        if (attackFlag) {
-            System.out.println("HEJ");
-            attackRight.draw(batch, position.getX(), position.getY(), timeSinceAttackAnimation);
-        }
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
-        //hitbox.draw(batch);
-        //hitbox.drawPosition(batch);
+        if (attackFlag){
+            currentAttackAnimation.draw(batch, attackPosition.getX() - currentAttackAnimation.getSpriteWidth()/2, attackPosition.getY() - currentAttackAnimation.getSpriteHeight()/2, timeSinceAttackAnimation);
+        }
     }
 
 
@@ -82,13 +89,61 @@ public class Player extends Entity{
     public void update(float deltaTime){
         timeSinceAnimationStart += deltaTime;
         timeSinceDamageTaken += deltaTime;
-        timeSinceAttackAnimation += deltaTime;
+        if (attackFlag) {
+            timeSinceAttackAnimation += deltaTime;
+        }
+        if (keepAttacking && timeSinceAttackAnimation == 0){
+            attackFlag = true;
+        }
         selectAnimation();
-        if (timeSinceAttackAnimation > 1){
+        if (timeSinceAttackAnimation >= 5/9f){
             attackFlag = false;
+            timeSinceAttackAnimation = 0;
         }
         position.setPosition(position.getX() + deltaTime*movement.getMovementX(), position.getY() + deltaTime*movement.getMovementY());
         hitbox.updatePosition(position);
+        if (attackFlag) {
+            updateAttackHitbox();
+        }
+    }
+
+    private void updateAttackHitbox(){
+        switch(currentAttackDirection){
+            default:
+            case IDLE:
+            case DOWN:
+                attackPosition.setPosition(position.getX(), position.getY() - currentAnimation.getSpriteHeight());
+                HorizontalAttack.updatePosition(attackPosition);
+                break;
+            case UP:
+                attackPosition.setPosition(position.getX(), position.getY() + currentAnimation.getSpriteHeight());
+                HorizontalAttack.updatePosition(attackPosition);
+                break;
+            case LEFT:
+                attackPosition.setPosition(position.getX() - currentAnimation.getSpriteWidth(), position.getY());
+                VerticalAttack.updatePosition(attackPosition);
+                break;
+            case RIGHT:
+                attackPosition.setPosition(position.getX() + currentAnimation.getSpriteWidth(), position.getY());
+                VerticalAttack.updatePosition(attackPosition);
+                break;
+        }
+    }
+
+    public Box getAttackHitbox(){
+        switch(currentAttackDirection){
+            default:
+            case DOWN:
+            case UP:
+                return HorizontalAttack;
+            case RIGHT:
+            case LEFT:
+                return VerticalAttack;
+        }
+    }
+
+    public boolean isAttacking(){
+        return attackFlag;
     }
 
     public Position getPosition(){ return this.position; }
@@ -150,13 +205,9 @@ public class Player extends Entity{
      */
     public void keyPressed(int keycode){
         Direction dir = Direction.keyCodeTranslate(keycode);
-        if (dir == Direction.IDLE){
-            return;
-        }
-        if (keycode == Input.Keys.Z){
-            attackFlag = true;
-        }
-        if (!movement.getMoveFlag(dir)){
+        if (dir == Direction.ATTACK){
+            keepAttacking = true;
+        } else if (!movement.getMoveFlag(dir)){
             movement.setMoveFlag(dir, true);
         }
     }
@@ -182,16 +233,35 @@ public class Player extends Entity{
     }
 
     /**
+     * Sätter animationen för spelaren.
+     * Om animationen redan är startad ska den inte startas om, så därför kollar metoden
+     * först om animationen redan körs.
+     * @param dir Vilken animation som ska spelas.
+     */
+    @Override
+    protected void setAnimation(Direction dir){
+        if (!attackFlag) {
+            currentAttackDirection = dir;
+        }
+        if (currentAnimation != animations.get(dir)) {
+            currentAnimation = animations.get(dir);
+            timeSinceAnimationStart = 0;
+        }
+        if (!attackFlag){
+            currentAttackAnimation = attackAnimations.get(dir);
+        }
+    }
+
+    /**
      * Metod som anropas när en tangent släpps.
      * Om spelaren rör sig åt det hållet som tangenten pekar åt så slutar spelaren att röra sig åt det hållet.
      * @param keycode Tangenten som släpptes.
      */
     public void keyReleased(int keycode){
         Direction dir = Direction.keyCodeTranslate(keycode);
-        if (dir == Direction.IDLE){
-            return;
-        }
-        if (movement.getMoveFlag(dir)){
+        if (dir == Direction.ATTACK){
+            keepAttacking = false;
+        } else if (movement.getMoveFlag(dir)){
             movement.setMoveFlag(dir, false);
         }
     }
