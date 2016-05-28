@@ -14,6 +14,6 @@ För att bygga projektet behövs intellij och gradle.
 Ladda ned projektet som zip och extrahera eller använd git clone/git pull. Gå sedan in i mappen *Goblet-Death-and-Rebirth/Goblet-Death-and-Rebirth/* via terminalen, och använd kommandot **./gradlew idea**. Öppna intellij och importera mappen som du precis var i som ett gradleprojekt (*File > New > Project from existing sources* och sedan *Import project from external model > Gradle*). För att starta spelet används filen desktopLauncer.java som finns i *desktop/src/com.goblet.game.desktop*.
 
 ##Hur man spelar:
-Använd piltangenterna för att röra på huvudkaraktären.
-Attackera med Z, du attackerar i den riktningen som spelaren rör sig åt då du trycker på Z, men riktningen hålls till samma även om du byter riktning när du väl har börjat attackera.
+Använd piltangenterna för att röra på huvudkaraktären.  
+Attackera med Z, du attackerar i den riktningen som spelaren rör sig åt då du trycker på Z, men riktningen hålls till samma även om du byter riktning när du väl har börjat attackera.  
 Se upp för snabba spindlar!
