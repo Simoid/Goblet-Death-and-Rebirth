@@ -72,8 +72,8 @@
     "moveSpeed" : 0,
     "moveAnimationSpeed" : 0.1,
     "attackAnimationSpeed" : 0.1,
-    "maxHealth" : 250,
-    "damageTaken" : 250
+    "maxHealth" : 100,
+    "damageTaken" : 50
   },
   "eye": {
     "name": "eye",
@@ -88,11 +88,11 @@
     "attackType": "movement",
     "moveType": 1,
     "flight": true,
-    "moveSpeed" : 50,
+    "moveSpeed" : 60,
     "moveAnimationSpeed" : 0.333,
     "attackAnimationSpeed" : 0.111,
-    "maxHealth" : 250,
-    "damageTaken" : 35
+    "maxHealth" : 240,
+    "damageTaken" : 60
   },
   "prism": {
     "name": "prism",
@@ -107,11 +107,11 @@
     "attackType": "movement",
     "moveType": 1,
     "flight": true,
-    "moveSpeed" : 50,
+    "moveSpeed" : 20,
     "moveAnimationSpeed" : 0.333,
     "attackAnimationSpeed" : 0.111,
     "maxHealth" : 250,
-    "damageTaken" : 35
+    "damageTaken" : 50
   },
   "spider": {
     "name": "spider",
@@ -126,10 +126,10 @@
     "attackType": "movement",
     "moveType": 1,
     "flight": false,
-    "moveSpeed" : 50,
-    "moveAnimationSpeed" : 0.333,
-    "attackAnimationSpeed" : 0.111,
-    "maxHealth" : 100,
-    "damageTaken" : 35
+    "moveSpeed" : 120,
+    "moveAnimationSpeed" : 0.5,
+    "attackAnimationSpeed" : 0.5,
+    "maxHealth" : 50,
+    "damageTaken" : 50
   }
 }
