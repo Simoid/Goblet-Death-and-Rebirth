@@ -49,8 +49,8 @@ public class Player extends Entity{
             anim.changeScale(1.0f);
         }
 
-        HorizontalAttack = new Box(this.position,27*2.0f,18*2.0f,0,0);
-        VerticalAttack = new Box(this.position,18*2.0f,27*2.0f,0,0);
+        HorizontalAttack = new Box(this.position,27,18,0,0);
+        VerticalAttack = new Box(this.position,18,27,0,0);
         attackPosition = new Position(0, 0);
 
         maxHP = 3;
@@ -135,15 +135,15 @@ public class Player extends Entity{
             default:
             case DOWN:
             case UP:
-                return HorizontalAttack;
+                return VerticalAttack;
             case RIGHT:
             case LEFT:
-                return VerticalAttack;
+                return HorizontalAttack;
         }
     }
 
     public boolean isAttacking(){
-        return attackFlag;
+        return timeSinceAttackAnimation >= 2/9f && timeSinceAttackAnimation <= 5/9f;
     }
 
     public Position getPosition(){ return this.position; }
@@ -172,10 +172,6 @@ public class Player extends Entity{
             hP--;
             timeSinceDamageTaken = 0;
         }
-    }
-
-    public void attack(){
-        return;
     }
 
     /**

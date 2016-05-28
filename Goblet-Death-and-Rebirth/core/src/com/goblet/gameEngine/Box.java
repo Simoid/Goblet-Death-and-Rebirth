@@ -106,7 +106,7 @@ public class Box {
      * @param batch
      */
     public void draw(Batch batch){
-        //batch.draw(blueSquare, this.getX(), this.getY(), width, height);
+        batch.draw(blueSquare, this.getX(), this.getY(), width, height);
     }
 
     /**

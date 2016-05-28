@@ -160,6 +160,9 @@ public class Room {
                 currentEnemy.takeDamage();
                 if (currentEnemy.isDead()) {
                     enemyIterator.remove();
+                    if (enemies.size() == 0){
+                        openDoors();
+                    }
                 }
             }
 
