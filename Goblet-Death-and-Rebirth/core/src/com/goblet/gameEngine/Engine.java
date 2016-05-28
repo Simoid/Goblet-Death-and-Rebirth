@@ -125,9 +125,9 @@ public class Engine implements ApplicationListener, InputProcessor {
                 currentRoom = floor.getNextRoom(currentRoom.nextRoom());
                 currentRoom.playerEnter(dir, player);
                 lastRoom.clearNextRoom();
-                changeRoom -= 2;
+                changeRoom -= 5;
             } else {
-                changeRoom -= 2;
+                changeRoom -= 5;
             }
 
 			timeCounter = 0f;
