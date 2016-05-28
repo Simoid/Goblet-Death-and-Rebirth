@@ -63,8 +63,8 @@ public class Engine implements ApplicationListener, InputProcessor {
         Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
 
         enemyParser = new EnemyParser("enemies.json");
-        roomParser = new RoomParser("rooms.json", bottomLeft, topRight, 2);
-        floor = new Floor(5, roomParser);
+        roomParser = new RoomParser("rooms.json", bottomLeft, topRight, 7);
+        floor = new Floor(15, roomParser);
         currentRoom = floor.getFirstRoom();
 
 		player = new Player(0, 0,100f);
@@ -78,11 +78,6 @@ public class Engine implements ApplicationListener, InputProcessor {
 
 		Gdx.input.setInputProcessor(this);
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-		try {
-			System.out.println(enemyParser.getName("bat"));
-		}catch (FileNotFoundException ex){
-
-		}
 	}
 
 	@Override

@@ -65,8 +65,6 @@ public class DoorObject {
 
     public void draw(Batch batch){
         batch.draw(region, position.getX(), position.getY(), region.getRegionWidth(), region.getRegionHeight());
-        allowedZone.draw(batch);
-        nextRoomZone.draw(batch);
     }
 
 }

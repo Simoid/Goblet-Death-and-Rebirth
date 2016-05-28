@@ -3,7 +3,6 @@ package com.goblet.level;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.entities.Direction;
-import com.sun.glass.ui.SystemClipboard;
 
 /**
  * Created by Johan on 2016-05-24.
@@ -26,13 +25,17 @@ public class RoofObject {
         setPosition();
     }
 
+    public Direction getDirection(){
+        return dir;
+    }
+
     private void setPosition(){
         switch(dir){
             case LEFT:
-                position.setPosition(bottomLeft.getX(), bottomLeft.getY());
+                position.setPosition(bottomLeft.getX() + 1, bottomLeft.getY());
                 break;
             case RIGHT:
-                position.setPosition(topRight.getX() - region.getRegionWidth(), bottomLeft.getY());
+                position.setPosition(topRight.getX() - region.getRegionWidth() - 1, bottomLeft.getY());
                 break;
         }
     }

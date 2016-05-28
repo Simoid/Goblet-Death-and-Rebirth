@@ -75,18 +75,23 @@ public class WallObject {
         noEntititesZone = new Box(new Position(position.getX() + region.getRegionWidth() / 2, position.getY() + region.getRegionHeight() / 2), region.getRegionWidth(), region.getRegionHeight(), offsetX, offsetY);
     }
 
+    public boolean hasDoor(){
+        return hasDoor;
+    }
+
     private void setEnterPosition(Direction dir) {
         switch (dir) {
             case DOWN:
-                enterPosition = new Position(0, bottomLeft.getY() + region.getRegionHeight() + 60);
+                enterPosition = new Position(0, bottomLeft.getY() + region.getRegionHeight() + 5);
+                break;
             case LEFT:
-                enterPosition = new Position(bottomLeft.getX() + region.getRegionWidth() + 60, 0);
+                enterPosition = new Position(bottomLeft.getX() + region.getRegionWidth() + 5, 0);
                 break;
             case UP:
-                enterPosition = new Position(0, topRight.getY() - region.getRegionHeight() - 60);
+                enterPosition = new Position(0, topRight.getY() - region.getRegionHeight() - 5);
                 break;
             case RIGHT:
-                enterPosition = new Position(topRight.getX() - region.getRegionWidth() - 60, 0);
+                enterPosition = new Position(topRight.getX() - region.getRegionWidth() - 5, 0);
                 break;
         }
     }
@@ -117,7 +122,6 @@ public class WallObject {
         if (hasDoor && !doorOpened){
             door.draw(batch);
         }
-        //noEntititesZone.draw(batch);
     }
 
     public Box getNextRoomZone(){
@@ -132,6 +136,7 @@ public class WallObject {
         this.region = regionWithDoor;
         door = new DoorObject(doorTexture, dir, bottomLeft, topRight, position);
         setNoEntititesZone(dir);
+        setPosition();
     }
 
     public Box getDoorZone(){

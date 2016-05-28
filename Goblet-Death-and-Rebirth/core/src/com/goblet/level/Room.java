@@ -85,7 +85,9 @@ public class Room {
      */
     private void drawRoof(Batch batch){
         for (RoofObject currentRoof : roofMap.values()){
-            currentRoof.draw(batch);
+            if (wallMap.get(currentRoof.getDirection()).hasDoor()) {
+                currentRoof.draw(batch);
+            }
         }
     }
 
@@ -143,6 +145,7 @@ public class Room {
 
     public void playerEnter(Direction dir, Player player){
         dir = Direction.opposite(dir);
+        System.out.println(dir);
         player.setPosition(wallMap.get(dir).getEnterPosition());
     }
 
@@ -175,7 +178,7 @@ public class Room {
         }
         player.update(deltaTime);
         for (WallObject wall : wallMap.values()){
-            if (wall.getNoEntititesZone().collides(player.getHitbox()) && (wall.getDoorZone() != null && !wall.getDoorZone().collides(player.getHitbox()) || wall.doorIsClosed())){
+            if (wall.getNoEntititesZone().collides(player.getHitbox()) && (!wall.hasDoor() || (wall.getDoorZone() != null && !wall.getDoorZone().collides(player.getHitbox())) || wall.doorIsClosed())){
                 fixMovementWall(wall, player);
             } else if (wall.getNextRoomZone() != null && wall.getNextRoomZone().collides(player.getHitbox())){
                 nextRoom = wall.getDir();

@@ -3,6 +3,7 @@ package com.goblet.level;
 import com.goblet.entities.Direction;
 import com.goblet.gameEngine.RoomParser;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -14,6 +15,7 @@ public class Floor {
     private FloorNode startNode;
     private RoomParser roomParser;
     private FloorNode currentNode;
+    private ArrayList<FloorNode> nodes;
 
     public Room getNextRoom(Direction dir){
         currentNode = currentNode.getConnection(dir);
@@ -23,6 +25,7 @@ public class Floor {
     public Floor(int numberOfRooms, RoomParser roomParser){
         this.roomParser = roomParser;
         this.numberOfRooms = numberOfRooms;
+        nodes = new ArrayList<FloorNode>();
         generateRooms();
     }
 
@@ -36,7 +39,7 @@ public class Floor {
         startNode = new FloorNode(x, y, roomParser, false);
         currentNode = startNode;
         Random randomizer = new Random();
-        FloorNode lastNode = startNode;
+        nodes.add(startNode);
         for (int rooms  = 1; rooms <= numberOfRooms; rooms++){
             switch(randomizer.nextInt(4)) {
                 case 0:
@@ -52,26 +55,34 @@ public class Floor {
                     y++;
                     break;
             }
-            System.out.println(positionBusy(x, y, lastNode));
-            System.out.println("x: " + x + ", y: " + y);
-            if (positionBusy(x, y, lastNode)){
+            if (positionBusy(x, y)){
                 rooms--;
             } else {
-                //System.out.println("x: " + x + ", y: " + y);
-                lastNode = lastNode.createNeighbour(x, y);
+                createNode(x, y);
             }
 
         }
     }
 
-    private boolean positionBusy(int x, int  y, FloorNode lastNode){
-        for (FloorNode neighbour : lastNode.getNeighbours()){
-            if (neighbour.getX() == x && neighbour.getX() == y){
+    private boolean positionBusy(int x, int  y){
+        for (FloorNode node : startNode.getAllNodes()){
+            if (node.getX() == x && node.getY() == y){
                 return true;
             }
         }
         return false;
     }
 
+    private void createNode(int x, int y){
+        FloorNode newNode = new FloorNode(x, y, roomParser, true);
+        System.out.println(nodes);
+        for (FloorNode node : nodes){
+            if (node.isNeighbourWith(newNode)){
+                node.addNeighbour(newNode);
+                newNode.addNeighbour(node);
+            }
+        }
+        nodes.add(newNode);
+    }
 
 }

@@ -3,6 +3,8 @@ package com.goblet.level;
 import com.goblet.entities.Direction;
 import com.goblet.gameEngine.RoomParser;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -50,6 +52,52 @@ public class FloorNode {
         return neighbours.values();
     }
 
+    public ArrayList<FloorNode> getAllNodes(){
+        ArrayList<FloorNode> returnCollection = new ArrayList<FloorNode>();
+        returnCollection.add(this);
+        for (FloorNode node : neighbours.values()){
+            if (node != null) {
+                returnCollection.add(node);
+                returnCollection.addAll(node.getAllNeighboursExcluding(returnCollection));
+            }
+        }
+        return returnCollection;
+    }
+
+    public ArrayList<FloorNode> getAllNeighboursExcluding(ArrayList<FloorNode> excludeCollection){
+        ArrayList<FloorNode> returnCollection = excludeCollection;
+        for (FloorNode node : neighbours.values()){
+            boolean nodeChecked = false;
+            for (FloorNode excludeNode : returnCollection){
+                if (node == excludeNode){
+                    nodeChecked = true;
+                }
+            }
+            if (node != null && !nodeChecked) {
+                returnCollection.add(node);
+                returnCollection.addAll(node.getAllNeighboursExcluding(returnCollection));
+            }
+
+        }
+        return returnCollection;
+    }
+
+    public void addNeighbour(FloorNode otherNode){
+        if (otherNode.getX() - xPos == 1){
+            otherNode.setConnection(Direction.RIGHT, this);
+            this.setConnection(Direction.LEFT, otherNode);
+        } else if (xPos - otherNode.getX() == 1) {
+            otherNode.setConnection(Direction.LEFT, this);
+            this.setConnection(Direction.RIGHT, otherNode);
+        } else if (otherNode.getY() - yPos == 1){
+            otherNode.setConnection(Direction.UP, this);
+            this.setConnection(Direction.DOWN, otherNode);
+        } else if (yPos - otherNode.getY() == 1) {
+            otherNode.setConnection(Direction.DOWN, this);
+            this.setConnection(Direction.UP, otherNode);
+        }
+    }
+
     public FloorNode createNeighbour(int x, int y){
         FloorNode newNode = new FloorNode(x, y, roomParser, true);
         if (x - xPos == 1){
@@ -74,6 +122,11 @@ public class FloorNode {
 
     public Room getRoom(){
         return room;
+    }
+
+    @Override
+    public String toString(){
+        return "x: " + xPos + ", y: " + yPos;
     }
 
 
