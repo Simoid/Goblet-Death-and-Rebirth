@@ -108,23 +108,28 @@ public class Player extends Entity{
     }
 
     private void updateAttackHitbox(){
+        System.out.println("YO");
         switch(currentAttackDirection){
             default:
             case IDLE:
             case DOWN:
                 attackPosition.setPosition(position.getX(), position.getY() - currentAnimation.getSpriteHeight());
                 HorizontalAttack.updatePosition(attackPosition);
+                VerticalAttack.updatePosition(attackPosition);
                 break;
             case UP:
                 attackPosition.setPosition(position.getX(), position.getY() + currentAnimation.getSpriteHeight());
                 HorizontalAttack.updatePosition(attackPosition);
+                VerticalAttack.updatePosition(attackPosition);
                 break;
             case LEFT:
                 attackPosition.setPosition(position.getX() - currentAnimation.getSpriteWidth(), position.getY());
+                HorizontalAttack.updatePosition(attackPosition);
                 VerticalAttack.updatePosition(attackPosition);
                 break;
             case RIGHT:
                 attackPosition.setPosition(position.getX() + currentAnimation.getSpriteWidth(), position.getY());
+                HorizontalAttack.updatePosition(attackPosition);
                 VerticalAttack.updatePosition(attackPosition);
                 break;
         }
