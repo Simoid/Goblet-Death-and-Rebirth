@@ -95,6 +95,18 @@ public class WallObject {
         //noEntititesZone.draw(batch);
     }
 
+    public Box getNextRoomZone(){
+        return door.getNextRoomZone();
+    }
+
+    public Box getDoorZone(){
+        return door.getAllowedZone();
+    }
+
+    public boolean doorIsClosed(){
+        return !doorOpened;
+    }
+
     public void closeDoor(){
         doorOpened = false;
     }

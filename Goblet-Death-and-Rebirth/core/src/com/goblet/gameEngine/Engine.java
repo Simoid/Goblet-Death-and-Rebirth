@@ -113,6 +113,9 @@ public class Engine implements ApplicationListener, InputProcessor {
         // Uppdatera om det har gått tillräckligt lång tid sen senaste uppdateringen.
 		timeCounter += Gdx.graphics.getDeltaTime();
 		if (timeCounter > timeBetweenUpdates && !gameover){
+			if (currentRoom.nextRoom() != null){
+                System.out.println(currentRoom.nextRoom());
+            }
 			update(timeCounter);
 			timeCounter = 0f;
             if (player.getHP() <= 0){
