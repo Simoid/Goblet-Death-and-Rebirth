@@ -147,6 +147,7 @@ public class Room {
         dir = Direction.opposite(dir);
         System.out.println(dir);
         player.setPosition(wallMap.get(dir).getEnterPosition());
+        player.setInvincible();
     }
 
     public void updateEntities(float deltaTime, Player player){
@@ -161,7 +162,7 @@ public class Room {
                 }
             }
             for (GObstacles obstacle : gObstacles){
-                if (obstacle.getHitbox().collides(currentEnemy.getHitbox())){
+                if (!currentEnemy.canFly() && obstacle.getHitbox().collides(currentEnemy.getHitbox())){
                     fixMovementGObstacle(obstacle, currentEnemy);
                 }
             }

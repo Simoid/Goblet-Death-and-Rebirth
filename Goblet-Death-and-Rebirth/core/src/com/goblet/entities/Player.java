@@ -146,6 +146,10 @@ public class Player extends Entity{
         }
     }
 
+    public void setInvincible(){
+        timeSinceDamageTaken = 0;
+    }
+
     public Box getAttackHitbox(){
         switch(currentAttackDirection){
             default:

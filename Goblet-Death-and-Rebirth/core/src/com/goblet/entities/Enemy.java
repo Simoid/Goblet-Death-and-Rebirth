@@ -26,6 +26,7 @@ public class Enemy extends Entity{
     private boolean damageCooldown;
     private float damageCooldownCounter;
     private AttackType attackType;
+    private boolean flight;
 
     /**
      * Konstruktorn för fiendeklassen.
@@ -35,11 +36,12 @@ public class Enemy extends Entity{
      * @param movementSpeed Fiendens rörelsehastighet.
      */
     public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, int health, float attackRange, String moveType, AttackType attackType,  Box hitBox,
-                 float moveAnimationSpeed, float attackAnimationSpeed, float maxHealth, float damageTaken){
+                 float moveAnimationSpeed, float attackAnimationSpeed, float maxHealth, float damageTaken, boolean flight){
         super(position, hitBox);
         this.attackRange = attackRange;
         this.attackSpeed = attackAnimationSpeed * attackFrames;
         this.attackType = attackType;
+        this.flight = flight;
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames,  moveAnimationSpeed,true));
 
         if (attackType == AttackType.MELEEAREA) {
@@ -126,6 +128,10 @@ public class Enemy extends Entity{
                 timeSinceAnimationStart = 0;
             }
         }
+    }
+
+    public boolean canFly(){
+        return flight;
     }
 
     public void takeDamage(){

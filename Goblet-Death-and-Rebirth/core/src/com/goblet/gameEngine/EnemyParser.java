@@ -111,6 +111,10 @@ public class EnemyParser {
         return speed;
     }
 
+    public boolean getFlight(String enemy){
+        return je.getAsJsonObject().get(enemy).getAsJsonObject().get("flight").getAsBoolean();
+    }
+
     public float getMaxHealth(String enemy) throws FileNotFoundException{
         float maxHealth = je.getAsJsonObject().get(enemy).getAsJsonObject().get("maxHealth").getAsFloat();
         return maxHealth;
