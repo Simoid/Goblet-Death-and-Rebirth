@@ -41,6 +41,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 	private EnemyParser enemyParser;
     private UserInterface ui;
     private boolean gameover = false;
+    private int changeRoom = -100;
     //private Enemy testEnemy;
 
     /**
@@ -113,14 +114,23 @@ public class Engine implements ApplicationListener, InputProcessor {
         // Uppdatera om det har gått tillräckligt lång tid sen senaste uppdateringen.
 		timeCounter += Gdx.graphics.getDeltaTime();
 		if (timeCounter > timeBetweenUpdates && !gameover){
-			if (currentRoom.nextRoom() != null){
+			if (currentRoom.nextRoom() != null && changeRoom <= -100){
+                changeRoom = 100;
+            }
+            if (changeRoom <= -100) {
+                update(timeCounter);
+            } else if (changeRoom == 0){
+                System.out.println("hej");
                 Direction dir = currentRoom.nextRoom();
                 Room lastRoom = currentRoom;
                 currentRoom = floor.getNextRoom(currentRoom.nextRoom());
                 currentRoom.playerEnter(dir, player);
                 lastRoom.clearNextRoom();
+                changeRoom -= 2;
+            } else {
+                changeRoom -= 2;
             }
-			update(timeCounter);
+
 			timeCounter = 0f;
             if (player.getHP() <= 0){
                 gameover = true;
@@ -140,6 +150,7 @@ public class Engine implements ApplicationListener, InputProcessor {
             }
             batch.setColor(1, 1, 1, timeCounter);
         }
+        batch.setColor(1, 1, 1, Math.abs((float)changeRoom/100f));
         currentRoom.draw(batch, player);
         ui.draw(batch, player);
 		batch.end();
