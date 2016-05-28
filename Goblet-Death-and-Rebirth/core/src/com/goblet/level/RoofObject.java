@@ -3,7 +3,6 @@ package com.goblet.level;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.entities.Direction;
-import com.sun.glass.ui.SystemClipboard;
 
 /**
  * Created by Johan on 2016-05-24.

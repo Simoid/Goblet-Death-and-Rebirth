@@ -124,7 +124,6 @@ public class Enemy extends Entity{
             damageCooldown = true;
             damageCooldownCounter = 0;
             currentHealth -= damageTaken;
-            System.out.println(currentHealth);
             if (currentHealth <= 0) {
                 die();
             }

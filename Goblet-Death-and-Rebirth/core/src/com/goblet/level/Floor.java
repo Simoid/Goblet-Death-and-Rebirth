@@ -52,8 +52,6 @@ public class Floor {
                     y++;
                     break;
             }
-            System.out.println(positionBusy(x, y, lastNode));
-            System.out.println("x: " + x + ", y: " + y);
             if (positionBusy(x, y, lastNode)){
                 rooms--;
             } else {

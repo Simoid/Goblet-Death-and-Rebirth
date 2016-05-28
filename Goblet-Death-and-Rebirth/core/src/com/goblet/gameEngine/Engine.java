@@ -78,11 +78,6 @@ public class Engine implements ApplicationListener, InputProcessor {
 
 		Gdx.input.setInputProcessor(this);
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-		try {
-			System.out.println(enemyParser.getName("bat"));
-		}catch (FileNotFoundException ex){
-
-		}
 	}
 
 	@Override

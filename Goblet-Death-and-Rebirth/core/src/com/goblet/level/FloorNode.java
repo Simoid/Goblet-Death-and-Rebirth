@@ -50,6 +50,10 @@ public class FloorNode {
         return neighbours.values();
     }
 
+    public Collection<FloorNode> getAllNeighbours(){
+        return null;
+    }
+
     public FloorNode createNeighbour(int x, int y){
         FloorNode newNode = new FloorNode(x, y, roomParser, true);
         if (x - xPos == 1){
