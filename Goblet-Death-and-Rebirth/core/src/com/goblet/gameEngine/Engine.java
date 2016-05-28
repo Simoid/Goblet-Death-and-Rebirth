@@ -120,7 +120,6 @@ public class Engine implements ApplicationListener, InputProcessor {
             if (changeRoom <= -100) {
                 update(timeCounter);
             } else if (changeRoom == 0){
-                System.out.println("hej");
                 Direction dir = currentRoom.nextRoom();
                 Room lastRoom = currentRoom;
                 currentRoom = floor.getNextRoom(currentRoom.nextRoom());
