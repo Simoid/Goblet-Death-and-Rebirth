@@ -11,8 +11,8 @@
     "attackType": "movement",
     "flight": true,
     "moveSpeed" : 50,
-    "moveAnimationSpeed" : 0.333,
-    "attackAnimationSpeed" : 0.111,
+    "moveAnimationSpeed" : 0.1,
+    "attackAnimationSpeed" : 0.05,
     "maxHealth" : 100,
     "damageTaken" : 35
   },
@@ -28,8 +28,8 @@
     "attackType": "movement",
     "flight": false,
     "moveSpeed" : 50,
-    "moveAnimationSpeed" : 0.333,
-    "attackAnimationSpeed" : 0.111,
+    "moveAnimationSpeed" : 0.1,
+    "attackAnimationSpeed" : 0.05,
     "maxHealth" : 100,
     "damageTaken" : 60
   },
@@ -62,7 +62,7 @@
     "attackType": "movement",
     "flight": false,
     "moveSpeed" : 0,
-    "moveAnimationSpeed" : 0.1,
+    "moveAnimationSpeed" : 0.08,
     "attackAnimationSpeed" : 0.1,
     "maxHealth" : 100,
     "damageTaken" : 50
