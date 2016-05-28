@@ -10,6 +10,20 @@ import com.badlogic.gdx.Input;
 public enum Direction {
     IDLE, LEFT, RIGHT, UP, DOWN, ATTACK;
 
+    public static Direction opposite(Direction dir){
+        switch(dir){
+            case DOWN:
+                return UP;
+            case UP:
+                return DOWN;
+            case RIGHT:
+                return LEFT;
+            case LEFT:
+                return RIGHT;
+        }
+        return null;
+    }
+
     /**
      * Översätter en keycode till motsvarande Direction.
      * @param keycode Keycoden som ska översättas.

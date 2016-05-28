@@ -46,8 +46,8 @@ public class Enemy extends Entity{
         this.maxHealth = maxHealth/10;
         this.currentHealth = this.maxHealth;
         this.damageTaken = damageTaken/10;
-        healthBar = new Texture(Gdx.files.internal("assets/sprites/hitbox/redHealthBar.png"));
-        currentHealthBar = new Texture(Gdx.files.internal("assets/sprites/hitbox/greenHealthBar.png"));
+        healthBar = new Texture(Gdx.files.internal("assets/sprites/hitbox/emptyHealthBar.png"));
+        currentHealthBar = new Texture(Gdx.files.internal("assets/sprites/hitbox/fullHealthBar.png"));
         damageCooldownCounter = 0;
     }
 

@@ -31,6 +31,7 @@ public class Room {
     private Position bottomLeft;
     private Position topRight;
     private boolean doorsOpen;
+    private Direction nextRoom = null;
 
 
     /**
@@ -136,6 +137,11 @@ public class Room {
         }
     }
 
+    public void playerEnter(Direction dir){
+        dir = Direction.opposite(dir);
+
+    }
+
     public void updateEntities(float deltaTime, Player player){
         Iterator<Enemy> enemyIterator = enemies.iterator();
         Enemy currentEnemy;
@@ -169,8 +175,10 @@ public class Room {
         }
         player.update(deltaTime);
         for (WallObject wall : wallMap.values()){
-            if (wall.getNoEntititesZone().collides(player.getHitbox())){
+            if (wall.getNoEntititesZone().collides(player.getHitbox()) && (!wall.getDoorZone().collides(player.getHitbox()) || wall.doorIsClosed())){
                 fixMovementWall(wall, player);
+            } else if (wall.getNextRoomZone().collides(player.getHitbox())){
+                nextRoom = wall.getDir();
             }
         }
         for (GObstacles obstacle : gObstacles){
@@ -179,6 +187,10 @@ public class Room {
             }
         }
         checkPosition(player.getPosition());
+    }
+
+    public Direction nextRoom(){
+        return nextRoom;
     }
 
     private void fixMovementWall(WallObject wall, Entity entity){
