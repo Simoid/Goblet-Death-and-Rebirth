@@ -60,6 +60,10 @@ public class EnemyParser {
         return moveType;
     }
 
+    public int getScore(String enemy){
+        return je.getAsJsonObject().get(enemy).getAsJsonObject().get("score").getAsInt();
+    }
+
     public int getMoveSpeed(String enemy) throws FileNotFoundException{
         int moveSpeed = je.getAsJsonObject().get(enemy).getAsJsonObject().get("moveSpeed").getAsInt();
         return moveSpeed;

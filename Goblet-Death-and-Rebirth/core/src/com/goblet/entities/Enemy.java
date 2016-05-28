@@ -27,6 +27,7 @@ public class Enemy extends Entity{
     private float damageCooldownCounter;
     private AttackType attackType;
     private boolean flight;
+    private int score;
 
     /**
      * Konstruktorn för fiendeklassen.
@@ -35,12 +36,13 @@ public class Enemy extends Entity{
      * @param attackFrames Hur många frames fiendens animation har när den attackerar.
      * @param movementSpeed Fiendens rörelsehastighet.
      */
-    public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, float attackRange, AttackType attackType,  Box hitBox,
+    public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, int score, float movementSpeed, float attackRange, AttackType attackType,  Box hitBox,
                  float moveAnimationSpeed, float attackAnimationSpeed, float maxHealth, float damageTaken, boolean flight){
         super(position, hitBox);
         this.attackRange = attackRange;
         this.attackSpeed = attackAnimationSpeed * attackFrames;
         this.attackType = attackType;
+        this.score = score;
         this.flight = flight;
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_move.pack", moveFrames,  moveAnimationSpeed,true));
 
@@ -66,8 +68,9 @@ public class Enemy extends Entity{
      */
     public void updateTowardsPlayer(Player player, float deltaTime){
         Position playerPosition = player.getPosition();
-        if (attackType == attackType.MELEEAREA &&currentAnimation == animations.get(Direction.ATTACK) && !currentAnimation.isAnimationComplete(timeSinceAnimationStart)){
+        if (attackType == attackType.MELEEAREA && currentAnimation == animations.get(Direction.ATTACK) && !currentAnimation.isAnimationComplete(timeSinceAnimationStart)){
             timeSinceAnimationStart += deltaTime;
+            timeSinceDamageTaken += deltaTime;
             return;
         }
         if (Math.abs(player.getHitbox().getMiddlePos().getX() - (hitbox.getMiddlePos().getX())) < attackRange/Math.sqrt(2)){
@@ -143,6 +146,10 @@ public class Enemy extends Entity{
                 die();
             }
         }
+    }
+
+    public int getScoreGain(){
+        return score;
     }
 
     /**

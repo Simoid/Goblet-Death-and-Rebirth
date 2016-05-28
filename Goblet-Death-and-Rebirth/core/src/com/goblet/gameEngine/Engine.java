@@ -11,6 +11,7 @@ import com.goblet.entities.Direction;
 import com.goblet.entities.Enemy;
 import com.goblet.entities.Entity;
 import com.goblet.entities.Player;
+import com.goblet.graphics.Score;
 import com.goblet.graphics.UserInterface;
 import com.goblet.level.Floor;
 import com.goblet.level.Room;
@@ -77,6 +78,7 @@ public class Engine implements ApplicationListener, InputProcessor {
         enemies = new ArrayList<Entity>();
         //enemies.add(testEnemy);
 
+
 		Gdx.input.setInputProcessor(this);
         Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 	}
@@ -101,7 +103,7 @@ public class Engine implements ApplicationListener, InputProcessor {
      * @param deltaTime
      */
 	public void update(float deltaTime){
-        currentRoom.updateEntities(deltaTime, player);
+        currentRoom.updateEntities(deltaTime, player, ui.getScoreObject());
 	}
 
     /**
@@ -149,7 +151,9 @@ public class Engine implements ApplicationListener, InputProcessor {
             }
             batch.setColor(1, 1, 1, timeCounter);
         }
-        batch.setColor(1, 1, 1, Math.abs((float)changeRoom/100f));
+		if (!gameover) {
+			batch.setColor(1, 1, 1, Math.abs((float) changeRoom / 100f));
+		}
         currentRoom.draw(batch, player);
         ui.draw(batch, player);
 		batch.end();

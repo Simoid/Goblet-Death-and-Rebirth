@@ -9,6 +9,7 @@ import com.goblet.entities.Enemy;
 import com.goblet.entities.Entity;
 import com.goblet.entities.Player;
 import com.goblet.gameEngine.Box;
+import com.goblet.graphics.Score;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -149,7 +150,7 @@ public class Room {
         player.setInvincible();
     }
 
-    public void updateEntities(float deltaTime, Player player){
+    public void updateEntities(float deltaTime, Player player, Score score){
         Iterator<Enemy> enemyIterator = enemies.iterator();
         Enemy currentEnemy;
         while (enemyIterator.hasNext()){
@@ -172,6 +173,8 @@ public class Room {
             if (player.isAttacking() && player.getAttackHitbox().collides(currentEnemy.getHitbox())){
                 currentEnemy.takeDamage();
                 if (currentEnemy.isDead()) {
+                    System.out.println(currentEnemy.getScoreGain());
+                    score.increaseScore(currentEnemy.getScoreGain());
                     enemyIterator.remove();
                 }
             }

@@ -16,12 +16,18 @@ public class UserInterface {
     private TextureRegion heartFull;
     private TextureRegion heartEmpty;
     private Position position;
+    private Score score;
 
     public UserInterface(Position bottomLeft, Position topRight){
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("assets/sprites/ui/heart.pack"));
         heartFull = atlas.findRegion("full");
         heartEmpty = atlas.findRegion("empty");
+        score = new Score(new Position(topRight.getX() - 130, topRight.getY() - 15));
         this.position = new Position(bottomLeft.getX(), topRight.getY()  - heartFull.getRegionHeight() * 2);
+    }
+
+    public Score getScoreObject(){
+        return score;
     }
 
     public void draw(Batch batch, Player player){
@@ -31,6 +37,7 @@ public class UserInterface {
         for (int i = player.getHP(); i < player.getMaxHP(); i ++){
             batch.draw(heartEmpty, position.getX() + (i + 1) * (heartFull.getRegionWidth() + 3), position.getY());
         }
+        score.draw(batch);
     }
 
 }
