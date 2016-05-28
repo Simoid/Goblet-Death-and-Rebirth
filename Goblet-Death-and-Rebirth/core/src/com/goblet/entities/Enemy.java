@@ -153,9 +153,9 @@ public class Enemy extends Entity{
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
         hitbox.draw(batch);
         if(currentHealth != maxHealth) {
-            batch.draw(healthBar, position.getX() - maxHealth / 2, position.getY() - currentAnimation.getSpriteHeight() / 4, maxHealth, 4);
+            batch.draw(healthBar, position.getX() - maxHealth / 2, position.getY() - currentAnimation.getSpriteHeight() / 4, maxHealth + 2, 4);
             if (currentHealth > 0) {
-                batch.draw(currentHealthBar, position.getX() - maxHealth / 2 + 1, position.getY() - currentAnimation.getSpriteHeight() / 4, currentHealth - 2, 4);
+                batch.draw(currentHealthBar, position.getX() - maxHealth / 2 + 1, position.getY() - currentAnimation.getSpriteHeight() / 4, currentHealth, 4);
             }
         }
     }

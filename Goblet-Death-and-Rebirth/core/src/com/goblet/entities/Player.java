@@ -14,6 +14,7 @@ import java.util.HashMap;
  */
 public class Player extends Entity{
 
+    //invis frames
     private final float damageCooldown = 1.2f;
 
     private int hP;
@@ -38,10 +39,10 @@ public class Player extends Entity{
     public Player(int xPos, int yPos, float moveSpeed){
         super(new Position(xPos, yPos), new Box(new Position(xPos, yPos), 13f, 25f, 0, 0));
         attackAnimations = new HashMap<Direction, SpriteAnimation>();
-        attackAnimations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc/mc_attack_right.pack",4,1/15f, false));
-        attackAnimations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc/mc_attack_left.pack",4,1/15f, false));
-        attackAnimations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_attack_up.pack",4,1/15f, false));
-        attackAnimations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_attack_down.pack",4,1/15f, false));
+        attackAnimations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc/mc_attack_right.pack",4,1/20f, false));
+        attackAnimations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc/mc_attack_left.pack",4,1/20f, false));
+        attackAnimations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_attack_up.pack",4,1/20f, false));
+        attackAnimations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_attack_down.pack",4,1/20f, false));
         currentAttackAnimation = attackAnimations.get(Direction.DOWN);
         currentAttackDirection = Direction.DOWN;
 
@@ -82,7 +83,7 @@ public class Player extends Entity{
     @Override
     public void draw(Batch batch){
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
-        if (attackFlag && timeSinceAttackAnimation < 4/15f){
+        if (attackFlag && timeSinceAttackAnimation < 4/20f){
             currentAttackAnimation.draw(batch, attackPosition.getX() - currentAttackAnimation.getSpriteWidth()/2, attackPosition.getY() - currentAttackAnimation.getSpriteHeight()/2, timeSinceAttackAnimation);
         }
         //getAttackHitbox().draw(batch);
@@ -105,7 +106,7 @@ public class Player extends Entity{
             currentAttackDirection = currentDirection;
         }
         selectAnimation();
-        if (timeSinceAttackAnimation >= 1f){
+        if (timeSinceAttackAnimation >= 0.5f){
             attackFlag = false;
             timeSinceAttackAnimation = 0;
         }
