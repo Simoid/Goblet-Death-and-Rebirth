@@ -36,10 +36,10 @@ public class Player extends Entity{
     public Player(int xPos, int yPos, float moveSpeed){
         super(new Position(xPos, yPos), new Box(new Position(xPos, yPos), 13f, 25f, 0, 0));
         attackAnimations = new HashMap<Direction, SpriteAnimation>();
-        attackAnimations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc/mc_attack_right.pack",4,1/9f, false));
-        attackAnimations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc/mc_attack_left.pack",4,1/9f, false));
-        attackAnimations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_attack_up.pack",4,1/9f, false));
-        attackAnimations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_attack_down.pack",4,1/9f, false));
+        attackAnimations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc/mc_attack_right.pack",4,1/15f, false));
+        attackAnimations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc/mc_attack_left.pack",4,1/15f, false));
+        attackAnimations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_attack_up.pack",4,1/15f, false));
+        attackAnimations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_attack_down.pack",4,1/15f, false));
         currentAttackAnimation = attackAnimations.get(Direction.DOWN);
 
         for (SpriteAnimation anim : attackAnimations.values()){
