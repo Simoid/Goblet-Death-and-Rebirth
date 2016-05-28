@@ -122,7 +122,6 @@ public class WallObject {
         if (hasDoor && !doorOpened){
             door.draw(batch);
         }
-        //noEntititesZone.draw(batch);
     }
 
     public Box getNextRoomZone(){

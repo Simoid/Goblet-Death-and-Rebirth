@@ -64,7 +64,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 
         enemyParser = new EnemyParser("enemies.json");
         roomParser = new RoomParser("rooms.json", bottomLeft, topRight, 2);
-        floor = new Floor(5, roomParser);
+        floor = new Floor(15, roomParser);
         currentRoom = floor.getFirstRoom();
 
 		player = new Player(0, 0,100f);

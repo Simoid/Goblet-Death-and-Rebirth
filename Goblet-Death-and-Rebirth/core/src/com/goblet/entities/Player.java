@@ -75,7 +75,7 @@ public class Player extends Entity{
     @Override
     public void draw(Batch batch){
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
-        if (attackFlag && timeSinceAttackAnimation < 6/9f){
+        if (attackFlag && timeSinceAttackAnimation < 5/9f){
             currentAttackAnimation.draw(batch, attackPosition.getX() - currentAttackAnimation.getSpriteWidth()/2, attackPosition.getY() - currentAttackAnimation.getSpriteHeight()/2, timeSinceAttackAnimation);
         }
     }

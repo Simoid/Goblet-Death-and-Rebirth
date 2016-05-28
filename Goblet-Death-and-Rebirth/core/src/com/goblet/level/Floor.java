@@ -55,21 +55,31 @@ public class Floor {
             if (positionBusy(x, y, lastNode)){
                 rooms--;
             } else {
-                //System.out.println("x: " + x + ", y: " + y);
-                lastNode = lastNode.createNeighbour(x, y);
+                createNode(x, y);
+                //lastNode = lastNode.createNeighbour(x, y);
             }
 
         }
     }
 
     private boolean positionBusy(int x, int  y, FloorNode lastNode){
-        for (FloorNode neighbour : lastNode.getNeighbours()){
-            if (neighbour.getX() == x && neighbour.getX() == y){
+        for (FloorNode node : startNode.getAllNodes()){
+            if (node.getX() == x && node.getX() == y){
                 return true;
             }
         }
         return false;
     }
 
+    private void createNode(int x, int y){
+        FloorNode newNode = new FloorNode(x, y, roomParser, true);
+        System.out.println(startNode.getAllNodes());
+        for (FloorNode node : startNode.getAllNodes()){
+            if (node.isNeighbourWith(newNode)){
+                node.addNeighbour(newNode);
+                newNode.addNeighbour(node);
+            }
+        }
+    }
 
 }
