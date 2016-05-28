@@ -91,7 +91,7 @@ public class Enemy extends Entity{
         selectAnimation(player);
         if (damageCooldown){
             damageCooldownCounter += deltaTime;
-            if (damageCooldownCounter >= 1){
+            if (damageCooldownCounter >= 0.6){
                 damageCooldown = false;
             }
         }
