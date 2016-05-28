@@ -150,7 +150,9 @@ public class Enemy extends Entity{
      * @param batch Batchen som ska ritas ut på.
      */
     public void draw(Batch batch){
-        currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
+        if (!damageCooldown || (int)(timeSinceDamageTaken * 20)%2 == 0) {
+            currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth() / 2, position.getY() - currentAnimation.getSpriteHeight() / 2, timeSinceAnimationStart);
+        }
         //hitbox.draw(batch);
         if(currentHealth != maxHealth) {
             batch.draw(healthBar, position.getX() - maxHealth / 2, position.getY() - currentAnimation.getSpriteHeight() / 4, maxHealth + 2, 4);
