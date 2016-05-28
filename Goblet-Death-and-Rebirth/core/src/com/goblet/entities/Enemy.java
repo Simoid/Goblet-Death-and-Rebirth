@@ -152,6 +152,10 @@ public class Enemy extends Entity{
     public void draw(Batch batch){
         if (!damageCooldown || (int)(timeSinceDamageTaken * 20)%2 == 0) {
             currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth() / 2, position.getY() - currentAnimation.getSpriteHeight() / 2, timeSinceAnimationStart);
+        } else {
+            batch.setColor(1, 1, 1, 0.5f);
+            currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth() / 2, position.getY() - currentAnimation.getSpriteHeight() / 2, timeSinceAnimationStart);
+            batch.setColor(1, 1, 1, 1);
         }
         //hitbox.draw(batch);
         if(currentHealth != maxHealth) {
