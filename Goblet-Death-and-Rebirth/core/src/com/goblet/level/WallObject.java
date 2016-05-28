@@ -19,11 +19,16 @@ public class WallObject {
     private Position topRight;
     private Boolean hasDoor;
     private Boolean doorOpened;
+    private TextureRegion regionWithDoor;
+    private TextureRegion doorTexture;
     private Box noEntititesZone;
+    private Position enterPosition;
 
     public WallObject(TextureRegion region, TextureRegion regionWithDoor, TextureRegion doorTexture, Direction dir, Position bottomLeft, Position topRight, boolean hasDoor) {
         //Se vilken TextureRegion som ska användas i WallObject
         this.hasDoor = hasDoor;
+        this.regionWithDoor = regionWithDoor;
+        this.doorTexture = doorTexture;
         doorOpened = false;
         if (hasDoor) {
             this.region = regionWithDoor;
@@ -36,6 +41,7 @@ public class WallObject {
         position = new Position(0, 0);
         setPosition();
         setNoEntititesZone(dir);
+        setEnterPosition(dir);
         if (hasDoor) {
             door = new DoorObject(doorTexture, dir, bottomLeft, topRight, position);
         }
@@ -66,8 +72,27 @@ public class WallObject {
                 offsetX = 2;
                 break;
         }
-
         noEntititesZone = new Box(new Position(position.getX() + region.getRegionWidth() / 2, position.getY() + region.getRegionHeight() / 2), region.getRegionWidth(), region.getRegionHeight(), offsetX, offsetY);
+    }
+
+    private void setEnterPosition(Direction dir) {
+        switch (dir) {
+            case DOWN:
+                enterPosition = new Position(0, bottomLeft.getY() + region.getRegionHeight() + 60);
+            case LEFT:
+                enterPosition = new Position(bottomLeft.getX() + region.getRegionWidth() + 60, 0);
+                break;
+            case UP:
+                enterPosition = new Position(0, topRight.getY() - region.getRegionHeight() - 60);
+                break;
+            case RIGHT:
+                enterPosition = new Position(topRight.getX() - region.getRegionWidth() - 60, 0);
+                break;
+        }
+    }
+
+    public Position getEnterPosition(){
+        return enterPosition;
     }
 
     private void setPosition(){
@@ -96,10 +121,23 @@ public class WallObject {
     }
 
     public Box getNextRoomZone(){
+        if (door == null){
+            return null;
+        }
         return door.getNextRoomZone();
     }
 
+    public void addDoor(){
+        hasDoor = true;
+        this.region = regionWithDoor;
+        door = new DoorObject(doorTexture, dir, bottomLeft, topRight, position);
+        setNoEntititesZone(dir);
+    }
+
     public Box getDoorZone(){
+        if (door == null){
+            return null;
+        }
         return door.getAllowedZone();
     }
 

@@ -108,10 +108,10 @@ public class Room {
 
         atlas = new TextureAtlas(Gdx.files.internal(atlasLocation));
 
-        wallMap.put(Direction.UP, new WallObject(atlas.findRegion("spr_upper_wall"), atlas.findRegion("spr_upper_wall_path"), atlas.findRegion("spr_upper_door"), Direction.UP, bottomLeft, topRight, true));
-        wallMap.put(Direction.DOWN, new WallObject(atlas.findRegion("spr_lower_wall"), atlas.findRegion("spr_lower_wall_path"), atlas.findRegion("spr_lower_door"), Direction.DOWN, bottomLeft, topRight, true));
-        wallMap.put(Direction.LEFT, new WallObject(atlas.findRegion("spr_left_wall"), atlas.findRegion("spr_left_wall_path"), atlas.findRegion("spr_left_door"), Direction.LEFT, bottomLeft, topRight, true));
-        wallMap.put(Direction.RIGHT, new WallObject(atlas.findRegion("spr_right_wall"), atlas.findRegion("spr_right_wall_path"), atlas.findRegion("spr_right_door"), Direction.RIGHT, bottomLeft, topRight, true));
+        wallMap.put(Direction.UP, new WallObject(atlas.findRegion("spr_upper_wall"), atlas.findRegion("spr_upper_wall_path"), atlas.findRegion("spr_upper_door"), Direction.UP, bottomLeft, topRight, false));
+        wallMap.put(Direction.DOWN, new WallObject(atlas.findRegion("spr_lower_wall"), atlas.findRegion("spr_lower_wall_path"), atlas.findRegion("spr_lower_door"), Direction.DOWN, bottomLeft, topRight, false));
+        wallMap.put(Direction.LEFT, new WallObject(atlas.findRegion("spr_left_wall"), atlas.findRegion("spr_left_wall_path"), atlas.findRegion("spr_left_door"), Direction.LEFT, bottomLeft, topRight, false));
+        wallMap.put(Direction.RIGHT, new WallObject(atlas.findRegion("spr_right_wall"), atlas.findRegion("spr_right_wall_path"), atlas.findRegion("spr_right_door"), Direction.RIGHT, bottomLeft, topRight, false));
 
         roofMap.put(Direction.LEFT, new RoofObject(atlas.findRegion("spr_left_wall_path_roof"), Direction.LEFT, bottomLeft, topRight));
         roofMap.put(Direction.RIGHT, new RoofObject(atlas.findRegion("spr_right_wall_path_roof"), Direction.RIGHT, bottomLeft, topRight));
@@ -137,9 +137,13 @@ public class Room {
         }
     }
 
-    public void playerEnter(Direction dir){
-        dir = Direction.opposite(dir);
+    public void addDoor(Direction dir){
+        wallMap.get(dir).addDoor();
+    }
 
+    public void playerEnter(Direction dir, Player player){
+        dir = Direction.opposite(dir);
+        player.setPosition(wallMap.get(dir).getEnterPosition());
     }
 
     public void updateEntities(float deltaTime, Player player){
@@ -166,18 +170,14 @@ public class Room {
                 currentEnemy.takeDamage();
                 if (currentEnemy.isDead()) {
                     enemyIterator.remove();
-                    if (enemies.size() == 0){
-                        openDoors();
-                    }
                 }
             }
-
         }
         player.update(deltaTime);
         for (WallObject wall : wallMap.values()){
-            if (wall.getNoEntititesZone().collides(player.getHitbox()) && (!wall.getDoorZone().collides(player.getHitbox()) || wall.doorIsClosed())){
+            if (wall.getNoEntititesZone().collides(player.getHitbox()) && (wall.getDoorZone() != null && !wall.getDoorZone().collides(player.getHitbox()) || wall.doorIsClosed())){
                 fixMovementWall(wall, player);
-            } else if (wall.getNextRoomZone().collides(player.getHitbox())){
+            } else if (wall.getNextRoomZone() != null && wall.getNextRoomZone().collides(player.getHitbox())){
                 nextRoom = wall.getDir();
             }
         }
@@ -187,10 +187,17 @@ public class Room {
             }
         }
         checkPosition(player.getPosition());
+        if (enemies.size() == 0){
+            openDoors();
+        }
     }
 
     public Direction nextRoom(){
         return nextRoom;
+    }
+
+    public void clearNextRoom(){
+        nextRoom = null;
     }
 
     private void fixMovementWall(WallObject wall, Entity entity){
