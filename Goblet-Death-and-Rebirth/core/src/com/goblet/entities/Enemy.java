@@ -35,7 +35,7 @@ public class Enemy extends Entity{
      * @param attackFrames Hur många frames fiendens animation har när den attackerar.
      * @param movementSpeed Fiendens rörelsehastighet.
      */
-    public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, int health, float attackRange, String moveType, AttackType attackType,  Box hitBox,
+    public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, float attackRange, AttackType attackType,  Box hitBox,
                  float moveAnimationSpeed, float attackAnimationSpeed, float maxHealth, float damageTaken, boolean flight){
         super(position, hitBox);
         this.attackRange = attackRange;

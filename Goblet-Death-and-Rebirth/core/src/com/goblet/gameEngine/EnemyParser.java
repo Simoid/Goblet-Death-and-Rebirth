@@ -34,10 +34,6 @@ public class EnemyParser {
         return name;
     }
 
-    public int getHealth(String enemy) throws FileNotFoundException{
-        int health = je.getAsJsonObject().get(enemy).getAsJsonObject().get("health").getAsInt();
-        return health;
-    }
 
     public float getAttackRange(String enemy) throws FileNotFoundException{
         float dmg = je.getAsJsonObject().get(enemy).getAsJsonObject().get("attackrange").getAsFloat();
@@ -52,11 +48,6 @@ public class EnemyParser {
     public int getHitboxHeight(String enemy) throws FileNotFoundException{
         int height = je.getAsJsonObject().get(enemy).getAsJsonObject().get("hitboxHeight").getAsInt();
         return height;
-    }
-
-    public int getHiboxOrigin(String enemy) throws FileNotFoundException{
-        int hitboxOrigin = je.getAsJsonObject().get(enemy).getAsJsonObject().get("hitboxOrigin").getAsInt();
-        return hitboxOrigin;
     }
 
     public AttackType getAttackType(String enemy) throws FileNotFoundException{

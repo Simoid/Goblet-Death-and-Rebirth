@@ -9,7 +9,6 @@ public enum AttackType {
 
     public static AttackType parse(String type){
         if (type.toLowerCase().equals("meleearea")){
-            System.out.println("King CREATE");
             return MELEEAREA;
         } else {
             return MOVEMENT;
