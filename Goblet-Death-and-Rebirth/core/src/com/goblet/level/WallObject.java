@@ -112,7 +112,11 @@ public class WallObject {
                 position.setPosition(bottomLeft.getX(), bottomLeft.getY());
                 break;
             case RIGHT:
-                position.setPosition(topRight.getX() - region.getRegionWidth(), bottomLeft.getY());
+                if (hasDoor) {
+                    position.setPosition(topRight.getX() - region.getRegionWidth(), bottomLeft.getY());
+                } else {
+                    position.setPosition(topRight.getX() - region.getRegionWidth() - 1/10f, bottomLeft.getY());
+                }
                 break;
         }
     }
@@ -137,6 +141,9 @@ public class WallObject {
         door = new DoorObject(doorTexture, dir, bottomLeft, topRight, position);
         setNoEntititesZone(dir);
         setPosition();
+        if (dir == Direction.RIGHT) {
+            position.setPosition(topRight.getX() - region.getRegionWidth(), bottomLeft.getY());
+        }
     }
 
     public Box getDoorZone(){

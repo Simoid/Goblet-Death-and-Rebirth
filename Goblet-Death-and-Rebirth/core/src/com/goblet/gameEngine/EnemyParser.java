@@ -1,6 +1,7 @@
 package com.goblet.gameEngine;
 
 
+import com.goblet.entities.AttackType;
 import com.goblet.entities.Enemy;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -65,9 +66,9 @@ public class EnemyParser {
         return hitboxOrigin;
     }
 
-    public String getAttackType(String enemy) throws FileNotFoundException{
+    public AttackType getAttackType(String enemy) throws FileNotFoundException{
         String attackType = je.getAsJsonObject().get(enemy).getAsJsonObject().get("attackType").getAsString();
-        return attackType;
+        return AttackType.parse(attackType);
     }
 
     public String getMoveType(String enemy) throws FileNotFoundException{

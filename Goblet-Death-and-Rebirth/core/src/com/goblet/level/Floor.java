@@ -75,7 +75,6 @@ public class Floor {
 
     private void createNode(int x, int y){
         FloorNode newNode = new FloorNode(x, y, roomParser, true);
-        System.out.println(nodes);
         for (FloorNode node : nodes){
             if (node.isNeighbourWith(newNode)){
                 node.addNeighbour(newNode);

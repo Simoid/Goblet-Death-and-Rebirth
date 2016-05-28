@@ -25,6 +25,7 @@ public class Enemy extends Entity{
     private Texture currentHealthBar;
     private boolean damageCooldown;
     private float damageCooldownCounter;
+    private AttackType attackType;
 
     /**
      * Konstruktorn för fiendeklassen.
@@ -33,13 +34,17 @@ public class Enemy extends Entity{
      * @param attackFrames Hur många frames fiendens animation har när den attackerar.
      * @param movementSpeed Fiendens rörelsehastighet.
      */
-    public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, int health, float attackRange, String moveType, String attackType,  Box hitBox,
+    public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, int health, float attackRange, String moveType, AttackType attackType,  Box hitBox,
                  float moveAnimationSpeed, float attackAnimationSpeed, float maxHealth, float damageTaken){
         super(position, hitBox);
         this.attackRange = attackRange;
         this.attackSpeed = attackAnimationSpeed * attackFrames;
+        this.attackType = attackType;
         animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames,  moveAnimationSpeed,true));
-        animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames,attackAnimationSpeed,false));
+
+        if (attackType == AttackType.MELEEAREA) {
+            animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames, attackAnimationSpeed, false));
+        }
         movement = new Movement(movementSpeed);
         currentAnimation = animations.get(Direction.DOWN);
 
@@ -59,7 +64,7 @@ public class Enemy extends Entity{
      */
     public void updateTowardsPlayer(Player player, float deltaTime){
         Position playerPosition = player.getPosition();
-        if (currentAnimation == animations.get(Direction.ATTACK) && !currentAnimation.isAnimationComplete(timeSinceAnimationStart)){
+        if (attackType == attackType.MELEEAREA &&currentAnimation == animations.get(Direction.ATTACK) && !currentAnimation.isAnimationComplete(timeSinceAnimationStart)){
             timeSinceAnimationStart += deltaTime;
             return;
         }
@@ -88,6 +93,9 @@ public class Enemy extends Entity{
                 damageCooldown = false;
             }
         }
+        if (attackType == AttackType.MOVEMENT && hitbox.collides(player.getHitbox())){
+            player.takeDamage();
+        }
         this.update(deltaTime);
     }
 
@@ -107,15 +115,16 @@ public class Enemy extends Entity{
      * Väljer animation för fienden, beroende på i fall den attackerar, rör sig eller står still.
      */
     public void selectAnimation(Player player){
-        if (hitbox.collides(player.getHitbox())){
-            setAnimation(Direction.ATTACK);
-            timeSinceAnimationStart = 0;
-        }
-        else if (movement.getMoveFlag(Direction.DOWN) || movement.getMoveFlag(Direction.LEFT) || movement.getMoveFlag(Direction.UP) || movement.getMoveFlag(Direction.RIGHT)){
-            setAnimation(Direction.DOWN);
-        } else {
-            setAnimation(Direction.ATTACK);
-            timeSinceAnimationStart = 0;
+        if (attackType == AttackType.MELEEAREA) {
+            if (hitbox.collides(player.getHitbox())) {
+                setAnimation(Direction.ATTACK);
+                timeSinceAnimationStart = 0;
+            } else if (movement.getMoveFlag(Direction.DOWN) || movement.getMoveFlag(Direction.LEFT) || movement.getMoveFlag(Direction.UP) || movement.getMoveFlag(Direction.RIGHT)) {
+                setAnimation(Direction.DOWN);
+            } else {
+                setAnimation(Direction.ATTACK);
+                timeSinceAnimationStart = 0;
+            }
         }
     }
 
