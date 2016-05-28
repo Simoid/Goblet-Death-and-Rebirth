@@ -3,6 +3,7 @@ package com.goblet.level;
 import com.goblet.entities.Direction;
 import com.goblet.gameEngine.RoomParser;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -14,6 +15,7 @@ public class Floor {
     private FloorNode startNode;
     private RoomParser roomParser;
     private FloorNode currentNode;
+    private ArrayList<FloorNode> nodes;
 
     public Room getNextRoom(Direction dir){
         currentNode = currentNode.getConnection(dir);
@@ -23,6 +25,7 @@ public class Floor {
     public Floor(int numberOfRooms, RoomParser roomParser){
         this.roomParser = roomParser;
         this.numberOfRooms = numberOfRooms;
+        nodes = new ArrayList<FloorNode>();
         generateRooms();
     }
 
@@ -37,6 +40,7 @@ public class Floor {
         currentNode = startNode;
         Random randomizer = new Random();
         FloorNode lastNode = startNode;
+        nodes.add(startNode);
         for (int rooms  = 1; rooms <= numberOfRooms; rooms++){
             switch(randomizer.nextInt(4)) {
                 case 0:
@@ -73,13 +77,13 @@ public class Floor {
 
     private void createNode(int x, int y){
         FloorNode newNode = new FloorNode(x, y, roomParser, true);
-        System.out.println(startNode.getAllNodes());
-        for (FloorNode node : startNode.getAllNodes()){
+        for (FloorNode node : nodes){
             if (node.isNeighbourWith(newNode)){
                 node.addNeighbour(newNode);
                 newNode.addNeighbour(node);
             }
         }
+        nodes.add(newNode);
     }
 
 }
