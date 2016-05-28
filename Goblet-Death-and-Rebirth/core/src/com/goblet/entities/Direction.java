@@ -8,7 +8,7 @@ import com.badlogic.gdx.Input;
  * Created by johan on 5/16/16.
  */
 public enum Direction {
-    IDLE, LEFT, RIGHT, UP, DOWN, ATTACK;
+    IDLE, LEFT, RIGHT, UP, DOWN, ATTACK, IDLE_RIGHT, IDLE_LEFT,IDLE_DOWN,IDLE_UP;
 
     /**
      * Översätter en keycode till motsvarande Direction.

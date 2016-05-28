@@ -1,8 +1,6 @@
 package com.goblet.entities;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.gameEngine.Box;
 import com.goblet.graphics.SpriteAnimation;
 import com.goblet.level.Position;
@@ -27,7 +25,7 @@ public class Player extends Entity{
     private boolean attackFlag;
     private boolean keepAttacking;
     private Position attackPosition;
-    private Direction currentAttackDirection;
+    private Direction currentDirection;
     private SpriteAnimation currentAttackAnimation;
 
     /**
@@ -42,8 +40,7 @@ public class Player extends Entity{
         attackAnimations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc/mc_attack_left.pack",4,1/9f, false));
         attackAnimations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_attack_up.pack",4,1/9f, false));
         attackAnimations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_attack_down.pack",4,1/9f, false));
-        attackAnimations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc/mc_attack_down.pack",4,1/9f, false));
-        currentAttackAnimation = animations.get(Direction.DOWN);
+        currentAttackAnimation = attackAnimations.get(Direction.DOWN);
 
         for (SpriteAnimation anim : attackAnimations.values()){
             anim.changeScale(1.0f);
@@ -60,10 +57,16 @@ public class Player extends Entity{
         animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_move_up.pack", 4, 1/5f, true));
         animations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc/mc_move_left.pack", 4, 1/5f, true));
         animations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc/mc_move_right.pack", 4, 1/5f, true));
-        animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc/mc_down_idle.pack", 2, 1f, true));
+        animations.put(Direction.IDLE_UP, new SpriteAnimation(spriteLocation + "mc/mc_up_idle.pack", 2, 1f, true));
+        animations.put(Direction.IDLE_RIGHT, new SpriteAnimation(spriteLocation + "mc/mc_right_idle.pack", 2, 1f, true));
+        animations.put(Direction.IDLE_LEFT, new SpriteAnimation(spriteLocation + "mc/mc_left_idle.pack", 2, 1f, true));
+        animations.put(Direction.IDLE_DOWN, new SpriteAnimation(spriteLocation + "mc/mc_down_idle.pack", 2, 1f, true));
 
-        currentAnimation = animations.get(Direction.IDLE);
-        currentAttackDirection = Direction.IDLE;
+
+
+
+        currentAnimation = animations.get(Direction.IDLE_DOWN);
+        currentDirection = Direction.IDLE_DOWN;
 
         movement = new Movement(moveSpeed);
         timeSinceAttackAnimation = 0;
@@ -109,24 +112,27 @@ public class Player extends Entity{
 
     private void updateAttackHitbox(){
         System.out.println("YO");
-        switch(currentAttackDirection){
+        switch(currentDirection){
             default:
-            case IDLE:
-            case DOWN:
+            case IDLE_DOWN:
+            case DOWN :
                 attackPosition.setPosition(position.getX(), position.getY() - currentAnimation.getSpriteHeight());
                 HorizontalAttack.updatePosition(attackPosition);
                 VerticalAttack.updatePosition(attackPosition);
                 break;
+            case IDLE_UP:
             case UP:
                 attackPosition.setPosition(position.getX(), position.getY() + currentAnimation.getSpriteHeight());
                 HorizontalAttack.updatePosition(attackPosition);
                 VerticalAttack.updatePosition(attackPosition);
                 break;
+            case IDLE_LEFT:
             case LEFT:
                 attackPosition.setPosition(position.getX() - currentAnimation.getSpriteWidth(), position.getY());
                 HorizontalAttack.updatePosition(attackPosition);
                 VerticalAttack.updatePosition(attackPosition);
                 break;
+            case IDLE_RIGHT:
             case RIGHT:
                 attackPosition.setPosition(position.getX() + currentAnimation.getSpriteWidth(), position.getY());
                 HorizontalAttack.updatePosition(attackPosition);
@@ -136,11 +142,15 @@ public class Player extends Entity{
     }
 
     public Box getAttackHitbox(){
-        switch(currentAttackDirection){
+        switch(currentDirection){
             default:
+            case IDLE_DOWN:
+            case IDLE_UP:
             case DOWN:
             case UP:
                 return VerticalAttack;
+            case IDLE_RIGHT:
+            case IDLE_LEFT:
             case RIGHT:
             case LEFT:
                 return HorizontalAttack;
@@ -222,14 +232,35 @@ public class Player extends Entity{
     private void selectAnimation(){
         if (movement.getMoveFlag(Direction.DOWN) && ! movement.getMoveFlag(Direction.UP)){
             setAnimation(Direction.DOWN);
+            currentDirection = Direction.DOWN;
         } else if (movement.getMoveFlag(Direction.UP) && ! movement.getMoveFlag(Direction.DOWN)){
             setAnimation(Direction.UP);
+            currentDirection = Direction.UP;
         } else if (movement.getMoveFlag(Direction.LEFT) && ! movement.getMoveFlag(Direction.RIGHT)){
             setAnimation(Direction.LEFT);
+            currentDirection = Direction.LEFT;
         } else if (movement.getMoveFlag(Direction.RIGHT) && ! movement.getMoveFlag(Direction.LEFT)){
             setAnimation(Direction.RIGHT);
+            currentDirection = Direction.RIGHT;
         } else {
-            setAnimation(Direction.IDLE);
+            switch (currentDirection){
+                case DOWN:
+                    setAnimation(Direction.IDLE_DOWN);
+                    currentDirection = Direction.DOWN;
+                    break;
+                case UP:
+                    setAnimation(Direction.IDLE_UP);
+                    currentDirection = Direction.UP;
+                    break;
+                case LEFT:
+                    setAnimation(Direction.IDLE_LEFT);
+                    currentDirection = Direction.LEFT;
+                    break;
+                case RIGHT:
+                    setAnimation(Direction.IDLE_RIGHT);
+                    currentDirection = Direction.RIGHT;
+                    break;
+            }
         }
     }
 
@@ -242,14 +273,31 @@ public class Player extends Entity{
     @Override
     protected void setAnimation(Direction dir){
         if (!attackFlag || timeSinceAttackAnimation >= 6/9f) {
-            currentAttackDirection = dir;
+            currentDirection = dir;
         }
         if (currentAnimation != animations.get(dir)) {
             currentAnimation = animations.get(dir);
             timeSinceAnimationStart = 0;
         }
         if (!attackFlag || timeSinceAttackAnimation >= 6/9f){
-            currentAttackAnimation = attackAnimations.get(dir);
+            switch (dir){
+                case IDLE_RIGHT:
+                case RIGHT:
+                    currentAttackAnimation = attackAnimations.get(Direction.RIGHT);
+                    break;
+                case IDLE_LEFT:
+                case LEFT:
+                    currentAttackAnimation = attackAnimations.get(Direction.LEFT);
+                    break;
+                case IDLE_UP:
+                case UP:
+                    currentAttackAnimation = attackAnimations.get(Direction.UP);
+                    break;
+                case IDLE_DOWN:
+                case DOWN:
+                    currentAttackAnimation = attackAnimations.get(Direction.DOWN);
+                    break;
+            }
         }
     }
 
