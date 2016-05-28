@@ -12,6 +12,7 @@ import com.google.gson.JsonParser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
+import java.util.Random;
 
 /**
  * Created by Simoido on 2016-05-19.
@@ -25,10 +26,12 @@ public class RoomParser {
     private EnemyConstructor enemyConstructor;
     private Position bottomLeft;
     private Position topRight;
+    private int numberOfRoomsInJson;
 
-    public RoomParser(String fileName, Position bottomLeft, Position topRight){
+    public RoomParser(String fileName, Position bottomLeft, Position topRight, int numberOfRoomsInJson){
         this.bottomLeft = bottomLeft;
         this.topRight = topRight;
+        this.numberOfRoomsInJson = numberOfRoomsInJson;
         enemyConstructor = new EnemyConstructor();
         batch = new SpriteBatch();
 
@@ -40,6 +43,12 @@ public class RoomParser {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public Room createRandom(){
+        Random randomizer = new Random();
+        String roomName = "room" + (randomizer.nextInt(numberOfRoomsInJson) + 1);
+        return createRoom(roomName);
     }
 
     public Room createRoom(String roomName){

@@ -111,7 +111,6 @@ public class Player extends Entity{
     }
 
     private void updateAttackHitbox(){
-        System.out.println("YO");
         switch(currentDirection){
             default:
             case IDLE_DOWN:

@@ -7,10 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.goblet.entities.Direction;
 import com.goblet.entities.Enemy;
 import com.goblet.entities.Entity;
 import com.goblet.entities.Player;
 import com.goblet.graphics.UserInterface;
+import com.goblet.level.Floor;
 import com.goblet.level.Room;
 import com.goblet.level.Position;
 
@@ -25,6 +27,7 @@ import java.util.ArrayList;
  */
 public class Engine implements ApplicationListener, InputProcessor {
 
+    private Floor floor;
 	private float timeBetweenUpdates = 1/120f;
 	private float timeCounter = 0f;
 	private SpriteBatch batch;
@@ -60,12 +63,14 @@ public class Engine implements ApplicationListener, InputProcessor {
         Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
 
         enemyParser = new EnemyParser("enemies.json");
-        roomParser = new RoomParser("rooms.json", bottomLeft, topRight);
+        roomParser = new RoomParser("rooms.json", bottomLeft, topRight, 2);
+        floor = new Floor(5, roomParser);
+        currentRoom = floor.getFirstRoom();
 
 		player = new Player(0, 0,100f);
         ui = new UserInterface(bottomLeft, topRight);
 
-		setCurrentRoom("room1");
+		//setCurrentRoom("room1");
 		//currentRoom = new Room(bottomLeft, topRight);
 
         enemies = new ArrayList<Entity>();
@@ -114,7 +119,11 @@ public class Engine implements ApplicationListener, InputProcessor {
 		timeCounter += Gdx.graphics.getDeltaTime();
 		if (timeCounter > timeBetweenUpdates && !gameover){
 			if (currentRoom.nextRoom() != null){
-                System.out.println(currentRoom.nextRoom());
+                Direction dir = currentRoom.nextRoom();
+                Room lastRoom = currentRoom;
+                currentRoom = floor.getNextRoom(currentRoom.nextRoom());
+                currentRoom.playerEnter(dir, player);
+                lastRoom.clearNextRoom();
             }
 			update(timeCounter);
 			timeCounter = 0f;
