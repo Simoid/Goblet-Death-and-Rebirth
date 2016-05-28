@@ -137,6 +137,7 @@ public class WallObject {
         this.region = regionWithDoor;
         door = new DoorObject(doorTexture, dir, bottomLeft, topRight, position);
         setNoEntititesZone(dir);
+        setPosition();
     }
 
     public Box getDoorZone(){
