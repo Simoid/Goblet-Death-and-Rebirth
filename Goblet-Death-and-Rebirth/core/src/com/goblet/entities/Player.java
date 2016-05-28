@@ -27,6 +27,7 @@ public class Player extends Entity{
     private Position attackPosition;
     private Direction currentDirection;
     private Direction currentAttackDirection;
+    private Box currentAttackBox;
     private SpriteAnimation currentAttackAnimation;
 
     /**
@@ -42,6 +43,7 @@ public class Player extends Entity{
         attackAnimations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_attack_up.pack",4,1/15f, false));
         attackAnimations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + "mc/mc_attack_down.pack",4,1/15f, false));
         currentAttackAnimation = attackAnimations.get(Direction.DOWN);
+        currentAttackDirection = Direction.DOWN;
 
         for (SpriteAnimation anim : attackAnimations.values()){
             anim.changeScale(1.0f);
@@ -50,6 +52,7 @@ public class Player extends Entity{
         HorizontalAttack = new Box(this.position,27,18,0,0);
         VerticalAttack = new Box(this.position,18,27,0,0);
         attackPosition = new Position(0, 0);
+        currentAttackBox = HorizontalAttack;
 
         maxHP = 3;
         hP = maxHP;
@@ -79,10 +82,10 @@ public class Player extends Entity{
     @Override
     public void draw(Batch batch){
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
-        getAttackHitbox().draw(batch);
         if (attackFlag && timeSinceAttackAnimation < 4/15f){
             currentAttackAnimation.draw(batch, attackPosition.getX() - currentAttackAnimation.getSpriteWidth()/2, attackPosition.getY() - currentAttackAnimation.getSpriteHeight()/2, timeSinceAttackAnimation);
         }
+        //getAttackHitbox().draw(batch);
     }
 
 
@@ -144,7 +147,7 @@ public class Player extends Entity{
     }
 
     public Box getAttackHitbox(){
-        switch(currentDirection){
+        switch(currentAttackDirection){
             default:
             case IDLE_DOWN:
             case IDLE_UP:
