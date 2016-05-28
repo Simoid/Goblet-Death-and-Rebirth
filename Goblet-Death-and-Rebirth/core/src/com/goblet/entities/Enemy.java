@@ -42,7 +42,7 @@ public class Enemy extends Entity{
         this.attackSpeed = attackAnimationSpeed * attackFrames;
         this.attackType = attackType;
         this.flight = flight;
-        animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_walk.pack", moveFrames,  moveAnimationSpeed,true));
+        animations.put(Direction.DOWN, new SpriteAnimation(spriteLocation + atlasLocation + "_move.pack", moveFrames,  moveAnimationSpeed,true));
 
         if (attackType == AttackType.MELEEAREA) {
             animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames, attackAnimationSpeed, false));
@@ -151,6 +151,7 @@ public class Enemy extends Entity{
      */
     public void draw(Batch batch){
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
+        hitbox.draw(batch);
         if(currentHealth != maxHealth) {
             batch.draw(healthBar, position.getX() - maxHealth / 2, position.getY() - currentAnimation.getSpriteHeight() / 4, maxHealth, 4);
             if (currentHealth > 0) {
