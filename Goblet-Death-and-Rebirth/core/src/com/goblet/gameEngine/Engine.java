@@ -63,7 +63,7 @@ public class Engine implements ApplicationListener, InputProcessor {
         Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
 
         enemyParser = new EnemyParser("enemies.json");
-        roomParser = new RoomParser("rooms.json", bottomLeft, topRight, 2);
+        roomParser = new RoomParser("rooms.json", bottomLeft, topRight, 7);
         floor = new Floor(15, roomParser);
         currentRoom = floor.getFirstRoom();
 
