@@ -30,6 +30,7 @@ public abstract class Entity {
     protected Box hitbox;
     protected Movement movement;
     protected Position position;
+    private boolean dead = false;
 
     protected float timeSinceAnimationStart;
     protected float timeSinceDamageTaken;
@@ -46,11 +47,7 @@ public abstract class Entity {
      * Ritar ut karaktären.
      * @param batch Batchen som ska ritas ut på.
      */
-    public void draw(Batch batch){
-        currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
-        //hitbox.draw(batch);
-        //hitbox.drawPosition(batch);
-    }
+    public abstract void draw(Batch batch);
 
     /**
      * Sätter animationen för karaktären.
@@ -125,7 +122,12 @@ public abstract class Entity {
         for (SpriteAnimation anim : animations.values()){
             anim.dispose();
             hitbox.dispose();
+            dead = true;
         }
+    }
+
+    public boolean isDead(){
+        return dead;
     }
 
 }

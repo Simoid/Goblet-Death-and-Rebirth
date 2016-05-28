@@ -1,5 +1,8 @@
 package com.goblet.entities;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.goblet.gameEngine.Box;
 import com.goblet.level.Position;
 import com.goblet.graphics.SpriteAnimation;
@@ -15,6 +18,13 @@ public class Enemy extends Entity{
 
     private float attackRange;
     private float attackSpeed;
+    private float maxHealth;
+    private float currentHealth;
+    private float damageTaken;
+    private Texture healthBar;
+    private Texture currentHealthBar;
+    private boolean damageCooldown;
+    private float damageCooldownCounter;
 
     /**
      * Konstruktorn för fiendeklassen.
@@ -24,7 +34,7 @@ public class Enemy extends Entity{
      * @param movementSpeed Fiendens rörelsehastighet.
      */
     public Enemy(Position position, String atlasLocation, int moveFrames, int attackFrames, float movementSpeed, int health, float attackRange, String moveType, String attackType,  Box hitBox,
-                 float moveAnimationSpeed, float attackAnimationSpeed){
+                 float moveAnimationSpeed, float attackAnimationSpeed, float maxHealth, float damageTaken){
         super(position, hitBox);
         this.attackRange = attackRange;
         this.attackSpeed = attackAnimationSpeed * attackFrames;
@@ -32,6 +42,13 @@ public class Enemy extends Entity{
         animations.put(Direction.ATTACK, new SpriteAnimation(spriteLocation + atlasLocation + "_attack.pack", attackFrames,attackAnimationSpeed,false));
         movement = new Movement(movementSpeed);
         currentAnimation = animations.get(Direction.DOWN);
+
+        this.maxHealth = maxHealth/10;
+        this.currentHealth = this.maxHealth;
+        this.damageTaken = damageTaken/10;
+        healthBar = new Texture(Gdx.files.internal("assets/sprites/hitbox/redHealthBar.png"));
+        currentHealthBar = new Texture(Gdx.files.internal("assets/sprites/hitbox/greenHealthBar.png"));
+        damageCooldownCounter = 0;
     }
 
 
@@ -65,6 +82,12 @@ public class Enemy extends Entity{
         movement.setMoveFlag(Direction.UP, !moveDown);
         }
         selectAnimation(player);
+        if (damageCooldown){
+            damageCooldownCounter += deltaTime;
+            if (damageCooldownCounter >= 1){
+                damageCooldown = false;
+            }
+        }
         this.update(deltaTime);
     }
 
@@ -93,6 +116,30 @@ public class Enemy extends Entity{
         } else {
             setAnimation(Direction.ATTACK);
             timeSinceAnimationStart = 0;
+        }
+    }
+
+    public void takeDamage(){
+        if (!damageCooldown) {
+            damageCooldown = true;
+            damageCooldownCounter = 0;
+            currentHealth -= damageTaken;
+            System.out.println(currentHealth);
+            if (currentHealth <= 0) {
+                die();
+            }
+        }
+    }
+
+    /**
+     * Ritar ut fienden.
+     * @param batch Batchen som ska ritas ut på.
+     */
+    public void draw(Batch batch){
+        currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
+        batch.draw(healthBar, position.getX()-maxHealth/2, position.getY() - currentAnimation.getSpriteHeight()/4, maxHealth, 5);
+        if (currentHealth > 0) {
+            batch.draw(currentHealthBar, position.getX() - maxHealth / 2, position.getY() - currentAnimation.getSpriteHeight() / 4, currentHealth, 5);
         }
     }
 

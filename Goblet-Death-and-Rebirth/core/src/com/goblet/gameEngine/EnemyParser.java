@@ -110,6 +110,16 @@ public class EnemyParser {
         return speed;
     }
 
+    public float getMaxHealth(String enemy) throws FileNotFoundException{
+        float maxHealth = je.getAsJsonObject().get(enemy).getAsJsonObject().get("maxHealth").getAsFloat();
+        return maxHealth;
+    }
+
+    public float getDamageTaken(String enemy) throws FileNotFoundException{
+        float damageTaken = je.getAsJsonObject().get(enemy).getAsJsonObject().get("damageTaken").getAsFloat();
+        return damageTaken;
+    }
+
 
 
 }

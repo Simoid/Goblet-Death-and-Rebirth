@@ -157,8 +157,10 @@ public class Room {
                 player.takeDamage();
             }
             if (player.isAttacking() && player.getAttackHitbox().collides(currentEnemy.getHitbox())){
-                currentEnemy.die();
-                enemyIterator.remove();
+                currentEnemy.takeDamage();
+                if (currentEnemy.isDead()) {
+                    enemyIterator.remove();
+                }
             }
 
         }
