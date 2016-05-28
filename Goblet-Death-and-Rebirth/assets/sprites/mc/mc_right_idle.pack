@@ -1,0 +1,19 @@
+
+mc_right_idle.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+0000
+  rotate: false
+  xy: 1, 1
+  size: 15, 27
+  orig: 15, 27
+  offset: 0, 0
+  index: -1
+0001
+  rotate: false
+  xy: 18, 1
+  size: 15, 27
+  orig: 15, 27
+  offset: 0, 0
+  index: -1
