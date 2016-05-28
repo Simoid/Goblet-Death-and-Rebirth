@@ -168,7 +168,7 @@ public class Player extends Entity{
     }
 
     public boolean isAttacking(){
-        return timeSinceAttackAnimation >= 2/9f && timeSinceAttackAnimation <= 5/9f;
+        return timeSinceAttackAnimation >= 4/20f && timeSinceAttackAnimation <= 5/20f;
     }
 
     public Position getPosition(){ return this.position; }
@@ -282,14 +282,14 @@ public class Player extends Entity{
      */
     @Override
     protected void setAnimation(Direction dir){
-        if (!attackFlag || timeSinceAttackAnimation >= 6/9f) {
+        if (!attackFlag || timeSinceAttackAnimation >= 6/20f) {
             currentDirection = dir;
         }
         if (currentAnimation != animations.get(dir)) {
             currentAnimation = animations.get(dir);
             timeSinceAnimationStart = 0;
         }
-        if (!attackFlag || timeSinceAttackAnimation >= 6/9f){
+        if (!attackFlag || timeSinceAttackAnimation >= 6/20f){
             switch (dir){
                 case IDLE_RIGHT:
                 case RIGHT:

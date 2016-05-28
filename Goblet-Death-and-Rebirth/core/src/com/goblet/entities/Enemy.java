@@ -151,7 +151,7 @@ public class Enemy extends Entity{
      */
     public void draw(Batch batch){
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
-        hitbox.draw(batch);
+        //hitbox.draw(batch);
         if(currentHealth != maxHealth) {
             batch.draw(healthBar, position.getX() - maxHealth / 2, position.getY() - currentAnimation.getSpriteHeight() / 4, maxHealth + 2, 4);
             if (currentHealth > 0) {
