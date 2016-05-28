@@ -19,8 +19,6 @@ import java.util.List;
 public class EnemyParser {
     private Reader reader;
     private JsonElement je;
-    private Gson gson;
-    private List<Enemy> enemyList;
 
     public EnemyParser(String filename){
         try{
@@ -29,11 +27,6 @@ public class EnemyParser {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    public void read(){
-        Type collectionType = new TypeToken<List<Enemy>>(){}.getType();
-        List<Enemy> students = gson.fromJson(je, collectionType);
     }
 
     public String getName(String enemy) throws FileNotFoundException{
