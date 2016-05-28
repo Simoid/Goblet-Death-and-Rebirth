@@ -68,9 +68,16 @@ public class Enemy extends Entity{
      */
     public void updateTowardsPlayer(Player player, float deltaTime){
         Position playerPosition = player.getPosition();
+        if (damageCooldown){
+            damageCooldownCounter += deltaTime;
+            if (damageCooldownCounter >= 0.6){
+                damageCooldown = false;
+            }
+        }
         if (attackType == attackType.MELEEAREA && currentAnimation == animations.get(Direction.ATTACK) && !currentAnimation.isAnimationComplete(timeSinceAnimationStart)){
             timeSinceAnimationStart += deltaTime;
             timeSinceDamageTaken += deltaTime;
+            damageCooldownCounter += deltaTime;
             return;
         }
         if (Math.abs(player.getHitbox().getMiddlePos().getX() - (hitbox.getMiddlePos().getX())) < attackRange/Math.sqrt(2)){
@@ -92,12 +99,6 @@ public class Enemy extends Entity{
         movement.setMoveFlag(Direction.UP, !moveDown);
         }
         selectAnimation(player);
-        if (damageCooldown){
-            damageCooldownCounter += deltaTime;
-            if (damageCooldownCounter >= 0.6){
-                damageCooldown = false;
-            }
-        }
         if (attackType == AttackType.MOVEMENT && hitbox.collides(player.getHitbox())){
             player.takeDamage();
         }
