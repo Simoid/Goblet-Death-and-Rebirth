@@ -60,7 +60,7 @@ public class Player extends Entity{
         animations.put(Direction.UP, new SpriteAnimation(spriteLocation + "mc/mc_move_up.pack", 4, 1/5f, true));
         animations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc/mc_move_left.pack", 4, 1/5f, true));
         animations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc/mc_move_right.pack", 4, 1/5f, true));
-        animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc/mc_idle.pack", 2, 1f, true));
+        animations.put(Direction.IDLE, new SpriteAnimation(spriteLocation + "mc/mc_down_idle.pack", 2, 1f, true));
 
         currentAnimation = animations.get(Direction.IDLE);
         currentAttackDirection = Direction.IDLE;
