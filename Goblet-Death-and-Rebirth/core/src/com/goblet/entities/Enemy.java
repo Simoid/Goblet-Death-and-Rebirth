@@ -46,8 +46,8 @@ public class Enemy extends Entity{
         this.maxHealth = maxHealth/10;
         this.currentHealth = this.maxHealth;
         this.damageTaken = damageTaken/10;
-        healthBar = new Texture(Gdx.files.internal("assets/sprites/hitbox/emptyHealthBar.png"));
-        currentHealthBar = new Texture(Gdx.files.internal("assets/sprites/hitbox/fullHealthBar.png"));
+        healthBar = new Texture(Gdx.files.internal("assets/sprites/hitbox/emptyHealthBarSmall.png"));
+        currentHealthBar = new Texture(Gdx.files.internal("assets/sprites/hitbox/fullHealthBarSmall.png"));
         damageCooldownCounter = 0;
     }
 
@@ -136,9 +136,11 @@ public class Enemy extends Entity{
      */
     public void draw(Batch batch){
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
-        batch.draw(healthBar, position.getX()-maxHealth/2, position.getY() - currentAnimation.getSpriteHeight()/4, maxHealth, 5);
-        if (currentHealth > 0) {
-            batch.draw(currentHealthBar, position.getX() - maxHealth / 2  + 1, position.getY() - currentAnimation.getSpriteHeight() / 4, currentHealth - 2, 5);
+        if(currentHealth != maxHealth) {
+            batch.draw(healthBar, position.getX() - maxHealth / 2, position.getY() - currentAnimation.getSpriteHeight() / 4, maxHealth, 4);
+            if (currentHealth > 0) {
+                batch.draw(currentHealthBar, position.getX() - maxHealth / 2 + 1, position.getY() - currentAnimation.getSpriteHeight() / 4, currentHealth - 2, 4);
+            }
         }
     }
 
