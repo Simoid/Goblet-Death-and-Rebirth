@@ -26,6 +26,7 @@ public class Player extends Entity{
     private boolean keepAttacking;
     private Position attackPosition;
     private Direction currentDirection;
+    private Direction currentAttackDirection;
     private SpriteAnimation currentAttackAnimation;
 
     /**
@@ -78,7 +79,8 @@ public class Player extends Entity{
     @Override
     public void draw(Batch batch){
         currentAnimation.draw(batch, position.getX() - currentAnimation.getSpriteWidth()/2, position.getY() - currentAnimation.getSpriteHeight()/2, timeSinceAnimationStart);
-        if (attackFlag && timeSinceAttackAnimation < 6/9f){
+        getAttackHitbox().draw(batch);
+        if (attackFlag && timeSinceAttackAnimation < 4/15f){
             currentAttackAnimation.draw(batch, attackPosition.getX() - currentAttackAnimation.getSpriteWidth()/2, attackPosition.getY() - currentAttackAnimation.getSpriteHeight()/2, timeSinceAttackAnimation);
         }
     }
@@ -97,6 +99,7 @@ public class Player extends Entity{
         }
         if (keepAttacking && timeSinceAttackAnimation == 0){
             attackFlag = true;
+            currentAttackDirection = currentDirection;
         }
         selectAnimation();
         if (timeSinceAttackAnimation >= 1f){
@@ -111,7 +114,7 @@ public class Player extends Entity{
     }
 
     private void updateAttackHitbox(){
-        switch(currentDirection){
+        switch(currentAttackDirection){
             default:
             case IDLE_DOWN:
             case DOWN :
