@@ -124,5 +124,10 @@ public class FloorNode {
         return room;
     }
 
+    @Override
+    public String toString(){
+        return "x: " + xPos + ", y: " + yPos;
+    }
+
 
 }

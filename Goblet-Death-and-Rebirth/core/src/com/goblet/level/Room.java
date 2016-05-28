@@ -85,7 +85,9 @@ public class Room {
      */
     private void drawRoof(Batch batch){
         for (RoofObject currentRoof : roofMap.values()){
-            currentRoof.draw(batch);
+            if (wallMap.get(currentRoof.getDirection()).hasDoor()) {
+                currentRoof.draw(batch);
+            }
         }
     }
 
