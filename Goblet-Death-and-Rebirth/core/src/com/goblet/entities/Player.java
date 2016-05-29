@@ -37,7 +37,7 @@ public class Player extends Entity{
      * @param yPos Startpositionen i y-led.
      */
     public Player(int xPos, int yPos, float moveSpeed){
-        super(new Position(xPos, yPos), new Box(new Position(xPos, yPos), 13f, 25f, 0, 0));
+        super(new Position(xPos, yPos), new Box(new Position(xPos, yPos), 13f, 20f, 0, -3));
         attackAnimations = new HashMap<Direction, SpriteAnimation>();
         attackAnimations.put(Direction.RIGHT, new SpriteAnimation(spriteLocation + "mc/mc_attack_right.pack",4,1/18f, false));
         attackAnimations.put(Direction.LEFT, new SpriteAnimation(spriteLocation + "mc/mc_attack_left.pack",4,1/18f, false));
@@ -93,6 +93,7 @@ public class Player extends Entity{
             currentAttackAnimation.draw(batch, attackPosition.getX() - currentAttackAnimation.getSpriteWidth()/2, attackPosition.getY() - currentAttackAnimation.getSpriteHeight()/2, timeSinceAttackAnimation);
         }
         //getAttackHitbox().draw(batch);
+        //getHitbox().draw(batch);
     }
 
 
