@@ -120,8 +120,8 @@
     "attackType": "movement",
     "flight": false,
     "moveSpeed" : 120,
-    "moveAnimationSpeed" : 0.5,
-    "attackAnimationSpeed" : 0.5,
+    "moveAnimationSpeed" : 0.1,
+    "attackAnimationSpeed" : 0.1,
     "maxHealth" : 50,
     "damageTaken" : 50
   }
