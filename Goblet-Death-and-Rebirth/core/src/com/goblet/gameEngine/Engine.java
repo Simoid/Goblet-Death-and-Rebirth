@@ -11,6 +11,7 @@ import com.goblet.entities.Direction;
 import com.goblet.entities.Enemy;
 import com.goblet.entities.Entity;
 import com.goblet.entities.Player;
+import com.goblet.graphics.Map;
 import com.goblet.graphics.Score;
 import com.goblet.graphics.UserInterface;
 import com.goblet.level.Floor;
@@ -43,6 +44,7 @@ public class Engine implements ApplicationListener, InputProcessor {
     private UserInterface ui;
     private boolean gameover = false;
     private int changeRoom = -100;
+	private Map map;
     //private Enemy testEnemy;
 
     /**
@@ -64,19 +66,23 @@ public class Engine implements ApplicationListener, InputProcessor {
         Position bottomLeft = new Position(-camera.viewportWidth/2, -camera.viewportHeight/2);
         Position topRight = new Position(camera.viewportWidth/2, camera.viewportHeight/2);
 
-        enemyParser = new EnemyParser("enemies.json");
+
+
+		enemyParser = new EnemyParser("enemies.json");
         roomParser = new RoomParser("rooms.json", bottomLeft, topRight, 20);
         floor = new Floor(15, roomParser);
         currentRoom = floor.getFirstRoom();
 
 		player = new Player(0, 0,100f);
-        ui = new UserInterface(bottomLeft, topRight);
+        ui = new UserInterface(bottomLeft, topRight,floor);
 
 		//setCurrentRoom("room1");
 		//currentRoom = new Room(bottomLeft, topRight);
 
         enemies = new ArrayList<Entity>();
         //enemies.add(testEnemy);
+
+		map = new Map(topRight,floor);
 
 
 		Gdx.input.setInputProcessor(this);
@@ -103,8 +109,7 @@ public class Engine implements ApplicationListener, InputProcessor {
      * @param deltaTime
      */
 	public void update(float deltaTime){
-        currentRoom.updateEntities(deltaTime, player, ui.getScoreObject());
-	}
+        currentRoom.updateEntities(deltaTime, player, ui.getScoreObject());}
 
     /**
      * Uppdaterar objekten och ritar ut dem.
@@ -156,6 +161,7 @@ public class Engine implements ApplicationListener, InputProcessor {
 		}
         currentRoom.draw(batch, player);
         ui.draw(batch, player);
+		map.draw(batch);
 		batch.end();
 		//System.out.println("FPS: " + Gdx.graphics.getFramesPerSecond());
 	}

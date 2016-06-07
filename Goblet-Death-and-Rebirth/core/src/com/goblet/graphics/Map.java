@@ -39,11 +39,11 @@ public class Map {
     }
 
     private void drawBackground(Batch batch){
-
+        batch.draw(mapBackgroundTexture,topRight.getX()- 85,topRight.getY()- 60);
     }
 
     private void drawFrame(Batch batch){
-
+        batch.draw(mapFrameTexture,topRight.getX()- 85,topRight.getY()- 60);
     }
 
     private void drawRooms(Batch batch){
