@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.level.Floor;
+import com.goblet.level.FloorNode;
 import com.goblet.level.Position;
 
 /**
