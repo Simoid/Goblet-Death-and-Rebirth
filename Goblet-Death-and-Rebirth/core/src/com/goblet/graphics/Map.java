@@ -33,7 +33,7 @@ public class Map {
     public Map(Position topRight, Floor floor){
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("assets/sprites/ui/map/Map.pack"));
         visitedRoomTexture = atlas.findRegion("map_visited_room");
-        seenRoomTexture = atlas.findRegion("map_current_room");
+        seenRoomTexture = atlas.findRegion("map_seen_room");
         currentRoomTexture = atlas.findRegion("map_current_room");
         mapBackgroundTexture = atlas.findRegion("map_background");
         mapFrameTexture = atlas.findRegion("map_frame");
