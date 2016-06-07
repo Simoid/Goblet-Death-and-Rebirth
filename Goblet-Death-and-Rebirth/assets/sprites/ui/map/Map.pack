@@ -3,31 +3,31 @@ Map.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-map_frame
-  rotate: false
-  xy: 1, 6
-  size: 67, 41
-  orig: 67, 41
-  offset: 0, 0
-  index: -1
 map_background
   rotate: false
-  xy: 70, 6
+  xy: 1, 9
   size: 67, 41
   orig: 67, 41
   offset: 0, 0
   index: -1
-map_visited_room
+map_frame
   rotate: false
-  xy: 1, 1
-  size: 5, 3
-  orig: 5, 3
+  xy: 70, 9
+  size: 67, 41
+  orig: 67, 41
   offset: 0, 0
   index: -1
 map_current_room
   rotate: false
+  xy: 1, 1
+  size: 10, 6
+  orig: 10, 6
+  offset: 0, 0
+  index: -1
+map_visited_room
+  rotate: false
   xy: 139, 44
-  size: 5, 3
-  orig: 5, 3
+  size: 10, 6
+  orig: 10, 6
   offset: 0, 0
   index: -1

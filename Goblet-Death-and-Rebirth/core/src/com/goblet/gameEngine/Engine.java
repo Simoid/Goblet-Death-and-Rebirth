@@ -133,6 +133,7 @@ public class Engine implements ApplicationListener, InputProcessor {
                 currentRoom.playerEnter(dir, player);
                 lastRoom.clearNextRoom();
                 changeRoom -= 5;
+                map.update();
             } else {
                 changeRoom -= 5;
             }
