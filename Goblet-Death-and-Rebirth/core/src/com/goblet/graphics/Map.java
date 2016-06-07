@@ -14,21 +14,21 @@ import com.goblet.level.Position;
  */
 public class Map {
 
-    private Texture visitedRoomTexture;
-    private Texture currentRoomTexture;
-    private Texture mapFrameTexture;
-    private Texture mapBackgroundTexture;
-    private Position topRight;
+    private TextureRegion visitedRoomTexture;
+    private TextureRegion currentRoomTexture;
+    private TextureRegion mapFrameTexture;
+    private TextureRegion mapBackgroundTexture;
+    private Position middlePos;
     private Floor floor;
 
 
     public Map(Position topRight, Floor floor){
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("assets/sprites/ui/map/Map.pack"));
-        visitedRoomTexture = atlas.findRegion("map_visited_room").getTexture();
-        currentRoomTexture = atlas.findRegion("map_current_room").getTexture();
-        mapBackgroundTexture = atlas.findRegion("map_background").getTexture();
-        mapFrameTexture = atlas.findRegion("map_frame").getTexture();
-        this.topRight = new Position(topRight);
+        visitedRoomTexture = atlas.findRegion("map_visited_room");
+        currentRoomTexture = atlas.findRegion("map_current_room");
+        mapBackgroundTexture = atlas.findRegion("map_background");
+        mapFrameTexture = atlas.findRegion("map_frame");
+        this.middlePos = new Position(topRight.getX() - mapFrameTexture.getRegionWidth()/2 - 1 , topRight.getY() - mapFrameTexture.getRegionHeight()/2 - 1 );
         this.floor = floor;
     }
 
@@ -39,11 +39,11 @@ public class Map {
     }
 
     private void drawBackground(Batch batch){
-        batch.draw(mapBackgroundTexture,topRight.getX()- 85,topRight.getY()- 60);
+        batch.draw(mapBackgroundTexture, middlePos.getX() - mapBackgroundTexture.getRegionWidth()/2,middlePos.getY() - mapBackgroundTexture.getRegionHeight()/2);
     }
 
     private void drawFrame(Batch batch){
-        batch.draw(mapFrameTexture,topRight.getX()- 85,topRight.getY()- 60);
+        batch.draw(mapFrameTexture, middlePos.getX() - mapFrameTexture.getRegionWidth()/2,middlePos.getY() - mapFrameTexture.getRegionHeight()/2);
     }
 
     private void drawRooms(Batch batch){
