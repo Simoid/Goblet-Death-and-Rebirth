@@ -18,17 +18,27 @@ public class FloorNode {
     private RoomParser roomParser;
     private HashMap<Direction, FloorNode> neighbours;
     private Room room;
+    private boolean visited;
 
     public FloorNode(int xPos, int yPos, RoomParser roomParser, boolean random){
         this.xPos = xPos;
         this.yPos = yPos;
         this.roomParser = roomParser;
+        visited = false;
         neighbours = new HashMap<Direction, FloorNode>();
         if (!random) {
             room = roomParser.createRoom("firstRoom");
         } else {
             room = roomParser.createRandom();
         }
+    }
+
+    public boolean visited(){
+        return visited;
+    }
+
+    public void visit(){
+        visited = true;
     }
 
     public void setConnection(Direction dir, FloorNode connectedNode){
@@ -58,13 +68,26 @@ public class FloorNode {
         for (FloorNode node : neighbours.values()){
             if (node != null) {
                 returnCollection.add(node);
-                returnCollection.addAll(node.getAllNeighboursExcluding(returnCollection));
+                returnCollection.addAll(node.getAllNeighboursExcluding(returnCollection, -1));
             }
         }
         return returnCollection;
     }
 
-    public ArrayList<FloorNode> getAllNeighboursExcluding(ArrayList<FloorNode> excludeCollection){
+    public ArrayList<FloorNode> getNodesSteps(int steps){
+        ArrayList<FloorNode> returnCollection = new ArrayList<FloorNode>();
+        for (FloorNode node : neighbours.values()){
+            if (node != null){
+                returnCollection.add(node);
+                if (steps != 0){
+                    returnCollection.addAll(getAllNeighboursExcluding(returnCollection, steps-1));
+                }
+            }
+        }
+        return returnCollection;
+    }
+
+    private ArrayList<FloorNode> getAllNeighboursExcluding(ArrayList<FloorNode> excludeCollection, int steps){
         ArrayList<FloorNode> returnCollection = excludeCollection;
         for (FloorNode node : neighbours.values()){
             boolean nodeChecked = false;
@@ -75,7 +98,9 @@ public class FloorNode {
             }
             if (node != null && !nodeChecked) {
                 returnCollection.add(node);
-                returnCollection.addAll(node.getAllNeighboursExcluding(returnCollection));
+                if (steps != 0) {
+                    returnCollection.addAll(node.getAllNeighboursExcluding(returnCollection, steps - 1));
+                }
             }
 
         }

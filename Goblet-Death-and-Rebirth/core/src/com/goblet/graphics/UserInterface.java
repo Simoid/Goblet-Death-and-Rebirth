@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.entities.Player;
+import com.goblet.level.Floor;
 import com.goblet.level.Position;
 
 /**
@@ -17,13 +18,15 @@ public class UserInterface {
     private TextureRegion heartEmpty;
     private Position position;
     private Score score;
+    private Map map;
 
-    public UserInterface(Position bottomLeft, Position topRight){
+    public UserInterface(Position bottomLeft, Position topRight, Floor floor){
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("assets/sprites/ui/heart.pack"));
         heartFull = atlas.findRegion("full");
         heartEmpty = atlas.findRegion("empty");
-        score = new Score(new Position(topRight.getX() - 130, topRight.getY() - 15));
+        score = new Score(new Position(topRight.getX() - 130, bottomLeft.getY() + 15));
         this.position = new Position(bottomLeft.getX(), topRight.getY()  - heartFull.getRegionHeight() * 2);
+        map = new Map(topRight, floor);
     }
 
     public Score getScoreObject(){

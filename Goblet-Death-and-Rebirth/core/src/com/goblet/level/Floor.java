@@ -2,6 +2,7 @@ package com.goblet.level;
 
 import com.goblet.entities.Direction;
 import com.goblet.gameEngine.RoomParser;
+import com.google.gson.internal.bind.ArrayTypeAdapter;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,6 +20,7 @@ public class Floor {
 
     public Room getNextRoom(Direction dir){
         currentNode = currentNode.getConnection(dir);
+        currentNode.visit();
         return currentNode.getRoom();
     }
 
@@ -37,6 +39,7 @@ public class Floor {
         int x = 0;
         int y = 0;
         startNode = new FloorNode(x, y, roomParser, false);
+        startNode.visit();
         currentNode = startNode;
         Random randomizer = new Random();
         nodes.add(startNode);
@@ -82,6 +85,12 @@ public class Floor {
             }
         }
         nodes.add(newNode);
+    }
+
+    public ArrayList<FloorNode> getVisitedNeighbours(int steps){
+        ArrayList<FloorNode> visitedNodes = new ArrayList<FloorNode>();
+
+        return visitedNodes;
     }
 
 }
