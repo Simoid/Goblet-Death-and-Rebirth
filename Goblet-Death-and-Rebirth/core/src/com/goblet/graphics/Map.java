@@ -7,10 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.level.Floor;
-import com.goblet.level.FloorNode;
 import com.goblet.level.Position;
-
-import java.util.ArrayList;
 
 /**
  * Created by johan on 6/5/16.
@@ -36,12 +33,17 @@ public class Map {
     }
 
     public void draw(Batch batch){
-        drawMiddlePos(batch, mapBackgroundTexture);
+        drawBackground(batch);
         drawMiddlePos(batch, mapFrameTexture);
         drawMiddlePos(batch, currentRoomTexture);
         drawVisitedRooms(batch);
     }
 
+    private void drawBackground(Batch batch){
+        batch.setColor(1.0f,1.0f,1.0f,0.4f);
+        batch.draw(mapBackgroundTexture, middlePos.getX() - mapBackgroundTexture.getRegionWidth()/2,middlePos.getY() - mapBackgroundTexture.getRegionHeight()/2);
+        batch.setColor(1.0f,1.0f,1.0f,1.0f);
+    }
 
     private void drawVisitedRooms(Batch batch){
         FloorNode currentNode = floor.getCurrentNode();
@@ -56,6 +58,5 @@ public class Map {
     private void drawMiddlePos(Batch batch, TextureRegion regionToDraw){
         batch.draw(regionToDraw, middlePos.getX() - regionToDraw.getRegionWidth()/2, middlePos.getY() - regionToDraw.getRegionHeight()/2);
     }
-
 
 }
