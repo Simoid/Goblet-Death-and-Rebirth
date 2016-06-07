@@ -7,7 +7,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.goblet.level.Floor;
+import com.goblet.level.FloorNode;
 import com.goblet.level.Position;
+
+import java.util.ArrayList;
 
 /**
  * Created by johan on 6/5/16.
@@ -33,21 +36,26 @@ public class Map {
     }
 
     public void draw(Batch batch){
-        drawBackground(batch);
-        drawFrame(batch);
-        drawRooms(batch);
+        drawMiddlePos(batch, mapBackgroundTexture);
+        drawMiddlePos(batch, mapFrameTexture);
+        drawMiddlePos(batch, currentRoomTexture);
+        drawVisitedRooms(batch);
     }
 
-    private void drawBackground(Batch batch){
-        batch.draw(mapBackgroundTexture, middlePos.getX() - mapBackgroundTexture.getRegionWidth()/2,middlePos.getY() - mapBackgroundTexture.getRegionHeight()/2);
+
+    private void drawVisitedRooms(Batch batch){
+        FloorNode currentNode = floor.getCurrentNode();
+        for (FloorNode neighbour : currentNode.getNodesSteps(5)) {
+            if (neighbour.visited()) {
+                batch.draw(visitedRoomTexture, middlePos.getX() - currentRoomTexture.getRegionWidth()/2 + (currentNode.getX() - neighbour.getX())*visitedRoomTexture.getRegionWidth(), middlePos.getY() - currentRoomTexture.getRegionHeight()/2 + (currentNode.getY() - neighbour.getY())*visitedRoomTexture.getRegionHeight());
+            }
+        }
+
     }
 
-    private void drawFrame(Batch batch){
-        batch.draw(mapFrameTexture, middlePos.getX() - mapFrameTexture.getRegionWidth()/2,middlePos.getY() - mapFrameTexture.getRegionHeight()/2);
+    private void drawMiddlePos(Batch batch, TextureRegion regionToDraw){
+        batch.draw(regionToDraw, middlePos.getX() - regionToDraw.getRegionWidth()/2, middlePos.getY() - regionToDraw.getRegionHeight()/2);
     }
 
-    private void drawRooms(Batch batch){
-
-    }
 
 }

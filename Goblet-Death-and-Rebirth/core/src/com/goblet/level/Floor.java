@@ -35,6 +35,10 @@ public class Floor {
         return startNode.getRoom();
     }
 
+    public FloorNode getCurrentNode(){
+        return currentNode;
+    }
+
     private void generateRooms(){
         int x = 0;
         int y = 0;

@@ -68,7 +68,7 @@ public class FloorNode {
         for (FloorNode node : neighbours.values()){
             if (node != null) {
                 returnCollection.add(node);
-                returnCollection.addAll(node.getAllNeighboursExcluding(returnCollection, -1));
+                node.getAllNeighboursExcluding(returnCollection, -1);
             }
         }
         return returnCollection;
@@ -76,35 +76,36 @@ public class FloorNode {
 
     public ArrayList<FloorNode> getNodesSteps(int steps){
         ArrayList<FloorNode> returnCollection = new ArrayList<FloorNode>();
+        returnCollection.add(this);
         for (FloorNode node : neighbours.values()){
             if (node != null){
-                returnCollection.add(node);
+                if (!returnCollection.contains(node)) {
+                    returnCollection.add(node);
+                }
                 if (steps != 0){
-                    returnCollection.addAll(getAllNeighboursExcluding(returnCollection, steps-1));
+                    //System.out.println("Nu kör vi:");
+                    getAllNeighboursExcluding(returnCollection, steps-1);
                 }
             }
         }
+        returnCollection.remove(this);
         return returnCollection;
     }
 
-    private ArrayList<FloorNode> getAllNeighboursExcluding(ArrayList<FloorNode> excludeCollection, int steps){
-        ArrayList<FloorNode> returnCollection = excludeCollection;
+    private void getAllNeighboursExcluding(ArrayList<FloorNode> excludeCollection, int steps){
+
         for (FloorNode node : neighbours.values()){
-            boolean nodeChecked = false;
-            for (FloorNode excludeNode : returnCollection){
-                if (node == excludeNode){
-                    nodeChecked = true;
+            if (node != null && (!excludeCollection.contains(node) || steps >= 0)) {
+                if (!excludeCollection.contains(node)) {
+                    excludeCollection.add(node);
                 }
-            }
-            if (node != null && !nodeChecked) {
-                returnCollection.add(node);
+                //System.out.println(steps);
                 if (steps != 0) {
-                    returnCollection.addAll(node.getAllNeighboursExcluding(returnCollection, steps - 1));
+                    node.getAllNeighboursExcluding(excludeCollection, steps - 1);
                 }
             }
 
         }
-        return returnCollection;
     }
 
     public void addNeighbour(FloorNode otherNode){
@@ -121,24 +122,6 @@ public class FloorNode {
             otherNode.setConnection(Direction.DOWN, this);
             this.setConnection(Direction.UP, otherNode);
         }
-    }
-
-    public FloorNode createNeighbour(int x, int y){
-        FloorNode newNode = new FloorNode(x, y, roomParser, true);
-        if (x - xPos == 1){
-            newNode.setConnection(Direction.RIGHT, this);
-            this.setConnection(Direction.LEFT, newNode);
-        } else if (xPos - x == 1) {
-            newNode.setConnection(Direction.LEFT, this);
-            this.setConnection(Direction.RIGHT, newNode);
-        } else if (y - yPos == 1){
-            newNode.setConnection(Direction.UP, this);
-            this.setConnection(Direction.DOWN, newNode);
-        } else if (yPos - y == 1) {
-            newNode.setConnection(Direction.DOWN, this);
-            this.setConnection(Direction.UP, newNode);
-        }
-        return newNode;
     }
 
     public FloorNode getConnection(Direction dir){
