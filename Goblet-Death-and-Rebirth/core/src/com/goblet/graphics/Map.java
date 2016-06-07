@@ -35,8 +35,8 @@ public class Map {
         visitedRoomTexture = atlas.findRegion("map_visited_room");
         seenRoomTexture = atlas.findRegion("map_seen_room");
         currentRoomTexture = atlas.findRegion("map_current_room");
-        mapBackgroundTexture = atlas.findRegion("map_background");
-        mapFrameTexture = atlas.findRegion("map_frame");
+        mapBackgroundTexture = atlas.findRegion("map_background_large");
+        mapFrameTexture = atlas.findRegion("map_frame_large");
         this.middlePos = new Position(topRight.getX() - mapFrameTexture.getRegionWidth()/2 - 1 , topRight.getY() - mapFrameTexture.getRegionHeight()/2 - 1 );
         this.floor = floor;
         visitedRooms = new ArrayList<FloorNode>();
