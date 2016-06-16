@@ -6,27 +6,27 @@ repeat: none
 map_background_large
   rotate: false
   xy: 1, 17
-  size: 72, 44
-  orig: 72, 44
+  size: 71, 44
+  orig: 71, 44
   offset: 0, 0
   index: -1
 map_frame_large
   rotate: false
-  xy: 75, 17
-  size: 72, 44
-  orig: 72, 44
+  xy: 74, 17
+  size: 71, 44
+  orig: 71, 44
   offset: 0, 0
   index: -1
 map_background
   rotate: false
-  xy: 149, 23
+  xy: 147, 23
   size: 62, 38
   orig: 62, 38
   offset: 0, 0
   index: -1
 map_frame
   rotate: false
-  xy: 213, 23
+  xy: 211, 23
   size: 62, 38
   orig: 62, 38
   offset: 0, 0
@@ -40,7 +40,7 @@ map_current_room
   index: -1
 map_seen_room
   rotate: false
-  xy: 277, 55
+  xy: 275, 55
   size: 10, 6
   orig: 10, 6
   offset: 0, 0
