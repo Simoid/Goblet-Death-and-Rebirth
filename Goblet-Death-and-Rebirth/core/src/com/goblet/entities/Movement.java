@@ -54,6 +54,10 @@ public class Movement {
 
     }
 
+    public float getMoveSpeed(){
+        return moveSpeed;
+    }
+
     /**
      * Ändra rörelsehastigheten för objeketet.
      * @param newSpeed Den nya rörelsehastigheten för objektet.

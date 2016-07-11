@@ -115,6 +115,11 @@ public abstract class Entity {
         return hitbox;
     }
 
+
+    public boolean canMove(){
+        return !(movement.getMoveSpeed() == 0.0);
+    }
+
     /**
      * Tar bort alla laddade bilder för karaktären.
      */

@@ -145,7 +145,6 @@ public class Box {
         float minValueInMap=(Collections.min(intersectMap.values()));
         for (java.util.Map.Entry<Direction, Float> entry : intersectMap.entrySet()){
             if (entry.getValue() == minValueInMap){
-                System.out.println(entry.getKey());
                 return entry.getKey();
             }
         }

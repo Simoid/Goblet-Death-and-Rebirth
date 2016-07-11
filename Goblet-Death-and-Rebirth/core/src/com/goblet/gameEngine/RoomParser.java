@@ -52,7 +52,6 @@ public class RoomParser {
     }
 
     public Room createRoom(String roomName){
-        //TODO
 
         Room room = new Room(bottomLeft, topRight);
 

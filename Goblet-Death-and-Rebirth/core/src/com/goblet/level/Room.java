@@ -161,6 +161,14 @@ public class Room {
         while (enemyIterator.hasNext()){
             currentEnemy = enemyIterator.next();
             currentEnemy.updateTowardsPlayer(player, deltaTime);
+            for (Enemy otherEnemy : enemies){
+                if (otherEnemy != currentEnemy && otherEnemy.getHitbox().collides(currentEnemy.getHitbox())) {
+                    fixMovementEntity(currentEnemy, otherEnemy);
+                }
+            }
+            if (player.getHitbox().collides(currentEnemy.getHitbox())){
+                fixMovementEntity(currentEnemy, player);
+            }
             for (WallObject wall : wallMap.values()){
                 if (wall.getNoEntititesZone().collides(currentEnemy.getHitbox())){
                     fixMovementWall(wall, currentEnemy);
@@ -227,6 +235,31 @@ public class Room {
                 entity.setPosition(new Position(entity.getPosition().getX(), wall.getNoEntititesZone().getY() + wall.getNoEntititesZone().getHeight() + entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY()));
                 break;
 
+        }
+    }
+
+    private void fixMovementEntity(Entity first, Entity second){
+        switch (first.getHitbox().getBiggestIntersectionDirection(second.getHitbox())){
+            case LEFT:
+                if (first.canMove()) {
+                    first.setPosition(second.getHitbox().getX() + second.getHitbox().getWidth() + first.getHitbox().getWidth() / 2 - first.getHitbox().getOffsetX(), first.getPosition().getY());
+                }
+                break;
+            case RIGHT:
+                if (first.canMove()){
+                    first.setPosition(second.getHitbox().getX() - first.getHitbox().getWidth()/2 - first.getHitbox().getOffsetX(), first.getPosition().getY());
+                }
+                break;
+            case UP:
+                if (first.canMove()){
+                    first.setPosition(first.getPosition().getX(), second.getHitbox().getY() - first.getHitbox().getHeight()/2 - first.getHitbox().getOffsetY());
+                }
+                break;
+            case DOWN:
+                if (first.canMove()){
+                    first.setPosition(first.getPosition().getX(), second.getHitbox().getY() + second.getHitbox().getHeight() + first.getHitbox().getHeight()/2 - first.getHitbox().getOffsetY());
+                }
+                break;
         }
     }
 

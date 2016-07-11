@@ -100,7 +100,7 @@ public class Player extends Entity{
             currentAttackAnimation.draw(batch, attackPosition.getX() - currentAttackAnimation.getSpriteWidth()/2, attackPosition.getY() - currentAttackAnimation.getSpriteHeight()/2, timeSinceAttackAnimation);
         }
         //getAttackHitbox().draw(batch);
-        getHitbox().draw(batch);
+        //getHitbox().draw(batch);
     }
 
 
