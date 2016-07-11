@@ -1,6 +1,7 @@
 package com.goblet.gameEngine;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.Action;
@@ -45,6 +46,7 @@ public class Engine implements ApplicationListener, InputProcessor {
     private boolean gameover = false;
     private int changeRoom = -100;
 	private Map map;
+	private Sound music;
     //private Enemy testEnemy;
 
     /**
@@ -52,6 +54,8 @@ public class Engine implements ApplicationListener, InputProcessor {
      */
 	@Override
 	public void create () {
+		music = Gdx.audio.newSound(Gdx.files.internal("assets/audio/gameMusic.mp3"));
+		music.play();
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		batch = new SpriteBatch();
         font = new BitmapFont();
