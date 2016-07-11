@@ -1,6 +1,7 @@
 package com.goblet.level;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -33,6 +34,7 @@ public class Room {
     private Position topRight;
     private boolean doorsOpen;
     private Direction nextRoom = null;
+    private Sound openDoorSound;
 
 
     /**
@@ -120,6 +122,7 @@ public class Room {
         roofMap.put(Direction.RIGHT, new RoofObject(atlas.findRegion("spr_right_wall_path_roof"), Direction.RIGHT, bottomLeft, topRight));
 
         floorTextureRegion = atlas.findRegion("spr_floor");
+        openDoorSound = Gdx.audio.newSound(Gdx.files.internal("assets/audio/door_open.mp3"));
     }
 
     public void openDoors(){
@@ -127,6 +130,8 @@ public class Room {
             currentWall.openDoor();
             doorsOpen = true;
         }
+
+        openDoorSound.play();
     }
 
     public void addEnemy(Enemy enemy){
@@ -193,7 +198,7 @@ public class Room {
             }
         }
         checkPosition(player.getPosition());
-        if (enemies.size() == 0){
+        if (enemies.size() == 0 && !doorsOpen){
             openDoors();
         }
     }

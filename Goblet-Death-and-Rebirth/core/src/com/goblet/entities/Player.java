@@ -1,5 +1,7 @@
 package com.goblet.entities;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.goblet.gameEngine.Box;
 import com.goblet.graphics.SpriteAnimation;
@@ -29,6 +31,8 @@ public class Player extends Entity{
     private Direction currentDirection;
     private Direction currentAttackDirection;
     private Box currentAttackBox;
+    private Sound attackSound;
+    private Sound damageSound;
     private SpriteAnimation currentAttackAnimation;
 
     /**
@@ -78,6 +82,9 @@ public class Player extends Entity{
         timeSinceAnimationStart = 0;
         timeSinceDamageTaken = 0;
 
+        attackSound = Gdx.audio.newSound(Gdx.files.internal("assets/audio/player_attack.ogg"));
+        damageSound = Gdx.audio.newSound(Gdx.files.internal("assets/audio/player_damage.ogg"));
+
     }
 
     @Override
@@ -111,6 +118,7 @@ public class Player extends Entity{
         if (keepAttacking && timeSinceAttackAnimation == 0){
             attackFlag = true;
             currentAttackDirection = currentDirection;
+            attackSound.play(0.5f);
         }
         selectAnimation();
         if (timeSinceAttackAnimation >= 0.6f){
@@ -203,6 +211,7 @@ public class Player extends Entity{
         if (timeSinceDamageTaken > damageCooldown) {
             hP--;
             timeSinceDamageTaken = 0;
+            damageSound.play();
         }
     }
 

@@ -1,6 +1,7 @@
 package com.goblet.entities;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.goblet.gameEngine.Box;
@@ -28,6 +29,7 @@ public class Enemy extends Entity{
     private AttackType attackType;
     private boolean flight;
     private int score;
+    private Sound damageSound;
 
     /**
      * Konstruktorn för fiendeklassen.
@@ -58,6 +60,7 @@ public class Enemy extends Entity{
         healthBar = new Texture(Gdx.files.internal("assets/sprites/hitbox/emptyHealthBarSmall.png"));
         currentHealthBar = new Texture(Gdx.files.internal("assets/sprites/hitbox/fullHealthBarSmall.png"));
         damageCooldownCounter = 0;
+        damageSound = Gdx.audio.newSound(Gdx.files.internal("assets/audio/enemy_damage.ogg"));
     }
 
 
@@ -140,6 +143,7 @@ public class Enemy extends Entity{
 
     public void takeDamage(){
         if (!damageCooldown) {
+            damageSound.play(0.5f);
             damageCooldown = true;
             damageCooldownCounter = 0;
             currentHealth -= damageTaken;
