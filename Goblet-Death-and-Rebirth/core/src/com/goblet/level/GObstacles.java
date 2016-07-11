@@ -44,7 +44,8 @@ public abstract class GObstacles {
 
     public void draw(Batch batch){
         batch.draw(region, position.getX(), position.getY());
-        //hitbox.draw(batch);
+        hitbox.draw(batch);
+        hitbox.drawPosition(batch);
     }
 
 }

@@ -236,38 +236,19 @@ public class Room {
      * @param entity Entityn som kolliderade.
      */
     private void fixMovementGObstacle(GObstacles obstacle, Entity entity){
-        if (entity.getHitbox().getX()  < obstacle.getPosition().getX()){
-            if (entity.getHitbox().getY() < obstacle.getPosition().getY()){
-                if (Math.abs(entity.getHitbox().getX() + entity.getHitbox().getWidth() - obstacle.getPosition().getX())
-                  > Math.abs(entity.getHitbox().getY() + entity.getHitbox().getHeight() - obstacle.getPosition().getY())) {
-                    entity.setPosition(entity.getPosition().getX(), obstacle.getPosition().getY() - entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY());
-                } else {
-                    entity.setPosition(obstacle.getPosition().getX() - entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY());
-                }
-            } else {
-                if (Math.abs(entity.getHitbox().getX() + entity.getHitbox().getWidth() - obstacle.getPosition().getX())
-                        > Math.abs(entity.getHitbox().getY() - (obstacle.getPosition().getY() + obstacle.getHeight()))) {
-                    entity.setPosition(entity.getPosition().getX(), obstacle.getPosition().getY() + obstacle.getHeight() + entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY());
-                } else {
-                    entity.setPosition(obstacle.getPosition().getX() - entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY());
-                }
-            }
-        } else {
-            if (entity.getHitbox().getY() < obstacle.getPosition().getY()){
-                if (Math.abs(entity.getHitbox().getX() - (obstacle.getPosition().getX() + obstacle.getWidth()))
-                        > Math.abs(entity.getHitbox().getY() + entity.getHitbox().getHeight() - obstacle.getPosition().getY())) {
-                    entity.setPosition(entity.getPosition().getX(), obstacle.getPosition().getY() - entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY());
-                } else {
-                    entity.setPosition(obstacle.getPosition().getX() + obstacle.getWidth() + entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY());
-                }
-            } else {
-                if (Math.abs(entity.getHitbox().getX()  - (obstacle.getPosition().getX() + obstacle.getWidth()))
-                        > Math.abs(entity.getHitbox().getY() - (obstacle.getPosition().getY() + obstacle.getHeight()))) {
-                    entity.setPosition(entity.getPosition().getX(), obstacle.getPosition().getY() + obstacle.getHeight() + entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY());
-                } else {
-                    entity.setPosition(obstacle.getPosition().getX() + obstacle.getWidth() + entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY());
-                }
-            }
+        switch (entity.getHitbox().getBiggestIntersectionDirection(obstacle.getHitbox())){
+            case LEFT:
+                entity.setPosition(obstacle.getHitbox().getX() + obstacle.getHitbox().getWidth() + entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY());
+                break;
+            case RIGHT:
+                entity.setPosition(obstacle.getHitbox().getX() - entity.getHitbox().getWidth()/2 - entity.getHitbox().getOffsetX(), entity.getPosition().getY());
+                break;
+            case UP:
+                entity.setPosition(entity.getPosition().getX(), obstacle.getHitbox().getY() - entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY());
+                break;
+            case DOWN:
+                entity.setPosition(entity.getPosition().getX(), obstacle.getHitbox().getY() + obstacle.getHitbox().getHeight() + entity.getHitbox().getHeight()/2 - entity.getHitbox().getOffsetY()/2);
+                break;
         }
     }
 
