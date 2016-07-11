@@ -211,7 +211,7 @@ public class Player extends Entity{
         if (timeSinceDamageTaken > damageCooldown) {
             hP--;
             timeSinceDamageTaken = 0;
-            damageSound.play();
+            damageSound.play(1.2f);
         }
     }
 
