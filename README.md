@@ -18,6 +18,6 @@ Använd piltangenterna för att röra på huvudkaraktären.
 Attackera med Z, du attackerar i den riktningen som spelaren rör sig åt då du trycker på Z, men riktningen hålls till samma även om du byter riktning när du väl har börjat attackera.  
 Se upp för snabba spindlar!
 
-###Källor till musik och ljudeffekter:
+##Källor till musik och ljudeffekter:
 http://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100787
 http://rpg.hamsterrepublic.com/ohrrpgce/Free_Sound_Effects
