@@ -151,7 +151,7 @@ public class Room {
 
     public void playerEnter(Direction dir, Player player){
         dir = Direction.opposite(dir);
-        player.setPosition(wallMap.get(dir).getEnterPosition());
+        player.setPosition(new Position(wallMap.get(dir).getEnterPosition()));
         player.setInvincible();
     }
 
