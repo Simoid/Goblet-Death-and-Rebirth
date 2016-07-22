@@ -2,7 +2,7 @@
 Spel för kursen Projektuppgift i introduktion till datalogi DD1349 
 
 ##Beskrivning:
-*Goblet: Death and Rebirth* är en top-down roguelite inspirerad av *The Binding of Isaac: Rebirth* och *Goblet Grotto*. I sin färdiga form är det tänkt att spelet ska innehålla följande features: 
+*Goblet: Death and Rebirth* är en top-down roguelite som hämtar inspiration från både *The Binding of Isaac: Rebirth* och *Goblet Grotto*. I sin färdiga form är det tänkt att spelet ska innehålla följande features: 
 * Slumpmässigt genererade nivåer, så att varje gång spelet startas ger en unik upplevelse.
 * Ett enkelt combat-system där huvudkaraktären kan attackera i 4 eller 8 olika riktningar.
 * Många olika fiender med olika attackmönster.
