@@ -1,6 +1,9 @@
 # Goblet: Death and Rebirth
 Spel för kursen Projektuppgift i introduktion till datalogi DD1349 
 
+###Branch: itemroom
+Denna branch ska fixa itemrooms och sedan läggas till masterbranchen.
+
 ##Beskrivning:
 *Goblet: Death and Rebirth* är en top-down roguelite som hämtar inspiration från både *The Binding of Isaac: Rebirth* och *Goblet Grotto*. I sin färdiga form är det tänkt att spelet ska innehålla följande features: 
 * Slumpmässigt genererade nivåer, så att varje gång spelet startas ger en unik upplevelse.
