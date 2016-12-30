@@ -186,7 +186,6 @@ public class Room {
             if (player.isAttacking() && player.getAttackHitbox().collides(currentEnemy.getHitbox())){
                 currentEnemy.takeDamage();
                 if (currentEnemy.isDead()) {
-                    System.out.println(currentEnemy.getScoreGain());
                     score.increaseScore(currentEnemy.getScoreGain());
                     enemyIterator.remove();
                 }

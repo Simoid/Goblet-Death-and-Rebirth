@@ -95,7 +95,6 @@ public class Map {
                 seenRooms.add(node);
             }
         }
-        System.out.println(seenRooms);
     }
 
     private void drawMiddlePos(Batch batch, TextureRegion regionToDraw){

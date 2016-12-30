@@ -54,7 +54,7 @@ public class Engine implements ApplicationListener, InputProcessor {
      */
 	@Override
 	public void create () {
-		music = Gdx.audio.newSound(Gdx.files.internal("assets/audio/gameMusic.mp3"));
+		music = Gdx.audio.newSound(Gdx.files.internal("assets/audio/wraiths_waltz.wav"));
 		music.loop();
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		batch = new SpriteBatch();
